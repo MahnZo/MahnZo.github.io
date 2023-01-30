@@ -7,6 +7,8 @@ button.addEventListener("click", function() {
   alert("Button was clicked!");
 });
 
+var versionNum = "1.0"
+
 function changeColor() {
   var color = document.getElementById("color").value;
   document.body.style.background = color;
