@@ -1,3 +1,8 @@
+// add a dynamic header
+let versionNum = "1.0";
+document.getElementById("header").innerHTML = "Welcome to my website! " + versionNum;
+
+
 // Get a reference to a button element on the page
 var button = document.getElementById("myButton");
 
