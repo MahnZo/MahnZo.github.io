@@ -19,5 +19,6 @@ function changeColor() {
 }
 
 function resetColor() {
-    document.body.style.background = lightblue;
+    var resetValue = "lightblue"
+    document.body.style.background = resetValue;
 }
