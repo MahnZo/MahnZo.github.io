@@ -4,7 +4,7 @@ document.getElementById("header").innerHTML = "Welcome to my website! " + versio
 
 
     // Get a reference to a button element on the page
-var button = document.getElementById("myButton");
+var button = document.getElementById("mySelect");
 
     // Add a click event listener to the button
 button.addEventListener("click", function() {
