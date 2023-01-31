@@ -22,3 +22,8 @@ function resetColor() {
     var resetValue = "lightblue"
     document.body.style.background = resetValue;
 }
+
+function runFruit() {
+    console.log("fruit ran");
+    
+}
