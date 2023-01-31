@@ -1,5 +1,5 @@
 // add a dynamic header
-let versionNum = "1.i";
+let versionNum = "1.ii";
 document.getElementById("header").innerHTML = "Welcome to my website! " + versionNum;
 
 
