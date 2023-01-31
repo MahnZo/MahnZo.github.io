@@ -1,5 +1,5 @@
 // add a dynamic header
-let versionNum = "1.70";
+let versionNum = "1.71";
 document.getElementById("header").innerHTML = "Welcome to my website! " + versionNum;
 
 
@@ -27,6 +27,7 @@ function resetColor() {
 
 
 function runFruit() {
-    console.log("fruit ran");
+    var fruitValue = document.getElementById("mySelect").value;
+    console.log("fruit ran" , fruitValue);
 
 }
