@@ -1,5 +1,5 @@
 // add a dynamic header
-let versionNum = "1.67";
+let versionNum = "1.68";
 document.getElementById("header").innerHTML = "Welcome to my website! " + versionNum;
 
 
@@ -12,7 +12,7 @@ button.addEventListener("click", function() {
     alert("Button was clicked!");
     });
 `
-
+document.getElementById("mySelect").addEventListener("change", runFruit);
 
 
 function changeColor() {
@@ -25,7 +25,7 @@ function resetColor() {
     document.body.style.background = resetValue;
 }
 
-document.getElementById("mySelect").addEventListener("change", runFruit);
+
 function runFruit() {
     console.log("fruit ran");
 
