@@ -23,6 +23,7 @@ function resetColor() {
     document.body.style.background = resetValue;
 }
 
+document.getElementById("mySelect").addEventListener("change", runFruit);
 function runFruit() {
     console.log("fruit ran");
 
