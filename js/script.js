@@ -31,3 +31,8 @@ function runFruit() {
     console.log("fruit ran" , fruitValue);
 
 }
+
+function runTestButton() {
+    console.log("testButton")
+    
+}
