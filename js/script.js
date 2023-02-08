@@ -14,6 +14,10 @@ button.addEventListener("click", function() {
 `
 document.getElementById("mySelect").addEventListener("change", runFruit);
 
+document.getElementById("testButton").onclick = function() {
+    alert("Button was clicked!");
+  };
+  
 
 function changeColor() {
     var color = document.getElementById("color").value;
