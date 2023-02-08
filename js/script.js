@@ -1,5 +1,5 @@
 // add a dynamic header
-let versionNum = "1.723a";
+let versionNum = "1.723b";
 document.getElementById("header").innerHTML = "Welcome to my website! " + versionNum;
 
 
@@ -15,6 +15,7 @@ button.addEventListener("click", function() {
 document.getElementById("mySelect").addEventListener("change", runFruit);
 
 document.getElementById("testButton").onclick = function() {
+    runTestButton();
     alert("Button was clicked!");
   };
   
