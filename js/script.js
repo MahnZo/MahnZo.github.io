@@ -16,7 +16,7 @@ document.getElementById("mySelect").addEventListener("change", runFruit);
 
 document.getElementById("testButton").onclick = function() {
     runTestButton();
-    alert("Button was clicked!");
+    alert("Button was clicked!!!!!!!");
   };
   
 
