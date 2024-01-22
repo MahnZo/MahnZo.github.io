@@ -1,5 +1,5 @@
 // add a dynamic header
-let versionNum = "1.723dd";
+let versionNum = "1";
 document.getElementById("header").innerHTML = "Welcome to my website! " + versionNum;
 
 
@@ -9,7 +9,7 @@ document.getElementById("header").innerHTML = "Welcome to my website! " + versio
     // Add a click event listener to the button
 button.addEventListener("click", function() {
     // Code to be executed when the button is clicked
-    alert("Button was clicked!");
+    alert("Button was clicked!!!!");
     });
 `
 document.getElementById("mySelect").addEventListener("change", runFruit);
