@@ -1,6 +1,6 @@
 // add a dynamic header
-let versionNum = "1";
-document.getElementById("header").innerHTML = "Welcome to my website! " + versionNum;
+let versionNum = "1.01";
+document.getElementById("header").innerHTML = "Welcome to my website! V." + versionNum;
 
 
     // Get a reference to a button element on the page
@@ -16,7 +16,11 @@ document.getElementById("mySelect").addEventListener("change", runFruit);
 
 document.getElementById("testButton").onclick = function() {
     runTestButton();
-    alert("Button was clicked!!!!!!!");
+
+    var now = new Date();
+    var dateString = now.toLocaleString();
+
+    alert("Button was clicked!!!!!!!" + dateString);
   };
   
 
