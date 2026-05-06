@@ -2,16 +2,6 @@
 let versionNum = "1.01";
 document.getElementById("header").innerHTML = "Welcome to my website! V." + versionNum;
 
-
-    // Get a reference to a button element on the page
-`var button = document.getElementById("mySelect");
-
-    // Add a click event listener to the button
-button.addEventListener("click", function() {
-    // Code to be executed when the button is clicked
-    alert("Button was clicked!!!!");
-    });
-`
 document.getElementById("mySelect").addEventListener("change", runFruit);
 
 document.getElementById("testButton").onclick = function() {
@@ -43,5 +33,9 @@ function runFruit() {
 
 function runTestButton() {
     console.log("testButton")
-    
+
+}
+
+if (typeof module !== "undefined") {
+    module.exports = { changeColor, resetColor, runFruit, runTestButton };
 }
