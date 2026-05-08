@@ -158,3 +158,23 @@ GitHub Pages auto-deploys from `main` within ~1 minute.
 - Don't add real customer reviews until they exist (the current ones are
   placeholders the owner will replace)
 - Don't use stock photos — wait for real product photos
+
+-----
+
+## Pending: API key security for assistant.html
+
+`assistant.html` calls the Anthropic API directly from the browser. This has
+two problems that must be fixed before the page goes live:
+
+1. **Missing API key** — the fetch has no `x-api-key` header, so it will fail.
+2. **Key exposure risk** — adding the key directly to a public HTML file lets
+   anyone who views source steal it.
+
+**The fix:** a thin serverless proxy that holds the key server-side and
+forwards requests. Good free options:
+- **Cloudflare Workers** (free tier, zero config)
+- **Netlify Functions** (free tier, works with GitHub Pages)
+
+When the owner is ready to activate the assistant, set up one of these proxies
+before adding any real API key. Remind the owner of this if they ask about
+wiring up assistant.html.
