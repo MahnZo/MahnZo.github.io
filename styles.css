@@ -360,6 +360,17 @@ section.shop {
   position: relative;
   z-index: 2;
 }
+section.worldcup-collection {
+  background: var(--paper);
+  max-width: 100%;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+section.worldcup-collection > * {
+  max-width: 1320px;
+  margin-left: auto;
+  margin-right: auto;
+}
 .section-head {
   display: flex;
   justify-content: space-between;
