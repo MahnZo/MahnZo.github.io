@@ -2,657 +2,448 @@
 
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>STRATUM — Next-Gen 3D Printing</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;800&display=swap" rel="stylesheet" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>STRATA — Custom 3D Printed Goods</title>
+<meta name="description" content="Handcrafted 3D printed keychains, figures, decor, and custom designs. Made to order in our studio." />
+
+<!-- Fonts -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Stylesheet -->
+
+<link rel="stylesheet" href="styles.css">
+
+<!-- TODO: paste your Google Analytics 4 + Microsoft Clarity scripts here -->
+
 </head>
 <body>
 
-  <!-- Custom Cursor -->
+<!-- ============ TOP UTILITY BAR ============ -->
 
-  <div class="cursor" id="cursor"></div>
-  <div class="cursor-ring" id="cursorRing"></div>
-
-  <!-- Grain overlay -->
-
-  <div class="grain"></div>
-
-  <!-- ═══ NAV ═══ -->
-
-  <nav class="nav" id="nav">
-    <div class="nav-logo">STRATUM<span class="accent-dot">.</span></div>
-    <ul class="nav-links">
-      <li><a href="#features">Features</a></li>
-      <li><a href="#materials">Materials</a></li>
-      <li><a href="#process">Process</a></li>
-      <li><a href="#specs">Specs</a></li>
-      <li><a href="#gallery">Gallery</a></li>
-    </ul>
-    <a href="#cta" class="nav-btn">Get Started →</a>
-    <button class="burger" id="burger" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
-
-  <!-- Mobile Menu -->
-
-  <div class="mob-menu" id="mobMenu">
-    <ul>
-      <li><a href="#features"  class="mob-link">Features</a></li>
-      <li><a href="#materials" class="mob-link">Materials</a></li>
-      <li><a href="#process"   class="mob-link">Process</a></li>
-      <li><a href="#specs"     class="mob-link">Specs</a></li>
-      <li><a href="#gallery"   class="mob-link">Gallery</a></li>
-      <li><a href="#cta"       class="mob-link">Get Started</a></li>
-    </ul>
-  </div>
-
-  <!-- ═══ HERO ═══ -->
-
-  <section class="hero" id="hero">
-    <canvas id="heroCanvas"></canvas>
-    <div class="hero-inner">
-      <p class="hero-eyebrow reveal">⬡ LAYER BY LAYER — THE FUTURE IS PRINTED</p>
-      <h1 class="hero-title reveal">
-        <span>BUILD</span>
-        <span class="orange">ANYTHING.</span>
-        <span>PRINT</span>
-        <span class="orange">EVERYTHING.</span>
-      </h1>
-      <p class="hero-sub reveal">
-        Professional-grade 3D printing for engineers, artists, and dreamers.
-        From concept to physical object — faster than you can imagine.
-      </p>
-      <div class="hero-ctas reveal">
-        <a href="#features" class="btn-primary">Explore Platform</a>
-        <a href="#gallery"  class="btn-outline">See Prints ↗</a>
-      </div>
-      <div class="hero-stats reveal">
-        <div class="hstat">
-          <strong><span class="countup" data-target="50" data-dec="true">0</span>μm</strong>
-          <span>Layer Resolution</span>
-        </div>
-        <div class="hstat-sep"></div>
-        <div class="hstat">
-          <strong><span class="countup" data-target="500">0</span>+</strong>
-          <span>Materials</span>
-        </div>
-        <div class="hstat-sep"></div>
-        <div class="hstat">
-          <strong><span class="countup" data-target="99">0</span>.8%</strong>
-          <span>Success Rate</span>
-        </div>
-        <div class="hstat-sep"></div>
-        <div class="hstat">
-          <strong><span class="countup" data-target="24">0</span>h</strong>
-          <span>Avg Turnaround</span>
-        </div>
-      </div>
-    </div>
-    <div class="scroll-hint">
-      <div class="scroll-bar"></div>
-      <span>SCROLL</span>
-    </div>
-  </section>
-
-  <!-- ═══ TICKER ═══ -->
-
-  <div class="ticker-wrap">
-    <div class="ticker">
-      <span>FDM PRINTING</span><span class="tick-dot">◆</span>
-      <span>SLA RESIN</span><span class="tick-dot">◆</span>
-      <span>SLS NYLON</span><span class="tick-dot">◆</span>
-      <span>CARBON FIBER</span><span class="tick-dot">◆</span>
-      <span>METAL-INFUSED</span><span class="tick-dot">◆</span>
-      <span>FLEXIBLE TPU</span><span class="tick-dot">◆</span>
-      <span>FOOD-SAFE PLA</span><span class="tick-dot">◆</span>
-      <span>MEDICAL GRADE</span><span class="tick-dot">◆</span>
-      <span>MULTI-COLOUR</span><span class="tick-dot">◆</span>
-      <span>FDM PRINTING</span><span class="tick-dot">◆</span>
-      <span>SLA RESIN</span><span class="tick-dot">◆</span>
-      <span>SLS NYLON</span><span class="tick-dot">◆</span>
-      <span>CARBON FIBER</span><span class="tick-dot">◆</span>
-      <span>METAL-INFUSED</span><span class="tick-dot">◆</span>
-      <span>FLEXIBLE TPU</span><span class="tick-dot">◆</span>
-      <span>FOOD-SAFE PLA</span><span class="tick-dot">◆</span>
-      <span>MEDICAL GRADE</span><span class="tick-dot">◆</span>
-      <span>MULTI-COLOUR</span><span class="tick-dot">◆</span>
+<div class="topbar">
+  <div class="topbar-inner">
+    <div>★ Free shipping on orders over $50</div>
+    <div>
+      <a href="#">Instagram</a> &nbsp; / &nbsp;
+      <a href="#">TikTok</a> &nbsp; / &nbsp;
+      <a href="#">Etsy Shop</a>
     </div>
   </div>
+</div>
 
-  <!-- ═══ FEATURES ═══ -->
+<!-- ============ NAV ============ -->
 
-  <section class="section features" id="features">
-    <div class="sec-head">
-      <p class="sec-tag reveal">// 01 — CORE FEATURES</p>
-      <h2 class="sec-title reveal">Engineering-grade tools<br>for <em>everyone</em></h2>
+<nav class="main">
+  <div class="nav-inner">
+    <div class="nav-links">
+      <a href="#shop">Shop</a>
+      <a href="#custom">Custom Orders</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
     </div>
-    <div class="feat-grid">
-
-      <div class="feat-card wide reveal" data-d="0">
-        <div class="feat-glow"></div>
-        <div class="feat-icon">⬡</div>
-        <h3>AI Slicer Engine</h3>
-        <p>Machine-learning geometry analysis generates optimal supports, infill density maps, and print paths automatically. Upload any STL and watch the magic happen — no manual tuning required.</p>
-        <span class="feat-badge">AI-POWERED</span>
-      </div>
-
-      <div class="feat-card reveal" data-d="100">
-        <div class="feat-glow"></div>
-        <div class="feat-icon">◎</div>
-        <h3>Live Print Monitor</h3>
-        <p>Camera-based failure detection with automated pause. Get push notifications on your phone. Never lose a 20-hour print again.</p>
-        <span class="feat-badge">REAL-TIME</span>
-      </div>
-
-      <div class="feat-card reveal" data-d="200">
-        <div class="feat-glow"></div>
-        <div class="feat-icon">▣</div>
-        <h3>Multi-Material</h3>
-        <p>Swap between up to 8 filaments mid-print. Full-colour, dual-durometer, support-dissolving combos out of the box.</p>
-        <span class="feat-badge">8 CHANNELS</span>
-      </div>
-
-      <div class="feat-card reveal" data-d="100">
-        <div class="feat-glow"></div>
-        <div class="feat-icon">⊞</div>
-        <h3>Cloud Print Farm</h3>
-        <p>Scale from 1 printer to 200. Centralized job queuing, per-machine analytics, and remote E-stop from anywhere in the world.</p>
-        <span class="feat-badge">SCALABLE</span>
-      </div>
-
-      <div class="feat-card wide reveal" data-d="200">
-        <div class="feat-glow"></div>
-        <div class="feat-icon">◈</div>
-        <h3>Precision Calibration Suite</h3>
-        <p>Automated bed leveling, first-layer probe mapping, flow rate calibration, and pressure advance tuning. Dimensional accuracy to ±0.05 mm across every print, every time. Works with 200+ printer models via one-click profiles.</p>
-        <span class="feat-badge">±0.05 MM</span>
-      </div>
-
-      <div class="feat-card reveal" data-d="0">
-        <div class="feat-glow"></div>
-        <div class="feat-icon">⬟</div>
-        <h3>Parametric Templates</h3>
-        <p>Library of 3,000+ parametric models. Adjust dimensions with sliders — no CAD software needed.</p>
-        <span class="feat-badge">3000+ MODELS</span>
-      </div>
-
+    <div class="logo">STRATA<em>·</em>3D</div>
+    <div class="nav-actions">
+      <button class="icon-btn" aria-label="Search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.5-4.5"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="Account">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+      </button>
+      <button class="icon-btn cart-badge" aria-label="Cart">
+        <svg viewBox="0 0 24 24"><path d="M6 7h13l-1.5 9H7.5L6 7zM6 7L5 4H3M9 21a1 1 0 100-2 1 1 0 000 2zM17 21a1 1 0 100-2 1 1 0 000 2z"/></svg>
+        <span class="count">2</span>
+      </button>
     </div>
-  </section>
+  </div>
+</nav>
 
-  <!-- ═══ MATERIALS ═══ -->
+<!-- ============ HERO ============ -->
 
-  <section class="section materials" id="materials">
-    <div class="sec-head">
-      <p class="sec-tag reveal">// 02 — MATERIAL LIBRARY</p>
-      <h2 class="sec-title reveal">500+ materials.<br>One platform.</h2>
+<section class="hero">
+  <div>
+    <div class="hero-eyebrow">Made-to-order · Studio in Phoenix</div>
+    <h1>Layered with care, <em>printed</em> with purpose.</h1>
+    <p class="lede">
+      Custom 3D printed keychains, figurines, decor, and one-of-a-kind designs.
+      Every piece is printed in our studio, hand-finished, and shipped to you.
+    </p>
+    <div class="hero-cta">
+      <a href="#shop" class="btn btn-primary">
+        Browse the shop
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#custom" class="btn btn-secondary">Request custom design</a>
     </div>
-
-    <div class="mat-tabs">
-      <button class="tab active" data-tab="polymers">Polymers</button>
-      <button class="tab" data-tab="composites">Composites</button>
-      <button class="tab" data-tab="flexible">Flexible</button>
-      <button class="tab" data-tab="specialty">Specialty</button>
-    </div>
-
-    <div class="mat-panels">
-
-      <!-- Polymers -->
-      <div class="mat-panel active" id="tab-polymers">
-        <div class="mat-card" style="--c:#ff6b00">
-          <div class="mat-dot"></div>
-          <div>
-            <h4>PLA+</h4>
-            <p>Easiest to print. Biodegradable. Perfect for prototypes and decorative items. 215 °C.</p>
-            <div class="mat-tags"><span>Easy</span><span>Biodegradable</span><span>215 °C</span></div>
-          </div>
-        </div>
-        <div class="mat-card" style="--c:#00c2ff">
-          <div class="mat-dot"></div>
-          <div>
-            <h4>PETG</h4>
-            <p>Food-safe, chemical-resistant, excellent layer adhesion. The workhorse of functional printing.</p>
-            <div class="mat-tags"><span>Food Safe</span><span>Chemical Resistant</span><span>240 °C</span></div>
-          </div>
-        </div>
-        <div class="mat-card" style="--c:#a855f7">
-          <div class="mat-dot"></div>
-          <div>
-            <h4>ABS</h4>
-            <p>Impact-resistant and machinable. Acetone-smoothable for glass-like surfaces.</p>
-            <div class="mat-tags"><span>Impact Resistant</span><span>Smoothable</span><span>240 °C</span></div>
-          </div>
-        </div>
-        <div class="mat-card" style="--c:#22c55e">
-          <div class="mat-dot"></div>
-          <div>
-            <h4>ASA</h4>
-            <p>UV & weather resistant. Outdoor-ready from day one. Automotive and marine grade.</p>
-            <div class="mat-tags"><span>UV Resistant</span><span>Outdoor</span><span>255 °C</span></div>
-          </div>
-        </div>
-        <div class="mat-card" style="--c:#f59e0b">
-          <div class="mat-dot"></div>
-          <div>
-            <h4>Nylon PA12</h4>
-            <p>High-temperature, fatigue resistant. Snap-fit components and living hinges.</p>
-            <div class="mat-tags"><span>High Temp</span><span>Fatigue Proof</span><span>260 °C</span></div>
-          </div>
-        </div>
-        <div class="mat-card" style="--c:#ec4899">
-          <div class="mat-dot"></div>
-          <div>
-            <h4>PC (Polycarbonate)</h4>
-            <p>Highest-strength FDM material. Flame retardant. Electronics housings and jigs.</p>
-            <div class="mat-tags"><span>Max Strength</span><span>Flame Retardant</span><span>300 °C</span></div>
-          </div>
-        </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">2,400+</span>
+        <span class="stat-label">Orders shipped</span>
       </div>
-
-      <!-- Composites -->
-      <div class="mat-panel" id="tab-composites">
-        <div class="mat-card" style="--c:#ff6b00">
-          <div class="mat-dot" style="background:repeating-linear-gradient(45deg,#ff6b00,#ff6b00 2px,#111 2px,#111 7px)"></div>
-          <div>
-            <h4>Carbon Fiber PLA</h4>
-            <p>Stiff, lightweight, professional matte finish. RC components, drones, structural brackets.</p>
-            <div class="mat-tags"><span>Ultra-Stiff</span><span>Lightweight</span><span>220 °C</span></div>
-          </div>
-        </div>
-        <div class="mat-card" style="--c:#f59e0b">
-          <div class="mat-dot" style="background:repeating-linear-gradient(135deg,#f59e0b,#f59e0b 2px,#111 2px,#111 7px)"></div>
-          <div>
-            <h4>Brass-Fill</h4>
-            <p>Metal-infused PLA. Polish to reveal genuine metallic shine. Heavy, dense, and stunning.</p>
-            <div class="mat-tags"><span>Metallic</span><span>Polishable</span><span>195 °C</span></div>
-          </div>
-        </div>
-        <div class="mat-card" style="--c:#9ca3af">
-          <div class="mat-dot" style="background:repeating-linear-gradient(45deg,#9ca3af,#9ca3af 2px,#111 2px,#111 7px)"></div>
-          <div>
-            <h4>Steel-Fill</h4>
-            <p>Magnetic steel composite. Develop a rustic patina over time. Industrial product design.</p>
-            <div class="mat-tags"><span>Magnetic</span><span>Industrial</span><span>210 °C</span></div>
-          </div>
-        </div>
-        <div class="mat-card" style="--c:#0ea5e9">
-          <div class="mat-dot" style="background:repeating-linear-gradient(135deg,#0ea5e9,#0ea5e9 2px,#111 2px,#111 7px)"></div>
-          <div>
-            <h4>Kevlar Nylon</h4>
-            <p>Aerospace-grade tensile strength. Extreme impact resistance. Used in motorsport prototyping.</p>
-            <div class="mat-tags"><span>Aerospace</span><span>Impact Proof</span><span>280 °C</span></div>
-          </div>
-        </div>
-        <div class="mat-card" style="--c:#a855f7">
-          <div class="mat-dot" style="background:repeating-linear-gradient(45deg,#a855f7,#a855f7 2px,#111 2px,#111 7px)"></div>
-          <div>
-            <h4>Graphene PLA</h4>
-            <p>Electrically conductive composite. Antistatic enclosures and embedded sensor pathways.</p>
-            <div class="mat-tags"><span>Conductive</span><span>Antistatic</span><span>215 °C</span></div>
-          </div>
-        </div>
-        <div class="mat-card" style="--c:#22c55e">
-          <div class="mat-dot" style="background:repeating-linear-gradient(135deg,#22c55e,#22c55e 2px,#111 2px,#111 7px)"></div>
-          <div>
-            <h4>Wood-Fill</h4>
-            <p>Real wood fibre composite. Sand and stain like natural wood. Architectural models and decor.</p>
-            <div class="mat-tags"><span>Sandable</span><span>Stainable</span><span>200 °C</span></div>
-          </div>
-        </div>
+      <div class="stat">
+        <span class="stat-num">4.9</span>
+        <span class="stat-label">Avg. rating</span>
       </div>
-
-      <!-- Flexible -->
-      <div class="mat-panel" id="tab-flexible">
-        <div class="mat-card" style="--c:#ec4899">
-          <div class="mat-dot" style="background:radial-gradient(circle,#ec4899,#9d174d)"></div>
-          <div>
-            <h4>TPU 95A</h4>
-            <p>Shore 95A hardness. Phone cases, gaskets, wearables. Excellent layer bonding and elasticity.</p>
-            <div class="mat-tags"><span>Elastic</span><span>Wearable-Safe</span><span>230 °C</span></div>
-          </div>
-        </div>
-        <div class="mat-card" style="--c:#10b981">
-          <div class="mat-dot" style="background:radial-gradient(circle,#10b981,#065f46)"></div>
-          <div>
-            <h4>TPE Soft 45A</h4>
-            <p>Shore 45A — extremely soft. Grips, cushions, prosthetic liners. Skin-safe certified.</p>
-            <div class="mat-tags"><span>Ultra-Soft</span><span>Skin-Safe</span><span>220 °C</span></div>
-          </div>
-        </div>
-        <div class="mat-card" style="--c:#f59e0b">
-          <div class="mat-dot" style="background:radial-gradient(circle,#f59e0b,#92400e)"></div>
-          <div>
-            <h4>NinjaFlex</h4>
-            <p>Shore 85A. Highly abrasion-resistant. Tire treads, shoe soles, vibration dampeners.</p>
-            <div class="mat-tags"><span>Abrasion-Proof</span><span>Shore 85A</span><span>225 °C</span></div>
-          </div>
-        </div>
-        <div class="mat-card" style="--c:#00c2ff">
-          <div class="mat-dot" style="background:radial-gradient(circle,#00c2ff,#003d5e)"></div>
-          <div>
-            <h4>TPU Translucent</h4>
-            <p>Clear flexible material. Light-diffusing panels, flexible lenses, artistic installations.</p>
-            <div class="mat-tags"><span>Translucent</span><span>Flexible</span><span>230 °C</span></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Specialty -->
-      <div class="mat-panel" id="tab-specialty">
-        <div class="mat-card" style="--c:#818cf8">
-          <div class="mat-dot" style="background:linear-gradient(135deg,#818cf8,#f472b6,#fb923c)"></div>
-          <div>
-            <h4>Glow-in-the-Dark</h4>
-            <p>Strontium aluminate phosphorescent. Charges in 2 minutes, glows for 8+ hours. Multiple colours.</p>
-            <div class="mat-tags"><span>Glow 8h+</span><span>Non-toxic</span><span>215 °C</span></div>
-          </div>
-        </div>
-        <div class="mat-card" style="--c:#ff6b00">
-          <div class="mat-dot" style="background:linear-gradient(135deg,#ff6b00,#fff,#0040ff)"></div>
-          <div>
-            <h4>Thermochromic PLA</h4>
-            <p>Shifts colour with temperature change. Interactive designs and novelty prototypes.</p>
-            <div class="mat-tags"><span>Colour-Shift</span><span>Interactive</span><span>215 °C</span></div>
-          </div>
-        </div>
-        <div class="mat-card" style="--c:#22c55e">
-          <div class="mat-dot" style="background:conic-gradient(from 0deg,#22c55e,#06b6d4,#a855f7,#22c55e)"></div>
-          <div>
-            <h4>Conductive PLA</h4>
-            <p>Print circuits, capacitive sensors, and interactive electronics directly into your model.</p>
-            <div class="mat-tags"><span>Conductive</span><span>Electronics</span><span>215 °C</span></div>
-          </div>
-        </div>
-        <div class="mat-card" style="--c:#f59e0b">
-          <div class="mat-dot" style="background:radial-gradient(circle,#f59e0b 30%,transparent 70%),repeating-conic-gradient(#111 0deg 10deg,#f59e0b 10deg 20deg)"></div>
-          <div>
-            <h4>Magnetic PLA</h4>
-            <p>Iron-particle composite. Magnets can be embedded or attracted to prints. Educational tools.</p>
-            <div class="mat-tags"><span>Magnetic</span><span>Iron-Filled</span><span>210 °C</span></div>
-          </div>
-        </div>
-        <div class="mat-card" style="--c:#ec4899">
-          <div class="mat-dot" style="background:linear-gradient(90deg,#ec4899,#a855f7,#00c2ff,#ec4899)"></div>
-          <div>
-            <h4>Rainbow Silk PLA</h4>
-            <p>Colour-gradient, high-sheen silk finish. Every print is unique. Art and jewellery-grade.</p>
-            <div class="mat-tags"><span>Gradient</span><span>High Sheen</span><span>215 °C</span></div>
-          </div>
-        </div>
-        <div class="mat-card" style="--c:#10b981">
-          <div class="mat-dot" style="background:linear-gradient(135deg,#10b981,#059669)"></div>
-          <div>
-            <h4>Algae Bio-Composite</h4>
-            <p>100% ocean-sourced, fully compostable. Net-negative carbon footprint per kg printed.</p>
-            <div class="mat-tags"><span>Compostable</span><span>Carbon-Negative</span><span>200 °C</span></div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ═══ PROCESS ═══ -->
-
-  <section class="section process" id="process">
-    <div class="sec-head">
-      <p class="sec-tag reveal">// 03 — HOW IT WORKS</p>
-      <h2 class="sec-title reveal">File to physical object<br>in <em>4 steps</em></h2>
-    </div>
-    <div class="proc-steps">
-      <div class="proc-step reveal" data-d="0">
-        <div class="proc-num">01</div>
-        <div class="proc-line"></div>
-        <h3>Upload Your Model</h3>
-        <p>STL, OBJ, 3MF, STEP — drag and drop into the cloud slicer or import directly from Fusion 360, SolidWorks, or Blender.</p>
-      </div>
-      <div class="proc-step reveal" data-d="150">
-        <div class="proc-num">02</div>
-        <div class="proc-line"></div>
-        <h3>AI Slice &amp; Optimize</h3>
-        <p>Our engine analyses wall thickness, overhangs, and stress points. Recommends optimal material, infill, and supports automatically.</p>
-      </div>
-      <div class="proc-step reveal" data-d="300">
-        <div class="proc-num">03</div>
-        <div class="proc-line"></div>
-        <h3>Send to Printer</h3>
-        <p>One click sends the job to any printer in your farm — local, remote, or our on-demand print network. Start time under 30 seconds.</p>
-      </div>
-      <div class="proc-step reveal" data-d="450">
-        <div class="proc-num">04</div>
-        <div class="proc-line last"></div>
-        <h3>Monitor &amp; Receive</h3>
-        <p>Watch your print live via camera feed. Get push notifications on completion. Post-processing tips included with every job summary.</p>
+      <div class="stat">
+        <span class="stat-num">48hr</span>
+        <span class="stat-label">Print turnaround</span>
       </div>
     </div>
-  </section>
-
-  <!-- ═══ SPECS ═══ -->
-
-  <section class="section specs" id="specs">
-    <div class="sec-head">
-      <p class="sec-tag reveal">// 04 — TECHNICAL SPECS</p>
-      <h2 class="sec-title reveal">Numbers that<br>actually matter</h2>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card main">
+      <svg viewBox="0 0 200 200" fill="none">
+        <polygon points="100,30 160,65 160,135 100,170 40,135 40,65" stroke="white" stroke-width="2" stroke-opacity="0.5"/>
+        <polygon points="100,55 140,77 140,123 100,145 60,123 60,77" stroke="white" stroke-width="2" stroke-opacity="0.7"/>
+        <polygon points="100,80 120,92 120,118 100,130 80,118 80,92" fill="white" fill-opacity="0.95"/>
+      </svg>
     </div>
-    <div class="specs-grid">
-      <div class="spec-card reveal" data-d="0">
-        <div class="spec-top">
-          <span class="spec-val"><span class="countup" data-target="50">0</span><em>μm</em></span>
-        </div>
-        <div class="spec-label">Min. Layer Height</div>
-        <div class="spec-bar-wrap"><div class="spec-bar" style="--pct:97%"></div></div>
+    <div class="hero-card float-1">
+      <svg viewBox="0 0 100 100" fill="none">
+        <circle cx="50" cy="50" r="35" stroke="#F2EBDC" stroke-width="2"/>
+        <circle cx="50" cy="50" r="25" stroke="#F2EBDC" stroke-width="2"/>
+        <circle cx="50" cy="50" r="15" fill="#F2EBDC"/>
+      </svg>
+    </div>
+    <div class="hero-card float-2">
+      <div class="badge">Bestseller</div>
+      <div class="price">$28</div>
+      <div class="name">Articulated Dragon</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span>★ Hand-finished &nbsp; <span class="dot"></span> &nbsp; PLA & PETG materials &nbsp; <span class="dot"></span> &nbsp; Ships from Arizona &nbsp; <span class="dot"></span> &nbsp; Custom orders welcome &nbsp; <span class="dot"></span> &nbsp; Eco-friendly packaging &nbsp; <span class="dot"></span> &nbsp;</span>
+    <span>★ Hand-finished &nbsp; <span class="dot"></span> &nbsp; PLA & PETG materials &nbsp; <span class="dot"></span> &nbsp; Ships from Arizona &nbsp; <span class="dot"></span> &nbsp; Custom orders welcome &nbsp; <span class="dot"></span> &nbsp; Eco-friendly packaging &nbsp; <span class="dot"></span> &nbsp;</span>
+  </div>
+</div>
+
+<!-- ============ SHOP ============ -->
+
+<section class="shop" id="shop">
+  <div class="section-head">
+    <h2>The <em>collection.</em></h2>
+    <div class="meta">// 24 items in stock</div>
+  </div>
+
+  <div class="filters">
+    <button class="filter-chip active" data-filter="all">All Items</button>
+    <button class="filter-chip" data-filter="keychains">Keychains</button>
+    <button class="filter-chip" data-filter="figures">Figures & Toys</button>
+    <button class="filter-chip" data-filter="decor">Home & Decor</button>
+    <button class="filter-chip" data-filter="office">Office</button>
+    <button class="filter-chip" data-filter="custom">Custom Orders</button>
+    <div class="filter-right">
+      <select class="sort-select">
+        <option>Sort: Featured</option>
+        <option>Price: Low to High</option>
+        <option>Price: High to Low</option>
+        <option>Newest</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="product-grid">
+
+    <div class="product" data-cat="keychains">
+      <div class="product-img art-1">
+        <span class="product-tag new">New</span>
+        <button class="product-fav" aria-label="Favorite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+        <svg viewBox="0 0 100 100" fill="none">
+          <circle cx="50" cy="35" r="20" stroke="#1A1612" stroke-width="2.5"/>
+          <line x1="50" y1="55" x2="50" y2="80" stroke="#1A1612" stroke-width="2.5"/>
+          <circle cx="50" cy="85" r="6" fill="#1A1612"/>
+        </svg>
       </div>
-      <div class="spec-card reveal" data-d="80">
-        <div class="spec-top">
-          <span class="spec-val"><span class="countup" data-target="300">0</span><em>mm/s</em></span>
-        </div>
-        <div class="spec-label">Max Print Speed</div>
-        <div class="spec-bar-wrap"><div class="spec-bar" style="--pct:85%"></div></div>
-      </div>
-      <div class="spec-card reveal" data-d="160">
-        <div class="spec-top">
-          <span class="spec-val"><span class="countup" data-target="350">0</span><em>°C</em></span>
-        </div>
-        <div class="spec-label">Max Nozzle Temp</div>
-        <div class="spec-bar-wrap"><div class="spec-bar" style="--pct:90%"></div></div>
-      </div>
-      <div class="spec-card reveal" data-d="240">
-        <div class="spec-top">
-          <span class="spec-val"><span class="countup" data-target="400">0</span><em>mm³</em></span>
-        </div>
-        <div class="spec-label">Build Volume</div>
-        <div class="spec-bar-wrap"><div class="spec-bar" style="--pct:80%"></div></div>
-      </div>
-      <div class="spec-card reveal" data-d="320">
-        <div class="spec-top">
-          <span class="spec-val"><span class="countup" data-target="8">0</span><em>mats</em></span>
-        </div>
-        <div class="spec-label">Multi-Material Slots</div>
-        <div class="spec-bar-wrap"><div class="spec-bar" style="--pct:72%"></div></div>
-      </div>
-      <div class="spec-card reveal" data-d="400">
-        <div class="spec-top">
-          <span class="spec-val"><span class="countup" data-target="99">0</span><em>.8%</em></span>
-        </div>
-        <div class="spec-label">Print Success Rate</div>
-        <div class="spec-bar-wrap"><div class="spec-bar" style="--pct:99%"></div></div>
+      <h3>Custom Initial Keychain</h3>
+      <div class="meta">
+        <span class="price">$12 <small>/ ea</small></span>
+        <span class="rating"><span class="star">★</span> 4.9 (87)</span>
       </div>
     </div>
-  </section>
 
-  <!-- ═══ GALLERY ═══ -->
-
-  <section class="section gallery" id="gallery">
-    <div class="sec-head">
-      <p class="sec-tag reveal">// 05 — PRINT SHOWCASE</p>
-      <h2 class="sec-title reveal">What people<br>are building</h2>
+    <div class="product" data-cat="figures">
+      <div class="product-img art-2">
+        <span class="product-tag">Bestseller</span>
+        <button class="product-fav active" aria-label="Favorite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+        <svg viewBox="0 0 100 100" fill="none">
+          <path d="M30 70 Q40 30 60 35 Q80 45 75 65 Q70 80 50 78 Q35 75 30 70Z" stroke="#1A1612" stroke-width="2.5" fill="none"/>
+          <circle cx="65" cy="48" r="2.5" fill="#1A1612"/>
+          <path d="M75 35 L82 25 M58 32 L60 22" stroke="#1A1612" stroke-width="2"/>
+        </svg>
+      </div>
+      <h3>Articulated Dragon Figure</h3>
+      <div class="meta">
+        <span class="price">$28</span>
+        <span class="rating"><span class="star">★</span> 5.0 (143)</span>
+      </div>
     </div>
-    <div class="gal-grid">
-      <div class="gal-item reveal" data-d="0"   style="--ac:#ff6b00">
-        <div class="gal-bg g1"></div>
-        <div class="gal-over">
-          <span class="gal-cat">ENGINEERING</span>
-          <h4>Titanium-Look Bracket</h4>
-          <p>Carbon fiber PLA — 0.1 mm layers</p>
+
+    <div class="product" data-cat="office">
+      <div class="product-img art-3">
+        <button class="product-fav" aria-label="Favorite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+        <svg viewBox="0 0 100 100" fill="none">
+          <rect x="20" y="35" width="25" height="35" stroke="#1A1612" stroke-width="2.5" rx="3"/>
+          <rect x="50" y="25" width="30" height="45" stroke="#1A1612" stroke-width="2.5" rx="3"/>
+          <line x1="55" y1="35" x2="75" y2="35" stroke="#1A1612" stroke-width="2"/>
+          <line x1="55" y1="45" x2="75" y2="45" stroke="#1A1612" stroke-width="2"/>
+        </svg>
+      </div>
+      <h3>Modular Desk Organizer</h3>
+      <div class="meta">
+        <span class="price">$35</span>
+        <span class="rating"><span class="star">★</span> 4.8 (62)</span>
+      </div>
+    </div>
+
+    <div class="product" data-cat="office">
+      <div class="product-img art-4">
+        <button class="product-fav" aria-label="Favorite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+        <svg viewBox="0 0 100 100" fill="none">
+          <path d="M25 75 L35 35 L65 35 L75 75 Z" stroke="#1A1612" stroke-width="2.5" fill="none"/>
+          <rect x="40" y="40" width="20" height="30" rx="3" stroke="#1A1612" stroke-width="2"/>
+        </svg>
+      </div>
+      <h3>Adjustable Phone Stand</h3>
+      <div class="meta">
+        <span class="price">$18</span>
+        <span class="rating"><span class="star">★</span> 4.7 (54)</span>
+      </div>
+    </div>
+
+    <div class="product" data-cat="decor">
+      <div class="product-img art-5">
+        <span class="product-tag new">New</span>
+        <button class="product-fav" aria-label="Favorite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+        <svg viewBox="0 0 100 100" fill="none">
+          <polygon points="30,75 50,40 70,75" stroke="#1A1612" stroke-width="2.5" fill="none"/>
+          <polygon points="40,75 50,55 60,75" fill="#1A1612"/>
+          <path d="M48 38 Q50 32 52 38" stroke="#1A1612" stroke-width="2"/>
+        </svg>
+      </div>
+      <h3>Hex Geometric Planter</h3>
+      <div class="meta">
+        <span class="price">$22</span>
+        <span class="rating"><span class="star">★</span> 4.9 (38)</span>
+      </div>
+    </div>
+
+    <div class="product" data-cat="custom">
+      <div class="product-img art-6">
+        <span class="product-tag">Custom</span>
+        <button class="product-fav" aria-label="Favorite"><svg viewBox="0 0 24 24" stroke="#F2EBDC"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+        <svg viewBox="0 0 100 100" fill="none">
+          <text x="50" y="55" text-anchor="middle" fill="#F2EBDC" font-family="Fraunces" font-size="32" font-style="italic" font-weight="700">Aa</text>
+          <line x1="25" y1="70" x2="75" y2="70" stroke="#F2EBDC" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <h3>Personalized Name Sign</h3>
+      <div class="meta">
+        <span class="price">$30+</span>
+        <span class="rating"><span class="star">★</span> 5.0 (29)</span>
+      </div>
+    </div>
+
+    <div class="product" data-cat="figures">
+      <div class="product-img art-7">
+        <button class="product-fav" aria-label="Favorite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+        <svg viewBox="0 0 100 100" fill="none">
+          <rect x="30" y="50" width="40" height="30" stroke="#1A1612" stroke-width="2.5"/>
+          <polygon points="25,50 35,40 65,40 75,50" stroke="#1A1612" stroke-width="2.5" fill="none"/>
+          <rect x="35" y="30" width="6" height="10" fill="#1A1612"/>
+          <rect x="50" y="30" width="6" height="10" fill="#1A1612"/>
+          <rect x="38" y="60" width="8" height="10" fill="#1A1612"/>
+          <rect x="54" y="60" width="8" height="10" fill="#1A1612"/>
+        </svg>
+      </div>
+      <h3>Miniature Castle (Detailed)</h3>
+      <div class="meta">
+        <span class="price">$45</span>
+        <span class="rating"><span class="star">★</span> 4.9 (71)</span>
+      </div>
+    </div>
+
+    <div class="product" data-cat="office">
+      <div class="product-img art-8">
+        <button class="product-fav" aria-label="Favorite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+        <svg viewBox="0 0 100 100" fill="none">
+          <path d="M30 35 Q30 30 35 30 L45 30 Q50 30 50 35 L50 50 Q50 55 45 55 L35 55 Q30 55 30 50 Z" stroke="#1A1612" stroke-width="2.5"/>
+          <path d="M55 45 Q55 40 60 40 L70 40 Q75 40 75 45 L75 60 Q75 65 70 65 L60 65 Q55 65 55 60 Z" stroke="#1A1612" stroke-width="2.5"/>
+        </svg>
+      </div>
+      <h3>Cable Management Clips (10pk)</h3>
+      <div class="meta">
+        <span class="price">$15</span>
+        <span class="rating"><span class="star">★</span> 4.6 (96)</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ TRUST / HOW TO ORDER ============ -->
+
+<section class="trust" id="custom">
+  <div class="trust-inner">
+    <h2>Multiple ways to <em>order</em>. Pay how you feel safest.</h2>
+    <p class="lede">
+      We know providing payment info to a small shop can feel like a leap. That's why we offer
+      three ways to buy — pick whatever works best for you.
+    </p>
+
+    <div class="trust-grid">
+      <div class="trust-card">
+        <div class="trust-num">01 / Direct Checkout</div>
+        <h3>Buy on the website</h3>
+        <p>Secure checkout with industry-standard payment processing. SSL encrypted, never stores your card details.</p>
+        <div class="pay-options">
+          <span class="pay-tag">Stripe</span>
+          <span class="pay-tag">Apple Pay</span>
+          <span class="pay-tag">Google Pay</span>
         </div>
       </div>
-      <div class="gal-item reveal" data-d="80"  style="--ac:#00c2ff">
-        <div class="gal-bg g2"></div>
-        <div class="gal-over">
-          <span class="gal-cat">MEDICAL</span>
-          <h4>Custom Prosthetic Grip</h4>
-          <p>TPU 95A — skin-safe, flexible</p>
+
+      <div class="trust-card">
+        <div class="trust-num">02 / Trusted Apps</div>
+        <h3>Pay through apps you use</h3>
+        <p>Already trust Venmo or PayPal? Order via DM and we'll send a request through the app. No card info needed on our site.</p>
+        <div class="pay-options">
+          <span class="pay-tag">Venmo</span>
+          <span class="pay-tag">CashApp</span>
+          <span class="pay-tag">PayPal</span>
+          <span class="pay-tag">Zelle</span>
         </div>
       </div>
-      <div class="gal-item tall reveal" data-d="160" style="--ac:#a855f7">
-        <div class="gal-bg g3"></div>
-        <div class="gal-over">
-          <span class="gal-cat">ART</span>
-          <h4>Parametric Sculpture</h4>
-          <p>Silk rainbow PLA — 0.08 mm layers</p>
-        </div>
-      </div>
-      <div class="gal-item reveal" data-d="0"   style="--ac:#22c55e">
-        <div class="gal-bg g4"></div>
-        <div class="gal-over">
-          <span class="gal-cat">AUTOMOTIVE</span>
-          <h4>Intake Manifold Proto</h4>
-          <p>Nylon PA12 — high-temp rated</p>
-        </div>
-      </div>
-      <div class="gal-item reveal" data-d="80"  style="--ac:#f59e0b">
-        <div class="gal-bg g5"></div>
-        <div class="gal-over">
-          <span class="gal-cat">CONSUMER</span>
-          <h4>Brass-Finish Desk Piece</h4>
-          <p>Brass-fill PLA — hand polished</p>
+
+      <div class="trust-card">
+        <div class="trust-num">03 / Etsy Shop</div>
+        <h3>Order through Etsy</h3>
+        <p>Prefer the security of a marketplace? Find every item in our Etsy shop with full buyer protection and reviews.</p>
+        <div class="pay-options">
+          <span class="pay-tag">Etsy Protection</span>
+          <span class="pay-tag">PayPal</span>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- ═══ TESTIMONIALS ═══ -->
+  </div>
+</section>
 
-  <section class="section testi">
-    <div class="sec-head">
-      <p class="sec-tag reveal">// 06 — MAKERS SAY</p>
-      <h2 class="sec-title reveal">Trusted by builders<br>worldwide</h2>
-    </div>
-    <div class="testi-track-wrap">
-      <div class="testi-track" id="testiTrack">
-        <div class="testi-card">
-          <div class="tq">"</div>
-          <p>The AI slicer cut my support material waste by 40%. 18-hour prints now finish in 10 with better dimensional accuracy. Absolute game-changer.</p>
-          <div class="ta">
-            <div class="ta-av" style="background:#ff6b00">JR</div>
-            <div><strong>Jake R.</strong><span>Mechanical Engineer, SpaceX</span></div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <div class="tq">"</div>
-          <p>I run a 12-printer farm from my phone. The live monitoring dashboard is incredible — I haven't had a failed print go unnoticed in 6 months.</p>
-          <div class="ta">
-            <div class="ta-av" style="background:#00c2ff">SL</div>
-            <div><strong>Sarah L.</strong><span>Founder, PrintCraft Studio</span></div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <div class="tq">"</div>
-          <p>As a sculptor, I never thought I'd use 3D printing. STRATUM made it approachable. My gallery now sells printed editions alongside traditional work.</p>
-          <div class="ta">
-            <div class="ta-av" style="background:#a855f7">MA</div>
-            <div><strong>Marco A.</strong><span>Digital Sculptor &amp; Artist</span></div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <div class="tq">"</div>
-          <p>We prototyped 14 iterations of our medical device enclosure in 3 weeks. Traditional machining would have taken 3 months. Unbelievable ROI.</p>
-          <div class="ta">
-            <div class="ta-av" style="background:#22c55e">PK</div>
-            <div><strong>Dr. P. Kim</strong><span>R&amp;D Lead, MedTech Startup</span></div>
-          </div>
+<!-- ============ REVIEWS ============ -->
+
+<section class="reviews-section">
+  <div class="section-head">
+    <h2>What folks are <em>saying.</em></h2>
+    <div class="meta">// Verified buyers</div>
+  </div>
+
+  <div class="reviews-grid">
+    <div class="review">
+      <div class="review-quote">"</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">The quality blew me away. Sharp details, smooth finish, and the dragon's joints actually move. Already ordered three more for friends.</p>
+      <div class="review-author">
+        <div class="avatar">M</div>
+        <div>
+          <div class="review-name">Maya R.</div>
+          <div class="review-meta">Verified · April 2026</div>
         </div>
       </div>
     </div>
-    <div class="testi-nav" id="testiNav"></div>
-  </section>
 
-  <!-- ═══ CTA ═══ -->
-
-  <section class="cta-sec" id="cta">
-    <canvas id="ctaCanvas"></canvas>
-    <div class="cta-inner">
-      <p class="sec-tag reveal">// START PRINTING TODAY</p>
-      <h2 class="cta-title reveal">Your first print<br>is <em>on us.</em></h2>
-      <p class="cta-sub reveal">No credit card required. Upload a file, get a free print preview, and see your idea in the real world.</p>
-      <div class="cta-btns reveal">
-        <a href="#" class="btn-primary big">Upload Your First Model →</a>
-        <a href="#" class="btn-outline">Talk to an Engineer</a>
-      </div>
-      <div class="cta-trust reveal">
-        <span>✓ Free forever tier</span>
-        <span>✓ No CAD experience needed</span>
-        <span>✓ Ships worldwide</span>
-        <span>✓ Open-source compatible</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ FOOTER ═══ -->
-
-  <footer class="footer">
-    <div class="foot-top">
-      <div class="foot-brand">
-        <div class="foot-logo">STRATUM<span class="accent-dot">.</span></div>
-        <p>Layer by layer. Dream by dream.<br>Building the future — one print at a time.</p>
-        <div class="foot-socials">
-          <a href="#" aria-label="Twitter">𝕏</a>
-          <a href="#" aria-label="GitHub">⌥</a>
-          <a href="#" aria-label="Discord">⬡</a>
-          <a href="#" aria-label="YouTube">▶</a>
-        </div>
-      </div>
-      <div class="foot-cols">
-        <div class="foot-col">
-          <h5>Platform</h5>
-          <ul>
-            <li><a href="#">Cloud Slicer</a></li>
-            <li><a href="#">Print Farm Manager</a></li>
-            <li><a href="#">Material Library</a></li>
-            <li><a href="#">REST API</a></li>
-          </ul>
-        </div>
-        <div class="foot-col">
-          <h5>Resources</h5>
-          <ul>
-            <li><a href="#">Documentation</a></li>
-            <li><a href="#">Video Tutorials</a></li>
-            <li><a href="#">Community Forum</a></li>
-            <li><a href="#">Blog</a></li>
-          </ul>
-        </div>
-        <div class="foot-col">
-          <h5>Company</h5>
-          <ul>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Careers</a></li>
-            <li><a href="#">Press Kit</a></li>
-            <li><a href="#">Contact</a></li>
-          </ul>
+    <div class="review">
+      <div class="review-quote">"</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">I was nervous about paying online but they offered Venmo which made it easy. The custom name sign turned out exactly like the mockup.</p>
+      <div class="review-author">
+        <div class="avatar b">D</div>
+        <div>
+          <div class="review-name">Daniel K.</div>
+          <div class="review-meta">Verified · March 2026</div>
         </div>
       </div>
     </div>
-    <div class="foot-bottom">
-      <span>© 2026 STRATUM Inc. All rights reserved.</span>
-      <span>Made for makers everywhere <span style="color:var(--orange)">◆</span></span>
-    </div>
-  </footer>
 
-  <script src="script.js"></script>
+    <div class="review">
+      <div class="review-quote">"</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">Fast turnaround, great communication, and the desk organizer is exactly what my home office needed. Will absolutely order again.</p>
+      <div class="review-author">
+        <div class="avatar c">S</div>
+        <div>
+          <div class="review-name">Sofia L.</div>
+          <div class="review-meta">Verified · March 2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA STRIP ============ -->
+
+<section class="cta-strip" id="contact">
+  <div class="cta-strip-inner">
+    <h2>Got something <em>specific</em> in mind?</h2>
+    <p>We do custom prints from your design files, sketches, or just an idea. Get a quote in 24 hours.</p>
+    <a href="#" class="btn btn-primary">
+      Start a custom order
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo">STRATA<em>·</em>3D</div>
+      <p>Custom 3D printed goods, made to order in our Phoenix studio. Designed and printed with care.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="#">All items</a></li>
+        <li><a href="#">Keychains</a></li>
+        <li><a href="#">Figures</a></li>
+        <li><a href="#">Custom orders</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Help</h4>
+      <ul>
+        <li><a href="#">Shipping</a></li>
+        <li><a href="#">Returns</a></li>
+        <li><a href="#">Track order</a></li>
+        <li><a href="#">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">TikTok</a></li>
+        <li><a href="#">Etsy Shop</a></li>
+        <li><a href="#">Email</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 STRATA · 3D — All Rights Reserved</div>
+    <div>Built with care · Hosted on GitHub Pages</div>
+  </div>
+</footer>
+
+<!-- Site interactions -->
+
+<script src="script.js" defer></script>
 
 </body>
 </html>
