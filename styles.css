@@ -158,11 +158,72 @@ nav.main {
   display: grid; place-items: center;
 }
 
+.nav-order-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 18px;
+  background: var(--accent);
+  color: var(--cream);
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 999px;
+  transition: background 0.2s, transform 0.15s;
+  white-space: nowrap;
+}
+.nav-order-btn:hover { background: var(--accent-deep); transform: translateY(-1px); }
+
 @media (max-width: 760px) {
   .nav-links { display: none; }
   .nav-inner { grid-template-columns: auto 1fr auto; }
   .logo { text-align: left; font-size: 22px; }
+  .nav-order-btn { display: none; }
 }
+
+/* ============ AI ASSISTANT BANNER ============ */
+.assistant-banner {
+  background: var(--ink);
+  color: var(--cream);
+  padding: 20px 24px;
+  position: relative;
+  z-index: 2;
+}
+.assistant-banner-inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.assistant-banner-inner > div {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 15px;
+}
+.assistant-banner-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.assistant-banner-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 22px;
+  background: var(--accent);
+  color: var(--cream);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition: background 0.2s, transform 0.15s;
+  flex-shrink: 0;
+}
+.assistant-banner-link:hover { background: var(--accent-deep); transform: translateY(-1px); }
 
 /* ============ HERO ============ */
 .hero {
