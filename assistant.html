@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AI Custom Order Assistant — STRATA · 3D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #F2EBDC;
+  --paper: #EAE1CC;
+  --ink: #1A1612;
+  --ink-soft: #3F362E;
+  --muted: #8C7E6A;
+  --accent: #D9482B;
+  --moss: #4F5D3F;
+  --line: #C9BFA7;
+  --display: 'Fraunces', Georgia, serif;
+  --body: 'Bricolage Grotesque', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--body);
+  background: var(--cream);
+  color: var(--ink);
+  min-height: 100vh;
+  padding: 40px 24px;
+  background-image: repeating-linear-gradient(0deg, transparent 0, transparent 3px, rgba(26,22,18,0.01) 3px, rgba(26,22,18,0.01) 4px);
+}
+.wrapper {
+  max-width: 760px;
+  margin: 0 auto;
+}
+.header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+.header h1 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(32px, 6vw, 56px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+}
+.header h1 em { font-style: italic; font-weight: 700; color: var(--accent); }
+.header p { color: var(--ink-soft); font-size: 16px; max-width: 500px; margin: 0 auto; }
+
+/* Chat area */
+.chat-box {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 28px;
+  min-height: 300px;
+  max-height: 480px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 20px;
+  scroll-behavior: smooth;
+}
+.chat-box:empty::after {
+  content: 'Your conversation will appear here…';
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: auto;
+  text-align: center;
+}
+
+.msg {
+  display: flex;
+  gap: 12px;
+  animation: rise 0.4s ease;
+}
+.msg.user { flex-direction: row-reverse; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.avatar {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: grid; place-items: center;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 13px;
+}
+.msg.ai .avatar { background: var(--ink); color: var(--cream); }
+.msg.user .avatar { background: var(--accent); color: var(--cream); }
+
+.bubble {
+  max-width: 78%;
+  padding: 14px 18px;
+  border-radius: 16px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+.msg.ai .bubble {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-top-left-radius: 4px;
+}
+.msg.user .bubble {
+  background: var(--ink);
+  color: var(--cream);
+  border-top-right-radius: 4px;
+}
+
+/* Result card */
+.result-card {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 28px;
+  margin-top: 28px;
+  display: none;
+}
+.result-card.visible { display: block; animation: rise 0.5s ease; }
+.result-card h3 {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.result-card h3 em { font-style: italic; color: var(--accent); }
+.order-text {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  white-space: pre-wrap;
+  font-family: var(--body);
+  margin-bottom: 18px;
+}
+.copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  background: var(--ink);
+  color: var(--cream);
+  border: none;
+  border-radius: 999px;
+  font-family: var(--body);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+.copy-btn:hover { background: var(--accent); }
+.copy-btn.secondary {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+.copy-btn.secondary:hover { background: var(--paper); }
+
+/* Input area */
+.input-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+}
+.input-wrap {
+  flex: 1;
+  position: relative;
+}
+textarea {
+  width: 100%;
+  font-family: var(--body);
+  font-size: 15px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 14px 18px;
+  resize: none;
+  min-height: 56px;
+  max-height: 140px;
+  color: var(--ink);
+  transition: border-color 0.2s;
+  line-height: 1.5;
+}
+textarea:focus { outline: none; border-color: var(--ink); }
+textarea::placeholder { color: var(--muted); }
+
+.send-btn {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--cream);
+  border: none;
+  cursor: pointer;
+  display: grid; place-items: center;
+  flex-shrink: 0;
+  transition: background 0.2s, transform 0.15s;
+}
+.send-btn:hover { background: var(--accent); transform: scale(1.05); }
+.send-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+.send-btn svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none; }
+
+/* Typing indicator */
+.typing {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 18px;
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  border-top-left-radius: 4px;
+  width: fit-content;
+}
+.typing.visible { display: flex; animation: rise 0.3s ease; }
+.dot { width: 7px; height: 7px; background: var(--muted); border-radius: 50%; animation: pulse 1.2s ease infinite; }
+.dot:nth-child(2) { animation-delay: 0.2s; }
+.dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes pulse {
+  0%, 80%, 100% { transform: scale(0.7); opacity: 0.4; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+/* Quick prompts */
+.quick-prompts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.quick-btn {
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: transparent;
+  font-family: var(--body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.quick-btn:hover { border-color: var(--ink); color: var(--ink); background: var(--paper); }
+
+.hint {
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+/* Mode toggle */
+.mode-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 28px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px;
+  width: fit-content;
+}
+.mode-tab {
+  padding: 8px 20px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--muted);
+  border: none;
+  background: none;
+  font-family: var(--body);
+}
+.mode-tab.active { background: var(--ink); color: var(--cream); }
+</style>
+
+</head>
+<body>
+<div class="wrapper">
+
+  <div class="header">
+    <div class="eyebrow">// AI-Powered Tool</div>
+    <h1>Custom Order <em>Assistant</em></h1>
+    <p>Describe what you want in plain English. I'll turn it into a complete order request you can send directly.</p>
+  </div>
+
+  <!-- Mode toggle -->
+
+  <div class="mode-tabs">
+    <button class="mode-tab active" onclick="setMode('order')">Custom Order</button>
+    <button class="mode-tab" onclick="setMode('worldcup')">World Cup Ideas</button>
+    <button class="mode-tab" onclick="setMode('gift')">Gift Finder</button>
+  </div>
+
+  <!-- Quick prompts -->
+
+  <div class="hint">Try one of these →</div>
+  <div class="quick-prompts" id="quickPrompts">
+    <button class="quick-btn" onclick="useQuick(this)">Keychain with my cat's name</button>
+    <button class="quick-btn" onclick="useQuick(this)">FIFA World Cup trophy replica</button>
+    <button class="quick-btn" onclick="useQuick(this)">Gift for a gamer friend</button>
+    <button class="quick-btn" onclick="useQuick(this)">Dragon figure, about 6 inches</button>
+    <button class="quick-btn" onclick="useQuick(this)">Custom desk decor for my office</button>
+  </div>
+
+  <!-- Chat -->
+
+  <div class="chat-box" id="chatBox"></div>
+
+  <!-- Typing -->
+
+  <div style="padding: 0 4px; margin-bottom: 8px;">
+    <div class="typing" id="typing">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+  </div>
+
+  <!-- Input -->
+
+  <div class="input-row">
+    <div class="input-wrap">
+      <textarea
+        id="userInput"
+        placeholder="Describe what you want printed..."
+        rows="1"
+        onkeydown="handleKey(event)"
+        oninput="autoResize(this)"
+      ></textarea>
+    </div>
+    <button class="send-btn" id="sendBtn" onclick="sendMessage()" aria-label="Send">
+      <svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+    </button>
+  </div>
+
+  <!-- Generated order card -->
+
+  <div class="result-card" id="resultCard">
+    <h3>Your <em>order request</em> is ready.</h3>
+    <div class="order-text" id="orderText"></div>
+    <button class="copy-btn" onclick="copyOrder()">📋 Copy to clipboard</button>
+    <a id="emailLink" href="#" class="copy-btn secondary">✉️ Open in email</a>
+    <br><br>
+    <div style="font-size:13px; color: var(--muted);">
+      Send this to <strong>your@email.com</strong> or paste it into a DM on Instagram / Etsy.
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ─── State ──────────────────────────────────────────────────────
+const history = [];
+let currentMode = 'order';
+let lastOrderText = '';
+
+// System prompts per mode
+const systemPrompts = {
+  order: `You are a friendly custom order assistant for STRATA · 3D, a 3D printing shop that makes keychains, figurines, home decor, and custom designs.
+
+Your job: chat with the customer to understand exactly what they want, then generate a complete "Custom Order Request" block they can send to the shop.
+
+Rules:
+- Ask 2-3 clarifying questions maximum before generating the order
+- Keep your chat responses short and warm (2-3 sentences max)
+- When you have enough info, say "I have everything I need! Here's your order request:" and then output a block that starts with --- ORDER REQUEST --- on its own line
+- The order block should include: Product description, Size/dimensions (if relevant), Colors, Personalization details, Quantity, Any special notes
+- Estimated price range if you can reasonably guess it (keychains $10-20, figures $25-60, decor $20-50, custom $30+)
+- Never make up things the customer didn't say`,
+
+  worldcup: `You are a World Cup 2026 product specialist for STRATA · 3D, a 3D printing shop.
+
+The 2026 FIFA World Cup is hosted in the US, Canada, and Mexico starting June 2026. It's a massive event.
+
+Your job: help customers find or design the perfect World Cup 3D printed item. Suggest specific products, upsells, and gift ideas based on what team or player they mention.
+
+Rules:
+- Be enthusiastic about soccer/football and the World Cup
+- Suggest real product ideas: team crests, trophy replicas, stadium models, player figures, flag wall art, etc.
+- When ready to create an order, say "Great! Here's your order request:" and output --- ORDER REQUEST --- block
+- Keep responses fun and short`,
+
+  gift: `You are a gift advisor for STRATA · 3D, a 3D printing shop.
+
+Help customers find the perfect 3D printed gift by asking about: who it's for, occasion, budget, and their interests/hobbies.
+
+Products available: keychains ($10-20), articulated figures ($25-50), desk organizers ($30-40), planters ($18-30), name signs ($25-40), custom miniatures ($40-80), phone stands ($15-25).
+
+When you have enough info, say "Perfect, here's a gift order request:" and output --- ORDER REQUEST --- block.
+
+Keep responses warm, brief, and gift-focused.`
+};
+
+// ─── Mode toggle ─────────────────────────────────────────────────
+function setMode(mode) {
+  currentMode = mode;
+  document.querySelectorAll('.mode-tab').forEach((t, i) => {
+    t.classList.toggle('active', ['order','worldcup','gift'][i] === mode);
+  });
+
+  // Reset chat
+  history.length = 0;
+  document.getElementById('chatBox').innerHTML = '';
+  document.getElementById('resultCard').classList.remove('visible');
+
+  // Update quick prompts
+  const sets = {
+    order: ['Keychain with my cat\'s name','Dragon figure, about 6 inches','Custom desk name plate','Mini succulent planter','Articulated octopus figure'],
+    worldcup: ['USA team crest keychain','FIFA trophy replica small','Brazil jersey number keychain','World Cup 2026 stadium model','Argentina fan gift'],
+    gift: ['Gift for a gamer, $30 budget','Birthday gift for my mom','Graduation gift for a teacher','Gift for a soccer fan','Desk gift for a coworker']
+  };
+  document.getElementById('quickPrompts').innerHTML = sets[mode].map(
+    p => `<button class="quick-btn" onclick="useQuick(this)">${p}</button>`
+  ).join('');
+}
+
+// ─── Chat logic ───────────────────────────────────────────────────
+function useQuick(btn) {
+  document.getElementById('userInput').value = btn.textContent;
+  sendMessage();
+}
+
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 140) + 'px';
+}
+
+function addMessage(role, text) {
+  const box = document.getElementById('chatBox');
+  const div = document.createElement('div');
+  div.className = `msg ${role}`;
+  const initial = role === 'ai' ? 'AI' : 'You';
+  div.innerHTML = `
+    <div class="avatar">${initial}</div>
+    <div class="bubble">${text.replace(/\n/g, '<br>')}</div>
+  `;
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+}
+
+async function sendMessage() {
+  const input = document.getElementById('userInput');
+  const text = input.value.trim();
+  if (!text) return;
+
+  // Add user message
+  addMessage('user', text);
+  history.push({ role: 'user', content: text });
+  input.value = '';
+  input.style.height = 'auto';
+
+  // Disable send
+  const btn = document.getElementById('sendBtn');
+  btn.disabled = true;
+
+  // Show typing
+  document.getElementById('typing').classList.add('visible');
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: systemPrompts[currentMode],
+        messages: history
+      })
+    });
+
+    const data = await res.json();
+    const reply = data.content?.[0]?.text || 'Something went wrong, please try again.';
+
+    // Hide typing
+    document.getElementById('typing').classList.remove('visible');
+
+    // Check if it contains an order block
+    if (reply.includes('--- ORDER REQUEST ---')) {
+      const parts = reply.split('--- ORDER REQUEST ---');
+      const chatPart = parts[0].trim();
+      const orderPart = parts[1]?.trim() || '';
+
+      if (chatPart) { addMessage('ai', chatPart); }
+      history.push({ role: 'assistant', content: reply });
+
+      // Show result card
+      lastOrderText = orderPart;
+      document.getElementById('orderText').textContent = orderPart;
+      document.getElementById('emailLink').href = `mailto:your@email.com?subject=Custom Order Request&body=${encodeURIComponent(orderPart)}`;
+      document.getElementById('resultCard').classList.add('visible');
+      document.getElementById('resultCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      addMessage('ai', reply);
+      history.push({ role: 'assistant', content: reply });
+    }
+
+  } catch (err) {
+    document.getElementById('typing').classList.remove('visible');
+    addMessage('ai', 'Sorry, I\'m having trouble connecting. Please try again in a moment.');
+  }
+
+  btn.disabled = false;
+}
+
+function copyOrder() {
+  navigator.clipboard.writeText(lastOrderText).then(() => {
+    const btn = event.target;
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => btn.textContent = '📋 Copy to clipboard', 2000);
+  });
+}
+</script>
+
+</body>
+</html>
