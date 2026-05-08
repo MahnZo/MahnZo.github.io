@@ -37,6 +37,35 @@ document.querySelectorAll('.product-fav').forEach(btn => {
 });
 
 // ————————————————————
+// MOBILE MENU
+// ————————————————————
+const burgerBtn  = document.getElementById('burgerBtn');
+const mobOverlay = document.getElementById('mobOverlay');
+const mobClose   = document.getElementById('mobClose');
+const mobLinks   = document.querySelectorAll('.mob-link');
+
+function openMenu() {
+  mobOverlay.classList.add('open');
+  mobOverlay.setAttribute('aria-hidden', 'false');
+  burgerBtn.setAttribute('aria-expanded', 'true');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMenu() {
+  mobOverlay.classList.remove('open');
+  mobOverlay.setAttribute('aria-hidden', 'true');
+  burgerBtn.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+}
+
+if (burgerBtn) burgerBtn.addEventListener('click', openMenu);
+if (mobClose)  mobClose.addEventListener('click', closeMenu);
+if (mobOverlay) mobOverlay.addEventListener('click', e => {
+  if (e.target === mobOverlay) closeMenu();
+});
+mobLinks.forEach(l => l.addEventListener('click', closeMenu));
+
+// ————————————————————
 // SORT DROPDOWN  (placeholder — wire up to real data later)
 // ————————————————————
 const sortSelect = document.querySelector('.sort-select');

@@ -58,7 +58,6 @@
     <div class="nav-links">
       <a href="#shop">Shop</a>
       <a href="#custom">Custom Orders</a>
-      <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </div>
     <div class="logo">STRATA<em>·</em>3D</div>
@@ -74,9 +73,28 @@
         <svg viewBox="0 0 24 24"><path d="M6 7h13l-1.5 9H7.5L6 7zM6 7L5 4H3M9 21a1 1 0 100-2 1 1 0 000 2zM17 21a1 1 0 100-2 1 1 0 000 2z"/></svg>
         <span class="count">2</span>
       </button>
+      <button class="icon-btn burger-btn" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/></svg>
+      </button>
     </div>
   </div>
 </nav>
+
+<!-- ============ MOBILE MENU ============ -->
+<div class="mob-overlay" id="mobOverlay" aria-hidden="true">
+  <div class="mob-drawer" id="mobDrawer">
+    <button class="mob-close" id="mobClose" aria-label="Close menu">
+      <svg viewBox="0 0 24 24" width="22" height="22"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <nav class="mob-nav">
+      <a href="#shop"    class="mob-link">Shop</a>
+      <a href="#worldcup" class="mob-link">World Cup 2026</a>
+      <a href="#custom"  class="mob-link">Custom Orders</a>
+      <a href="#contact" class="mob-link">Contact</a>
+      <a href="assistant.html" class="mob-link mob-cta">AI Order Assistant →</a>
+    </nav>
+  </div>
+</div>
 
 <!-- ============ HERO ============ -->
 
