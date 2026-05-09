@@ -39,6 +39,7 @@
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
+  overflow-x: hidden;
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.55;
@@ -336,6 +337,19 @@ h1,h2,h3,h4 { margin: 0; font-weight: 700; line-height: 1.05; letter-spacing: -.
   font-size: clamp(1.1rem, 2.2vw, 1.6rem);
   color: var(--chalk);
   letter-spacing: .04em;
+}
+.countdown__datetime {
+  font-family: var(--font-mono);
+  font-size: .82rem;
+  letter-spacing: .06em;
+  color: var(--paper-mute);
+}
+.countdown__venue {
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 .countdown__digits { display: flex; align-items: baseline; gap: .35rem; }
 .countdown__cell { display: flex; flex-direction: column; align-items: center; min-width: 64px; }
@@ -807,6 +821,7 @@ h1,h2,h3,h4 { margin: 0; font-weight: 700; line-height: 1.05; letter-spacing: -.
   .nav__links a:last-child { border-bottom: none; }
   .nav__cta { text-align: center; margin-top: .5rem; }
   .nav__toggle { display: flex; }
+  .hero__lights { display: none; }
   .countdown__cell { min-width: 52px; }
   .countdown__sep { display: none; }
   .countdown__digits { gap: .25rem; }

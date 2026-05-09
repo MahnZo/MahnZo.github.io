@@ -89,11 +89,13 @@
   }
 
   const cdEls = {
-    days:  document.getElementById('cdDays'),
-    hours: document.getElementById('cdHours'),
-    mins:  document.getElementById('cdMins'),
-    secs:  document.getElementById('cdSecs'),
-    label: document.getElementById('countdownMatch')
+    days:     document.getElementById('cdDays'),
+    hours:    document.getElementById('cdHours'),
+    mins:     document.getElementById('cdMins'),
+    secs:     document.getElementById('cdSecs'),
+    label:    document.getElementById('countdownMatch'),
+    datetime: document.getElementById('countdownDatetime'),
+    venue:    document.getElementById('countdownVenue')
   };
   function getNextMatch() {
     const now = Date.now();
@@ -114,6 +116,8 @@
     if (cdEls.label) {
       cdEls.label.textContent = `${next.home.flag} ${next.home.name} vs ${next.away.name} ${next.away.flag}`;
     }
+    if (cdEls.datetime) cdEls.datetime.textContent = `${formatDay(next.dateISO)} · ${formatTime(next.dateISO)}`;
+    if (cdEls.venue)    cdEls.venue.textContent    = next.venue || '';
     const diff = new Date(next.dateISO).getTime() - Date.now();
     if (diff <= 0) { updateCountdown(); return; }
     const days  = Math.floor(diff / 86400000);
