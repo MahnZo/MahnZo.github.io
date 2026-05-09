@@ -1,0 +1,119 @@
+# ============================================================
+# SITE CONFIG — fill in every value below, then send this
+# file back and all placeholders will be replaced site-wide.
+#
+# Rules:
+#   - Put your value after the = sign on the same line
+#   - Leave the line blank after = if you don't have it yet
+#   - Do NOT change anything to the left of the = sign
+#   - Do NOT add extra spaces around =
+# ============================================================
+
+
+# ------------------------------------------------------------
+# BRAND
+# ------------------------------------------------------------
+
+BRAND_NAME =
+BRAND_TAGLINE =
+SITE_URL =
+CUSTOM_DOMAIN =
+CONTACT_EMAIL =
+LOCAL_AREA =
+
+
+# ------------------------------------------------------------
+# ANALYTICS  (get these free — see README.md for instructions)
+# ------------------------------------------------------------
+
+GA_MEASUREMENT_ID =
+CLARITY_ID =
+
+
+# ------------------------------------------------------------
+# SHOP LINKS
+# ------------------------------------------------------------
+
+ETSY_SHOP_URL =
+SHOPIFY_SHOP_URL =
+FACEBOOK_MARKETPLACE_URL =
+OFFERUP_URL =
+
+
+# ------------------------------------------------------------
+# SOCIAL MEDIA
+# ------------------------------------------------------------
+
+INSTAGRAM_URL =
+TIKTOK_URL =
+YOUTUBE_URL =
+
+
+# ------------------------------------------------------------
+# FEATURED PRODUCT  (the hero drop shown at the top)
+# ------------------------------------------------------------
+
+FEATURED_PRODUCT_NAME =
+FEATURED_PRODUCT_DESCRIPTION =
+FEATURED_PRODUCT_URL =
+FEATURED_PRICE =
+FEATURED_MATERIAL =
+FEATURED_SIZE =
+FEATURED_FINISH =
+FEATURED_SHIP_DAYS =
+
+
+# ------------------------------------------------------------
+# STATS (shown in the hero section)
+# ------------------------------------------------------------
+
+ORDERS_COUNT =
+RATING =
+TURNAROUND_DAYS =
+
+
+# ------------------------------------------------------------
+# GALLERY — 6 products shown in the grid
+# (URL should be the direct Etsy or Shopify link for that item)
+# ------------------------------------------------------------
+
+PRODUCT_1_NAME =
+PRODUCT_1_PRICE =
+PRODUCT_1_URL =
+
+PRODUCT_2_NAME =
+PRODUCT_2_PRICE =
+PRODUCT_2_URL =
+
+PRODUCT_3_NAME =
+PRODUCT_3_PRICE =
+PRODUCT_3_URL =
+
+PRODUCT_4_NAME =
+PRODUCT_4_PRICE =
+PRODUCT_4_URL =
+
+PRODUCT_5_NAME =
+PRODUCT_5_PRICE =
+PRODUCT_5_URL =
+
+PRODUCT_6_NAME =
+PRODUCT_6_PRICE =
+PRODUCT_6_URL =
+
+
+# ------------------------------------------------------------
+# REVIEWS (3 quotes shown at the bottom of the page)
+# ------------------------------------------------------------
+
+REVIEW_1_QUOTE =
+REVIEW_1_NAME =
+REVIEW_1_PLATFORM =
+
+REVIEW_2_QUOTE =
+REVIEW_2_NAME =
+REVIEW_2_PLATFORM =
+
+REVIEW_3_QUOTE =
+REVIEW_3_NAME =
+REVIEW_3_PLATFORM =
