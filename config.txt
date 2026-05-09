@@ -34,7 +34,7 @@ CLARITY_ID =
 # SHOP LINKS
 # ------------------------------------------------------------
 
-ETSY_SHOP_URL =
+ETSY_SHOP_URL = https://pixlforgeshop.etsy.com
 SHOPIFY_SHOP_URL =
 FACEBOOK_MARKETPLACE_URL =
 OFFERUP_URL =
