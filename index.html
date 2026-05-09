@@ -1,624 +1,435 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>STRATA — Custom 3D Printed Goods</title>
-<meta name="description" content="Handcrafted 3D printed keychains, figures, decor, and custom designs. Made to order in our studio." />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-<!-- Fonts -->
+  <!-- ============================================ -->
+  <!-- SEO & SOCIAL META — REPLACE PLACEHOLDERS     -->
+  <!-- ============================================ -->
+  <title>{{BRAND_NAME}} — Custom 3D Printed Collectibles & Inspired-By Items</title>
+  <meta name="description" content="{{BRAND_TAGLINE}} — Custom 3D printed collectibles, fan art, and inspired-by designs. Shop on Etsy, Shopify, and more." />
+  <meta name="keywords" content="3d printed, custom prints, collectibles, fan art, miniatures, {{BRAND_NAME}}" />
+  <meta name="author" content="{{BRAND_NAME}}" />
+  <link rel="canonical" href="{{SITE_URL}}" />
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="{{SITE_URL}}" />
+  <meta property="og:title" content="{{BRAND_NAME}} — Custom 3D Printed Goods" />
+  <meta property="og:description" content="{{BRAND_TAGLINE}}" />
+  <meta property="og:image" content="{{SITE_URL}}/assets/og-image.jpg" />
 
-<!-- Stylesheet -->
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="{{SITE_URL}}" />
+  <meta name="twitter:title" content="{{BRAND_NAME}} — Custom 3D Printed Goods" />
+  <meta name="twitter:description" content="{{BRAND_TAGLINE}}" />
+  <meta name="twitter:image" content="{{SITE_URL}}/assets/og-image.jpg" />
 
-<link rel="stylesheet" href="styles.css">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
 
-<!-- Google Analytics 4 — replace G-XXXXXXXXXX with your real Measurement ID -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
-</script>
+  <!-- Fonts: Syne (display) + Manrope (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
-<!-- Microsoft Clarity — replace XXXXXXXXXX with your real Project ID -->
-<script type="text/javascript">
-  (function(c,l,a,r,i,t,y){
-    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-  })(window, document, "clarity", "script", "XXXXXXXXXX");
-</script>
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css" />
 
+  <!-- ============================================ -->
+  <!-- GOOGLE ANALYTICS 4 — REPLACE GA_MEASUREMENT_ID -->
+  <!-- ============================================ -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{GA_MEASUREMENT_ID}}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{GA_MEASUREMENT_ID}}', {
+      send_page_view: true,
+      anonymize_ip: true
+    });
+  </script>
+
+  <!-- ============================================ -->
+  <!-- MICROSOFT CLARITY (heatmaps) — REPLACE CLARITY_ID -->
+  <!-- ============================================ -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "{{CLARITY_ID}}");
+  </script>
+
+  <!-- JSON-LD Structured Data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Store",
+    "name": "{{BRAND_NAME}}",
+    "description": "{{BRAND_TAGLINE}}",
+    "url": "{{SITE_URL}}",
+    "image": "{{SITE_URL}}/assets/og-image.jpg",
+    "sameAs": [
+      "{{INSTAGRAM_URL}}",
+      "{{TIKTOK_URL}}",
+      "{{ETSY_SHOP_URL}}"
+    ]
+  }
+  </script>
 </head>
+
 <body>
 
-<!-- ============ TOP UTILITY BAR ============ -->
+  <!-- Decorative grain overlay -->
+  <div class="grain" aria-hidden="true"></div>
 
-<div class="topbar">
-  <div class="topbar-inner">
-    <div>★ Free shipping on orders over $50</div>
-    <div>
-      <a href="#">Instagram</a> &nbsp; / &nbsp;
-      <a href="#">TikTok</a> &nbsp; / &nbsp;
-      <a href="#">Etsy Shop</a>
-    </div>
-  </div>
-</div>
-
-<!-- ============ NAV ============ -->
-
-<nav class="main">
-  <div class="nav-inner">
-    <div class="nav-links">
-      <a href="#shop">Shop</a>
-      <a href="#custom">Custom Orders</a>
-      <a href="#contact">Contact</a>
-    </div>
-    <div class="logo">STRATA<em>·</em>3D</div>
-    <div class="nav-actions">
-      <a href="assistant.html" class="nav-order-btn">Custom Order</a>
-      <button class="icon-btn" aria-label="Search">
-        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.5-4.5"/></svg>
-      </button>
-      <button class="icon-btn" aria-label="Account">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
-      </button>
-      <button class="icon-btn cart-badge" aria-label="Cart">
-        <svg viewBox="0 0 24 24"><path d="M6 7h13l-1.5 9H7.5L6 7zM6 7L5 4H3M9 21a1 1 0 100-2 1 1 0 000 2zM17 21a1 1 0 100-2 1 1 0 000 2z"/></svg>
-        <span class="count">2</span>
-      </button>
-      <button class="icon-btn burger-btn" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
-        <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/></svg>
-      </button>
-    </div>
-  </div>
-</nav>
-
-<!-- ============ MOBILE MENU ============ -->
-<div class="mob-overlay" id="mobOverlay" aria-hidden="true">
-  <div class="mob-drawer" id="mobDrawer">
-    <button class="mob-close" id="mobClose" aria-label="Close menu">
-      <svg viewBox="0 0 24 24" width="22" height="22"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-    </button>
-    <nav class="mob-nav">
-      <a href="#shop"    class="mob-link">Shop</a>
-      <a href="#worldcup" class="mob-link">World Cup 2026</a>
-      <a href="#custom"  class="mob-link">Custom Orders</a>
-      <a href="#contact" class="mob-link">Contact</a>
-      <a href="assistant.html" class="mob-link mob-cta">AI Order Assistant →</a>
-    </nav>
-  </div>
-</div>
-
-<!-- ============ HERO ============ -->
-
-<section class="hero">
-  <div>
-    <div class="hero-eyebrow">Made-to-order · Studio in Phoenix</div>
-    <h1>Layered with care, <em>printed</em> with purpose.</h1>
-    <p class="lede">
-      Custom 3D printed keychains, figurines, decor, and one-of-a-kind designs.
-      Every piece is printed in our studio, hand-finished, and shipped to you.
-    </p>
-    <div class="hero-cta">
-      <a href="#shop" class="btn btn-primary">
-        Browse the shop
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-      </a>
-      <a href="#custom" class="btn btn-secondary">Request custom design</a>
-    </div>
-    <div class="hero-stats">
-      <div class="stat">
-        <span class="stat-num">2,400+</span>
-        <span class="stat-label">Orders shipped</span>
-      </div>
-      <div class="stat">
-        <span class="stat-num">4.9</span>
-        <span class="stat-label">Avg. rating</span>
-      </div>
-      <div class="stat">
-        <span class="stat-num">48hr</span>
-        <span class="stat-label">Print turnaround</span>
-      </div>
-    </div>
-  </div>
-  <div class="hero-visual">
-    <div class="hero-card main">
-      <svg viewBox="0 0 200 200" fill="none">
-        <polygon points="100,30 160,65 160,135 100,170 40,135 40,65" stroke="white" stroke-width="2" stroke-opacity="0.5"/>
-        <polygon points="100,55 140,77 140,123 100,145 60,123 60,77" stroke="white" stroke-width="2" stroke-opacity="0.7"/>
-        <polygon points="100,80 120,92 120,118 100,130 80,118 80,92" fill="white" fill-opacity="0.95"/>
-      </svg>
-    </div>
-    <div class="hero-card float-1">
-      <svg viewBox="0 0 100 100" fill="none">
-        <circle cx="50" cy="50" r="35" stroke="#F2EBDC" stroke-width="2"/>
-        <circle cx="50" cy="50" r="25" stroke="#F2EBDC" stroke-width="2"/>
-        <circle cx="50" cy="50" r="15" fill="#F2EBDC"/>
-      </svg>
-    </div>
-    <div class="hero-card float-2">
-      <div class="badge">Bestseller</div>
-      <div class="price">$28</div>
-      <div class="name">Articulated Dragon</div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ MARQUEE ============ -->
-
-<div class="marquee">
-  <div class="marquee-track">
-    <span>★ Hand-finished &nbsp; <span class="dot"></span> &nbsp; PLA & PETG materials &nbsp; <span class="dot"></span> &nbsp; Ships from Arizona &nbsp; <span class="dot"></span> &nbsp; Custom orders welcome &nbsp; <span class="dot"></span> &nbsp; Eco-friendly packaging &nbsp; <span class="dot"></span> &nbsp;</span>
-    <span>★ Hand-finished &nbsp; <span class="dot"></span> &nbsp; PLA & PETG materials &nbsp; <span class="dot"></span> &nbsp; Ships from Arizona &nbsp; <span class="dot"></span> &nbsp; Custom orders welcome &nbsp; <span class="dot"></span> &nbsp; Eco-friendly packaging &nbsp; <span class="dot"></span> &nbsp;</span>
-  </div>
-</div>
-
-<!-- ============ WORLD CUP 2026 COLLECTION ============ -->
-
-<section class="shop worldcup-collection" id="worldcup">
-  <div class="section-head">
-    <h2>World Cup <em>2026.</em></h2>
-    <div class="meta">// Limited edition</div>
-  </div>
-  <p style="font-size:16px; color:var(--ink-soft); max-width:600px; margin-bottom:48px; margin-top:-24px;">
-    The 2026 FIFA World Cup comes to the United States — celebrate the beautiful game with hand-printed keepsakes, custom team gear, and architectural tributes to the host stadiums.
-  </p>
-
-  <div class="product-grid">
-
-    <div class="product" data-cat="worldcup">
-      <div class="product-img art-1">
-        <span class="product-tag new">New</span>
-        <button class="product-fav" aria-label="Favorite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
-        <svg viewBox="0 0 100 100" fill="none">
-          <circle cx="50" cy="45" r="28" stroke="#1A1612" stroke-width="2.5"/>
-          <polygon points="50,28 54,40 67,40 57,48 61,61 50,53 39,61 43,48 33,40 46,40" fill="#1A1612"/>
-        </svg>
-      </div>
-      <h3>Team Crest Keychain</h3>
-      <div class="meta">
-        <span class="price">$14 <small>/ ea</small></span>
-        <span class="rating"><span class="star">★</span> 4.9 (12)</span>
-      </div>
-    </div>
-
-    <div class="product" data-cat="worldcup">
-      <div class="product-img art-7">
-        <span class="product-tag">Bestseller</span>
-        <button class="product-fav" aria-label="Favorite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
-        <svg viewBox="0 0 100 100" fill="none">
-          <path d="M38 75 L38 45 Q50 30 62 45 L62 75 Z" stroke="#1A1612" stroke-width="2.5" fill="none"/>
-          <ellipse cx="50" cy="44" rx="14" ry="8" stroke="#1A1612" stroke-width="2"/>
-          <rect x="44" y="75" width="12" height="6" rx="2" fill="#1A1612"/>
-          <rect x="36" y="81" width="28" height="4" rx="2" fill="#1A1612"/>
-        </svg>
-      </div>
-      <h3>FIFA Trophy Replica (mini)</h3>
-      <div class="meta">
-        <span class="price">$38</span>
-        <span class="rating"><span class="star">★</span> 5.0 (8)</span>
-      </div>
-    </div>
-
-    <div class="product" data-cat="worldcup">
-      <div class="product-img art-3">
-        <button class="product-fav" aria-label="Favorite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
-        <svg viewBox="0 0 100 100" fill="none">
-          <rect x="15" y="55" width="70" height="22" rx="2" stroke="#1A1612" stroke-width="2.5"/>
-          <path d="M25 55 L30 30 L70 30 L75 55" stroke="#1A1612" stroke-width="2.5" fill="none"/>
-          <line x1="50" y1="30" x2="50" y2="55" stroke="#1A1612" stroke-width="1.5"/>
-          <line x1="37" y1="30" x2="35" y2="55" stroke="#1A1612" stroke-width="1.5"/>
-          <line x1="63" y1="30" x2="65" y2="55" stroke="#1A1612" stroke-width="1.5"/>
-        </svg>
-      </div>
-      <h3>Stadium Architecture Model</h3>
-      <div class="meta">
-        <span class="price">$55</span>
-        <span class="rating"><span class="star">★</span> 4.8 (5)</span>
-      </div>
-    </div>
-
-    <div class="product" data-cat="worldcup">
-      <div class="product-img art-2">
-        <span class="product-tag">Custom</span>
-        <button class="product-fav" aria-label="Favorite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
-        <svg viewBox="0 0 100 100" fill="none">
-          <circle cx="50" cy="35" r="14" stroke="#1A1612" stroke-width="2.5"/>
-          <rect x="38" y="49" width="24" height="28" rx="3" stroke="#1A1612" stroke-width="2.5"/>
-          <line x1="38" y1="62" x2="20" y2="58" stroke="#1A1612" stroke-width="2.5"/>
-          <line x1="62" y1="62" x2="80" y2="58" stroke="#1A1612" stroke-width="2.5"/>
-          <line x1="44" y1="77" x2="40" y2="92" stroke="#1A1612" stroke-width="2.5"/>
-          <line x1="56" y1="77" x2="60" y2="92" stroke="#1A1612" stroke-width="2.5"/>
-        </svg>
-      </div>
-      <h3>Player Bobblehead (custom)</h3>
-      <div class="meta">
-        <span class="price">$42</span>
-        <span class="rating"><span class="star">★</span> 5.0 (6)</span>
-      </div>
-    </div>
-
-    <div class="product" data-cat="worldcup">
-      <div class="product-img art-5">
-        <span class="product-tag new">New</span>
-        <button class="product-fav" aria-label="Favorite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
-        <svg viewBox="0 0 100 100" fill="none">
-          <rect x="20" y="30" width="60" height="40" rx="3" stroke="#1A1612" stroke-width="2.5"/>
-          <line x1="20" y1="43" x2="80" y2="43" stroke="#1A1612" stroke-width="2"/>
-          <line x1="20" y1="57" x2="80" y2="57" stroke="#1A1612" stroke-width="2"/>
-          <line x1="40" y1="30" x2="40" y2="70" stroke="#1A1612" stroke-width="2"/>
-          <line x1="60" y1="30" x2="60" y2="70" stroke="#1A1612" stroke-width="2"/>
-          <line x1="32" y1="70" x2="32" y2="78" stroke="#1A1612" stroke-width="2"/>
-          <line x1="68" y1="70" x2="68" y2="78" stroke="#1A1612" stroke-width="2"/>
-        </svg>
-      </div>
-      <h3>National Flag Wall Art</h3>
-      <div class="meta">
-        <span class="price">$28</span>
-        <span class="rating"><span class="star">★</span> 4.9 (9)</span>
-      </div>
-    </div>
-
-    <div class="product" data-cat="worldcup">
-      <div class="product-img art-4">
-        <button class="product-fav" aria-label="Favorite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
-        <svg viewBox="0 0 100 100" fill="none">
-          <rect x="22" y="38" width="56" height="34" rx="4" stroke="#1A1612" stroke-width="2.5"/>
-          <line x1="35" y1="48" x2="35" y2="62" stroke="#1A1612" stroke-width="3" stroke-linecap="round"/>
-          <line x1="50" y1="44" x2="50" y2="62" stroke="#1A1612" stroke-width="3" stroke-linecap="round"/>
-          <line x1="65" y1="51" x2="65" y2="62" stroke="#1A1612" stroke-width="3" stroke-linecap="round"/>
-          <rect x="30" y="72" width="40" height="5" rx="2" fill="#1A1612"/>
-        </svg>
-      </div>
-      <h3>World Cup Countdown Display</h3>
-      <div class="meta">
-        <span class="price">$22</span>
-        <span class="rating"><span class="star">★</span> 4.7 (11)</span>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ============ SHOP ============ -->
-
-<section class="shop" id="shop">
-  <div class="section-head">
-    <h2>The <em>collection.</em></h2>
-    <div class="meta">// 30 items in stock</div>
-  </div>
-
-  <div class="filters">
-    <button class="filter-chip active" data-filter="all">All Items</button>
-    <button class="filter-chip" data-filter="keychains">Keychains</button>
-    <button class="filter-chip" data-filter="figures">Figures & Toys</button>
-    <button class="filter-chip" data-filter="decor">Home & Decor</button>
-    <button class="filter-chip" data-filter="office">Office</button>
-    <button class="filter-chip" data-filter="custom">Custom Orders</button>
-    <button class="filter-chip" data-filter="worldcup">⚽ World Cup 2026</button>
-    <div class="filter-right">
-      <select class="sort-select">
-        <option>Sort: Featured</option>
-        <option>Price: Low to High</option>
-        <option>Price: High to Low</option>
-        <option>Newest</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="product-grid">
-
-    <div class="product" data-cat="keychains">
-      <div class="product-img art-1">
-        <span class="product-tag new">New</span>
-        <button class="product-fav" aria-label="Favorite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
-        <svg viewBox="0 0 100 100" fill="none">
-          <circle cx="50" cy="35" r="20" stroke="#1A1612" stroke-width="2.5"/>
-          <line x1="50" y1="55" x2="50" y2="80" stroke="#1A1612" stroke-width="2.5"/>
-          <circle cx="50" cy="85" r="6" fill="#1A1612"/>
-        </svg>
-      </div>
-      <h3>Custom Initial Keychain</h3>
-      <div class="meta">
-        <span class="price">$12 <small>/ ea</small></span>
-        <span class="rating"><span class="star">★</span> 4.9 (87)</span>
-      </div>
-    </div>
-
-    <div class="product" data-cat="figures">
-      <div class="product-img art-2">
-        <span class="product-tag">Bestseller</span>
-        <button class="product-fav active" aria-label="Favorite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
-        <svg viewBox="0 0 100 100" fill="none">
-          <path d="M30 70 Q40 30 60 35 Q80 45 75 65 Q70 80 50 78 Q35 75 30 70Z" stroke="#1A1612" stroke-width="2.5" fill="none"/>
-          <circle cx="65" cy="48" r="2.5" fill="#1A1612"/>
-          <path d="M75 35 L82 25 M58 32 L60 22" stroke="#1A1612" stroke-width="2"/>
-        </svg>
-      </div>
-      <h3>Articulated Dragon Figure</h3>
-      <div class="meta">
-        <span class="price">$28</span>
-        <span class="rating"><span class="star">★</span> 5.0 (143)</span>
-      </div>
-    </div>
-
-    <div class="product" data-cat="office">
-      <div class="product-img art-3">
-        <button class="product-fav" aria-label="Favorite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
-        <svg viewBox="0 0 100 100" fill="none">
-          <rect x="20" y="35" width="25" height="35" stroke="#1A1612" stroke-width="2.5" rx="3"/>
-          <rect x="50" y="25" width="30" height="45" stroke="#1A1612" stroke-width="2.5" rx="3"/>
-          <line x1="55" y1="35" x2="75" y2="35" stroke="#1A1612" stroke-width="2"/>
-          <line x1="55" y1="45" x2="75" y2="45" stroke="#1A1612" stroke-width="2"/>
-        </svg>
-      </div>
-      <h3>Modular Desk Organizer</h3>
-      <div class="meta">
-        <span class="price">$35</span>
-        <span class="rating"><span class="star">★</span> 4.8 (62)</span>
-      </div>
-    </div>
-
-    <div class="product" data-cat="office">
-      <div class="product-img art-4">
-        <button class="product-fav" aria-label="Favorite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
-        <svg viewBox="0 0 100 100" fill="none">
-          <path d="M25 75 L35 35 L65 35 L75 75 Z" stroke="#1A1612" stroke-width="2.5" fill="none"/>
-          <rect x="40" y="40" width="20" height="30" rx="3" stroke="#1A1612" stroke-width="2"/>
-        </svg>
-      </div>
-      <h3>Adjustable Phone Stand</h3>
-      <div class="meta">
-        <span class="price">$18</span>
-        <span class="rating"><span class="star">★</span> 4.7 (54)</span>
-      </div>
-    </div>
-
-    <div class="product" data-cat="decor">
-      <div class="product-img art-5">
-        <span class="product-tag new">New</span>
-        <button class="product-fav" aria-label="Favorite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
-        <svg viewBox="0 0 100 100" fill="none">
-          <polygon points="30,75 50,40 70,75" stroke="#1A1612" stroke-width="2.5" fill="none"/>
-          <polygon points="40,75 50,55 60,75" fill="#1A1612"/>
-          <path d="M48 38 Q50 32 52 38" stroke="#1A1612" stroke-width="2"/>
-        </svg>
-      </div>
-      <h3>Hex Geometric Planter</h3>
-      <div class="meta">
-        <span class="price">$22</span>
-        <span class="rating"><span class="star">★</span> 4.9 (38)</span>
-      </div>
-    </div>
-
-    <div class="product" data-cat="custom">
-      <div class="product-img art-6">
-        <span class="product-tag">Custom</span>
-        <button class="product-fav" aria-label="Favorite"><svg viewBox="0 0 24 24" stroke="#F2EBDC"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
-        <svg viewBox="0 0 100 100" fill="none">
-          <text x="50" y="55" text-anchor="middle" fill="#F2EBDC" font-family="Fraunces" font-size="32" font-style="italic" font-weight="700">Aa</text>
-          <line x1="25" y1="70" x2="75" y2="70" stroke="#F2EBDC" stroke-width="1.5"/>
-        </svg>
-      </div>
-      <h3>Personalized Name Sign</h3>
-      <div class="meta">
-        <span class="price">$30+</span>
-        <span class="rating"><span class="star">★</span> 5.0 (29)</span>
-      </div>
-    </div>
-
-    <div class="product" data-cat="figures">
-      <div class="product-img art-7">
-        <button class="product-fav" aria-label="Favorite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
-        <svg viewBox="0 0 100 100" fill="none">
-          <rect x="30" y="50" width="40" height="30" stroke="#1A1612" stroke-width="2.5"/>
-          <polygon points="25,50 35,40 65,40 75,50" stroke="#1A1612" stroke-width="2.5" fill="none"/>
-          <rect x="35" y="30" width="6" height="10" fill="#1A1612"/>
-          <rect x="50" y="30" width="6" height="10" fill="#1A1612"/>
-          <rect x="38" y="60" width="8" height="10" fill="#1A1612"/>
-          <rect x="54" y="60" width="8" height="10" fill="#1A1612"/>
-        </svg>
-      </div>
-      <h3>Miniature Castle (Detailed)</h3>
-      <div class="meta">
-        <span class="price">$45</span>
-        <span class="rating"><span class="star">★</span> 4.9 (71)</span>
-      </div>
-    </div>
-
-    <div class="product" data-cat="office">
-      <div class="product-img art-8">
-        <button class="product-fav" aria-label="Favorite"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
-        <svg viewBox="0 0 100 100" fill="none">
-          <path d="M30 35 Q30 30 35 30 L45 30 Q50 30 50 35 L50 50 Q50 55 45 55 L35 55 Q30 55 30 50 Z" stroke="#1A1612" stroke-width="2.5"/>
-          <path d="M55 45 Q55 40 60 40 L70 40 Q75 40 75 45 L75 60 Q75 65 70 65 L60 65 Q55 65 55 60 Z" stroke="#1A1612" stroke-width="2.5"/>
-        </svg>
-      </div>
-      <h3>Cable Management Clips (10pk)</h3>
-      <div class="meta">
-        <span class="price">$15</span>
-        <span class="rating"><span class="star">★</span> 4.6 (96)</span>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ============ TRUST / HOW TO ORDER ============ -->
-
-<section class="trust" id="custom">
-  <div class="trust-inner">
-    <h2>Multiple ways to <em>order</em>. Pay how you feel safest.</h2>
-    <p class="lede">
-      We know providing payment info to a small shop can feel like a leap. That's why we offer
-      three ways to buy — pick whatever works best for you.
-    </p>
-
-    <div class="trust-grid">
-      <div class="trust-card">
-        <div class="trust-num">01 / Direct Checkout</div>
-        <h3>Buy on the website</h3>
-        <p>Secure checkout with industry-standard payment processing. SSL encrypted, never stores your card details.</p>
-        <div class="pay-options">
-          <span class="pay-tag">Stripe</span>
-          <span class="pay-tag">Apple Pay</span>
-          <span class="pay-tag">Google Pay</span>
-        </div>
-      </div>
-
-      <div class="trust-card">
-        <div class="trust-num">02 / Trusted Apps</div>
-        <h3>Pay through apps you use</h3>
-        <p>Already trust Venmo or PayPal? Order via DM and we'll send a request through the app. No card info needed on our site.</p>
-        <div class="pay-options">
-          <span class="pay-tag">Venmo</span>
-          <span class="pay-tag">CashApp</span>
-          <span class="pay-tag">PayPal</span>
-          <span class="pay-tag">Zelle</span>
-        </div>
-      </div>
-
-      <div class="trust-card">
-        <div class="trust-num">03 / Etsy Shop</div>
-        <h3>Order through Etsy</h3>
-        <p>Prefer the security of a marketplace? Find every item in our Etsy shop with full buyer protection and reviews.</p>
-        <div class="pay-options">
-          <span class="pay-tag">Etsy Protection</span>
-          <span class="pay-tag">PayPal</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ============ AI ASSISTANT BANNER ============ -->
-
-<div class="assistant-banner">
-  <div class="assistant-banner-inner">
-    <div>
-      <span class="assistant-banner-label">// AI-Powered</span>
-      <span>Not sure what to order? Let our assistant build your request for you.</span>
-    </div>
-    <a href="assistant.html" class="assistant-banner-link">Try our AI Order Assistant →</a>
-  </div>
-</div>
-
-<!-- ============ REVIEWS ============ -->
-
-<section class="reviews-section">
-  <div class="section-head">
-    <h2>What folks are <em>saying.</em></h2>
-    <div class="meta">// Verified buyers</div>
-  </div>
-
-  <div class="reviews-grid">
-    <div class="review">
-      <div class="review-quote">"</div>
-      <div class="review-stars">★★★★★</div>
-      <p class="review-text">The quality blew me away. Sharp details, smooth finish, and the dragon's joints actually move. Already ordered three more for friends.</p>
-      <div class="review-author">
-        <div class="avatar">M</div>
-        <div>
-          <div class="review-name">Maya R.</div>
-          <div class="review-meta">Verified · April 2026</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="review">
-      <div class="review-quote">"</div>
-      <div class="review-stars">★★★★★</div>
-      <p class="review-text">I was nervous about paying online but they offered Venmo which made it easy. The custom name sign turned out exactly like the mockup.</p>
-      <div class="review-author">
-        <div class="avatar b">D</div>
-        <div>
-          <div class="review-name">Daniel K.</div>
-          <div class="review-meta">Verified · March 2026</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="review">
-      <div class="review-quote">"</div>
-      <div class="review-stars">★★★★★</div>
-      <p class="review-text">Fast turnaround, great communication, and the desk organizer is exactly what my home office needed. Will absolutely order again.</p>
-      <div class="review-author">
-        <div class="avatar c">S</div>
-        <div>
-          <div class="review-name">Sofia L.</div>
-          <div class="review-meta">Verified · March 2026</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ CTA STRIP ============ -->
-
-<section class="cta-strip" id="contact">
-  <div class="cta-strip-inner">
-    <h2>Got something <em>specific</em> in mind?</h2>
-    <p>We do custom prints from your design files, sketches, or just an idea. Get a quote in 24 hours.</p>
-    <a href="#" class="btn btn-primary">
-      Start a custom order
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+  <!-- ============================================ -->
+  <!-- NAV                                          -->
+  <!-- ============================================ -->
+  <header class="nav">
+    <a href="#top" class="nav__brand">
+      <span class="nav__brand-mark">◣</span>
+      <span class="nav__brand-name">{{BRAND_NAME}}</span>
     </a>
-  </div>
-</section>
+    <nav class="nav__links">
+      <a href="#featured" data-track="nav_featured">Featured</a>
+      <a href="#shop" data-track="nav_shop">Shop</a>
+      <a href="#gallery" data-track="nav_gallery">Gallery</a>
+      <a href="#contact" data-track="nav_contact">Contact</a>
+    </nav>
+  </header>
 
-<!-- ============ FOOTER ============ -->
+  <!-- ============================================ -->
+  <!-- HERO                                         -->
+  <!-- ============================================ -->
+  <section class="hero" id="top">
+    <div class="hero__grid">
+      <div class="hero__copy">
+        <span class="eyebrow">Made-to-order · Hand finished</span>
+        <h1 class="hero__title">
+          Inspired by<br />
+          <span class="hero__title-accent">your favorites.</span><br />
+          Printed for <em>you</em>.
+        </h1>
+        <p class="hero__lead">
+          {{BRAND_TAGLINE}} — Custom 3D printed collectibles, fan-inspired sculpts,
+          and one-off pieces. Each one printed, sanded, and finished by hand.
+        </p>
+        <div class="hero__cta">
+          <a href="{{FEATURED_PRODUCT_URL}}"
+             class="btn btn--primary"
+             target="_blank"
+             rel="noopener"
+             data-track="hero_cta_featured"
+             data-platform="featured">
+            Shop the Featured Drop →
+          </a>
+          <a href="#shop" class="btn btn--ghost" data-track="hero_cta_browse">
+            Browse all platforms
+          </a>
+        </div>
+        <div class="hero__stats">
+          <div class="stat">
+            <span class="stat__num">{{ORDERS_COUNT}}</span>
+            <span class="stat__label">Orders Shipped</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num">{{RATING}}★</span>
+            <span class="stat__label">Avg Rating</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num">{{TURNAROUND_DAYS}}d</span>
+            <span class="stat__label">Avg Turnaround</span>
+          </div>
+        </div>
+      </div>
 
-<footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <div class="logo">STRATA<em>·</em>3D</div>
-      <p>Custom 3D printed goods, made to order in our Phoenix studio. Designed and printed with care.</p>
+      <div class="hero__visual">
+        <div class="hero__product-card">
+          <div class="hero__product-img">
+            <!-- REPLACE: hero product photo -->
+            <img src="assets/hero-product.jpg" alt="Featured 3D printed product" loading="eager" />
+          </div>
+          <div class="hero__product-meta">
+            <span class="tag">FEATURED</span>
+            <span class="hero__product-price">${{FEATURED_PRICE}}</span>
+          </div>
+        </div>
+        <div class="hero__decor" aria-hidden="true">
+          <span class="hero__decor-line"></span>
+          <span class="hero__decor-dot"></span>
+        </div>
+      </div>
     </div>
-    <div class="footer-col">
-      <h4>Shop</h4>
-      <ul>
-        <li><a href="#">All items</a></li>
-        <li><a href="#">Keychains</a></li>
-        <li><a href="#">Figures</a></li>
-        <li><a href="#">Custom orders</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Help</h4>
-      <ul>
-        <li><a href="#">Shipping</a></li>
-        <li><a href="#">Returns</a></li>
-        <li><a href="#">Track order</a></li>
-        <li><a href="#">FAQ</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Connect</h4>
-      <ul>
-        <li><a href="#">Instagram</a></li>
-        <li><a href="#">TikTok</a></li>
-        <li><a href="#">Etsy Shop</a></li>
-        <li><a href="#">Email</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <div>© 2026 STRATA · 3D — All Rights Reserved</div>
-    <div>Built with care · Hosted on GitHub Pages</div>
-  </div>
-</footer>
+  </section>
 
-<!-- Site interactions -->
+  <!-- ============================================ -->
+  <!-- FEATURED PRODUCT                             -->
+  <!-- ============================================ -->
+  <section class="featured" id="featured">
+    <div class="section__header">
+      <span class="eyebrow">★ This week's drop</span>
+      <h2 class="section__title">{{FEATURED_PRODUCT_NAME}}</h2>
+    </div>
+    <div class="featured__grid">
+      <div class="featured__image">
+        <!-- REPLACE: featured product main image -->
+        <img src="assets/featured-main.jpg" alt="{{FEATURED_PRODUCT_NAME}}" loading="lazy" />
+      </div>
+      <div class="featured__details">
+        <p class="featured__desc">{{FEATURED_PRODUCT_DESCRIPTION}}</p>
+        <ul class="featured__specs">
+          <li><span>Material</span><strong>{{FEATURED_MATERIAL}}</strong></li>
+          <li><span>Size</span><strong>{{FEATURED_SIZE}}</strong></li>
+          <li><span>Finish</span><strong>{{FEATURED_FINISH}}</strong></li>
+          <li><span>Ships in</span><strong>{{FEATURED_SHIP_DAYS}} days</strong></li>
+        </ul>
+        <div class="featured__price-row">
+          <span class="featured__price">${{FEATURED_PRICE}}</span>
+          <a href="{{FEATURED_PRODUCT_URL}}"
+             class="btn btn--primary btn--lg"
+             target="_blank"
+             rel="noopener"
+             data-track="featured_buy"
+             data-platform="featured">
+            Buy Now →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<script src="script.js" defer></script>
+  <!-- ============================================ -->
+  <!-- SHOP / PLATFORMS                             -->
+  <!-- ============================================ -->
+  <section class="shop" id="shop">
+    <div class="section__header">
+      <span class="eyebrow">Where to buy</span>
+      <h2 class="section__title">Pick your <em>platform</em>.</h2>
+      <p class="section__lead">Different platforms, different perks. Pick the one that fits.</p>
+    </div>
 
+    <div class="shop__grid">
+      <!-- ETSY -->
+      <a href="{{ETSY_SHOP_URL}}?utm_source=landing&utm_medium=hub&utm_campaign=etsy"
+         class="platform-card platform-card--etsy"
+         target="_blank"
+         rel="noopener"
+         data-track="platform_click"
+         data-platform="etsy">
+        <div class="platform-card__top">
+          <span class="platform-card__icon">🛒</span>
+          <span class="platform-card__badge">Most popular</span>
+        </div>
+        <h3 class="platform-card__title">Browse the Full Collection on Etsy</h3>
+        <p class="platform-card__desc">
+          Every design, secure checkout, customer reviews, and worldwide shipping.
+          Best for first-time buyers.
+        </p>
+        <span class="platform-card__cta">Shop Etsy <span class="arrow">→</span></span>
+      </a>
+
+      <!-- SHOPIFY -->
+      <a href="{{SHOPIFY_SHOP_URL}}?utm_source=landing&utm_medium=hub&utm_campaign=shopify"
+         class="platform-card platform-card--shopify"
+         target="_blank"
+         rel="noopener"
+         data-track="platform_click"
+         data-platform="shopify">
+        <div class="platform-card__top">
+          <span class="platform-card__icon">🎨</span>
+          <span class="platform-card__badge">Custom orders</span>
+        </div>
+        <h3 class="platform-card__title">Custom Orders & Bundles</h3>
+        <p class="platform-card__desc">
+          Personalized requests, bundle discounts, and exclusive drops you won't
+          find anywhere else.
+        </p>
+        <span class="platform-card__cta">Shop Direct <span class="arrow">→</span></span>
+      </a>
+
+      <!-- FACEBOOK MARKETPLACE -->
+      <a href="{{FACEBOOK_MARKETPLACE_URL}}?utm_source=landing&utm_medium=hub&utm_campaign=fbmarket"
+         class="platform-card platform-card--facebook"
+         target="_blank"
+         rel="noopener"
+         data-track="platform_click"
+         data-platform="facebook">
+        <div class="platform-card__top">
+          <span class="platform-card__icon">📦</span>
+          <span class="platform-card__badge">Local pickup</span>
+        </div>
+        <h3 class="platform-card__title">Local Deals on Facebook</h3>
+        <p class="platform-card__desc">
+          No shipping fees, fast pickup, and local-only specials. Perfect if you're
+          in {{LOCAL_AREA}}.
+        </p>
+        <span class="platform-card__cta">View on FB <span class="arrow">→</span></span>
+      </a>
+
+      <!-- OFFERUP -->
+      <a href="{{OFFERUP_URL}}?utm_source=landing&utm_medium=hub&utm_campaign=offerup"
+         class="platform-card platform-card--offerup"
+         target="_blank"
+         rel="noopener"
+         data-track="platform_click"
+         data-platform="offerup">
+        <div class="platform-card__top">
+          <span class="platform-card__icon">🏷️</span>
+          <span class="platform-card__badge">Discounts</span>
+        </div>
+        <h3 class="platform-card__title">Open-Box & Discounted Items</h3>
+        <p class="platform-card__desc">
+          Prototypes, second prints, and clearance pieces at a discount. Updated
+          weekly.
+        </p>
+        <span class="platform-card__cta">Browse OfferUp <span class="arrow">→</span></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- GALLERY                                      -->
+  <!-- ============================================ -->
+  <section class="gallery" id="gallery">
+    <div class="section__header">
+      <span class="eyebrow">Recent prints</span>
+      <h2 class="section__title">From the bench.</h2>
+    </div>
+
+    <div class="gallery__grid">
+      <!-- Repeat 6 product cards. Replace with real product info. -->
+      <article class="product">
+        <div class="product__img"><img src="assets/product-1.jpg" alt="{{PRODUCT_1_NAME}}" loading="lazy" /></div>
+        <div class="product__info">
+          <h3>{{PRODUCT_1_NAME}}</h3>
+          <span class="product__price">${{PRODUCT_1_PRICE}}</span>
+        </div>
+        <a href="{{PRODUCT_1_URL}}" target="_blank" rel="noopener" class="product__link"
+           data-track="product_click" data-product="product_1" aria-label="Shop {{PRODUCT_1_NAME}}"></a>
+      </article>
+
+      <article class="product">
+        <div class="product__img"><img src="assets/product-2.jpg" alt="{{PRODUCT_2_NAME}}" loading="lazy" /></div>
+        <div class="product__info">
+          <h3>{{PRODUCT_2_NAME}}</h3>
+          <span class="product__price">${{PRODUCT_2_PRICE}}</span>
+        </div>
+        <a href="{{PRODUCT_2_URL}}" target="_blank" rel="noopener" class="product__link"
+           data-track="product_click" data-product="product_2" aria-label="Shop {{PRODUCT_2_NAME}}"></a>
+      </article>
+
+      <article class="product">
+        <div class="product__img"><img src="assets/product-3.jpg" alt="{{PRODUCT_3_NAME}}" loading="lazy" /></div>
+        <div class="product__info">
+          <h3>{{PRODUCT_3_NAME}}</h3>
+          <span class="product__price">${{PRODUCT_3_PRICE}}</span>
+        </div>
+        <a href="{{PRODUCT_3_URL}}" target="_blank" rel="noopener" class="product__link"
+           data-track="product_click" data-product="product_3" aria-label="Shop {{PRODUCT_3_NAME}}"></a>
+      </article>
+
+      <article class="product">
+        <div class="product__img"><img src="assets/product-4.jpg" alt="{{PRODUCT_4_NAME}}" loading="lazy" /></div>
+        <div class="product__info">
+          <h3>{{PRODUCT_4_NAME}}</h3>
+          <span class="product__price">${{PRODUCT_4_PRICE}}</span>
+        </div>
+        <a href="{{PRODUCT_4_URL}}" target="_blank" rel="noopener" class="product__link"
+           data-track="product_click" data-product="product_4" aria-label="Shop {{PRODUCT_4_NAME}}"></a>
+      </article>
+
+      <article class="product">
+        <div class="product__img"><img src="assets/product-5.jpg" alt="{{PRODUCT_5_NAME}}" loading="lazy" /></div>
+        <div class="product__info">
+          <h3>{{PRODUCT_5_NAME}}</h3>
+          <span class="product__price">${{PRODUCT_5_PRICE}}</span>
+        </div>
+        <a href="{{PRODUCT_5_URL}}" target="_blank" rel="noopener" class="product__link"
+           data-track="product_click" data-product="product_5" aria-label="Shop {{PRODUCT_5_NAME}}"></a>
+      </article>
+
+      <article class="product">
+        <div class="product__img"><img src="assets/product-6.jpg" alt="{{PRODUCT_6_NAME}}" loading="lazy" /></div>
+        <div class="product__info">
+          <h3>{{PRODUCT_6_NAME}}</h3>
+          <span class="product__price">${{PRODUCT_6_PRICE}}</span>
+        </div>
+        <a href="{{PRODUCT_6_URL}}" target="_blank" rel="noopener" class="product__link"
+           data-track="product_click" data-product="product_6" aria-label="Shop {{PRODUCT_6_NAME}}"></a>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- SOCIAL PROOF                                 -->
+  <!-- ============================================ -->
+  <section class="proof">
+    <div class="proof__grid">
+      <blockquote class="quote">
+        <p>"{{REVIEW_1_QUOTE}}"</p>
+        <cite>— {{REVIEW_1_NAME}}, {{REVIEW_1_PLATFORM}}</cite>
+      </blockquote>
+      <blockquote class="quote">
+        <p>"{{REVIEW_2_QUOTE}}"</p>
+        <cite>— {{REVIEW_2_NAME}}, {{REVIEW_2_PLATFORM}}</cite>
+      </blockquote>
+      <blockquote class="quote">
+        <p>"{{REVIEW_3_QUOTE}}"</p>
+        <cite>— {{REVIEW_3_NAME}}, {{REVIEW_3_PLATFORM}}</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- FOOTER / CONTACT                             -->
+  <!-- ============================================ -->
+  <footer class="footer" id="contact">
+    <div class="footer__main">
+      <div class="footer__brand">
+        <span class="nav__brand-mark">◣</span>
+        <h3>{{BRAND_NAME}}</h3>
+        <p>{{BRAND_TAGLINE}}</p>
+      </div>
+
+      <div class="footer__col">
+        <h4>Follow</h4>
+        <ul class="footer__social">
+          <li><a href="{{INSTAGRAM_URL}}" target="_blank" rel="noopener" data-track="social_click" data-platform="instagram">Instagram</a></li>
+          <li><a href="{{TIKTOK_URL}}" target="_blank" rel="noopener" data-track="social_click" data-platform="tiktok">TikTok</a></li>
+          <li><a href="{{YOUTUBE_URL}}" target="_blank" rel="noopener" data-track="social_click" data-platform="youtube">YouTube</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Shop</h4>
+        <ul class="footer__social">
+          <li><a href="{{ETSY_SHOP_URL}}" target="_blank" rel="noopener" data-track="footer_click" data-platform="etsy">Etsy</a></li>
+          <li><a href="{{SHOPIFY_SHOP_URL}}" target="_blank" rel="noopener" data-track="footer_click" data-platform="shopify">Shopify</a></li>
+          <li><a href="{{FACEBOOK_MARKETPLACE_URL}}" target="_blank" rel="noopener" data-track="footer_click" data-platform="facebook">Facebook</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Contact</h4>
+        <ul class="footer__social">
+          <li><a href="mailto:{{CONTACT_EMAIL}}" data-track="email_click">{{CONTACT_EMAIL}}</a></li>
+          <li><span>Custom orders welcome</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>© <span id="year"></span> {{BRAND_NAME}}. All designs original or fan-inspired.</span>
+      <span class="footer__mono">v1.0 · Built with care</span>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
 </body>
 </html>
