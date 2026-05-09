@@ -5,58 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-  <!-- ============================================ -->
-  <!-- SEO & SOCIAL META — REPLACE PLACEHOLDERS     -->
-  <!-- ============================================ -->
-  <title>Pixl Forge — Custom 3D Printed Collectibles & Inspired-By Items</title>
-  <meta name="description" content="Premium 3D printed collectibles and custom gifts — Custom 3D printed collectibles, fan art, and inspired-by designs. Shop on Etsy, Shopify, and more." />
-  <meta name="keywords" content="3d printed, custom prints, collectibles, fan art, miniatures, Pixl Forge" />
+  <title>Pixl Forge — World Cup 2026 Collectibles, Trophies & Custom 3D Prints</title>
+  <meta name="description" content="The destination for World Cup 2026 3D printed collectibles. Golden Boot replicas, Trophy replicas, team keychains, and custom soccer prints. In-person pickup in LA + worldwide Etsy shipping." />
+  <meta name="keywords" content="World Cup 2026, soccer collectibles, 3D printed, Golden Boot, Golden Glove, World Cup Trophy replica, soccer keychains, fan gifts, Pixl Forge" />
   <meta name="author" content="Pixl Forge" />
   <link rel="canonical" href="{{SITE_URL}}" />
 
-  <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="{{SITE_URL}}" />
-  <meta property="og:title" content="Pixl Forge — Custom 3D Printed Goods" />
-  <meta property="og:description" content="Premium 3D printed collectibles and custom gifts" />
+  <meta property="og:title" content="Pixl Forge — World Cup 2026 Collectibles" />
+  <meta property="og:description" content="3D printed soccer collectibles, Trophy replicas & custom prints. Built for World Cup 2026 fans." />
   <meta property="og:image" content="{{SITE_URL}}/assets/og-image.jpg" />
 
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="{{SITE_URL}}" />
-  <meta name="twitter:title" content="Pixl Forge — Custom 3D Printed Goods" />
-  <meta name="twitter:description" content="Premium 3D printed collectibles and custom gifts" />
+  <meta name="twitter:title" content="Pixl Forge — World Cup 2026 Collectibles" />
+  <meta name="twitter:description" content="3D printed soccer collectibles, Trophy replicas & custom prints." />
   <meta name="twitter:image" content="{{SITE_URL}}/assets/og-image.jpg" />
 
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/favicon.png" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
 
-  <!-- Fonts: Syne (display) + Manrope (body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
 
-  <!-- Stylesheet -->
   <link rel="stylesheet" href="css/styles.css" />
 
-  <!-- ============================================ -->
-  <!-- GOOGLE ANALYTICS 4 -->
-  <!-- ============================================ -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-64SCNVMZ07"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-64SCNVMZ07', {
-      send_page_view: true,
-      anonymize_ip: true
-    });
+    gtag('config', 'G-64SCNVMZ07', { send_page_view: true, anonymize_ip: true });
   </script>
 
-  <!-- ============================================ -->
-  <!-- MICROSOFT CLARITY (heatmaps) -->
-  <!-- ============================================ -->
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
       c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -65,340 +47,299 @@
     })(window, document, "clarity", "script", "wo6pchoxq4");
   </script>
 
-  <!-- JSON-LD Structured Data for SEO -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Store",
     "name": "Pixl Forge",
-    "description": "Premium 3D printed collectibles and custom gifts",
+    "description": "3D printed World Cup 2026 collectibles and custom soccer prints",
     "url": "{{SITE_URL}}",
     "image": "{{SITE_URL}}/assets/og-image.jpg",
     "sameAs": [
       "https://www.instagram.com/pixel3dla/",
-      "{{TIKTOK_URL}}",
       "https://pixlforgeshop.etsy.com"
     ]
   }
   </script>
 </head>
-
 <body>
 
-  <!-- Decorative grain overlay -->
-  <div class="grain" aria-hidden="true"></div>
-
-  <!-- ============================================ -->
-  <!-- NAV                                          -->
-  <!-- ============================================ -->
-  <header class="nav">
-    <a href="#top" class="nav__brand">
-      <span class="nav__brand-mark">◣</span>
+  <header class="nav" id="top">
+    <a href="#top" class="nav__brand" data-track="nav_brand">
+      <span class="nav__brand-mark" aria-hidden="true">⚽</span>
       <span class="nav__brand-name">Pixl Forge</span>
     </a>
     <nav class="nav__links">
-      <a href="#featured" data-track="nav_featured">Featured</a>
       <a href="#shop" data-track="nav_shop">Shop</a>
-      <a href="#gallery" data-track="nav_gallery">Gallery</a>
-      <a href="#contact" data-track="nav_contact">Contact</a>
+      <a href="#hub" data-track="nav_hub">World Cup Hub</a>
+      <a href="https://pixlforgeshop.etsy.com" target="_blank" rel="noopener" class="nav__cta" data-track="nav_online" data-platform="etsy">Shop Online →</a>
     </nav>
+    <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </header>
 
-  <!-- ============================================ -->
-  <!-- HERO                                         -->
-  <!-- ============================================ -->
-  <section class="hero" id="top">
-    <div class="hero__grid">
-      <div class="hero__copy">
-        <span class="eyebrow">Made-to-order · Hand finished</span>
-        <h1 class="hero__title">
-          Inspired by<br />
-          <span class="hero__title-accent">your favorites.</span><br />
-          Printed for <em>you</em>.
-        </h1>
-        <p class="hero__lead">
-          Premium 3D printed collectibles and custom gifts — Custom 3D printed collectibles, fan-inspired sculpts,
-          and one-off pieces. Each one printed, sanded, and finished by hand.
-        </p>
-        <div class="hero__cta">
-          <a href="{{FEATURED_PRODUCT_URL}}"
-             class="btn btn--primary"
-             target="_blank"
-             rel="noopener"
-             data-track="hero_cta_featured"
-             data-platform="featured">
-            Shop the Featured Drop →
-          </a>
-          <a href="#shop" class="btn btn--ghost" data-track="hero_cta_browse">
-            Browse all platforms
-          </a>
+  <section class="hero" id="home">
+    <div class="hero__bg" aria-hidden="true">
+      <div class="hero__pitch"></div>
+      <div class="hero__lights"></div>
+      <div class="hero__balls"></div>
+    </div>
+
+    <div class="hero__inner">
+      <span class="hero__eyebrow">⚽ FIFA World Cup 2026 · USA · CAN · MEX</span>
+      <h1 class="hero__title">
+        Forged for the<br />
+        <span class="hero__title-accent">Beautiful Game.</span>
+      </h1>
+      <p class="hero__lead">
+        Premium 3D printed soccer collectibles — Golden Boots, Trophy replicas,
+        team keychains, and custom prints for World Cup 2026.
+        <strong>Hand-finished in LA.</strong>
+      </p>
+
+      <div class="countdown" id="countdown" aria-live="polite">
+        <div class="countdown__label">
+          <span class="countdown__pill">NEXT MATCH</span>
+          <span class="countdown__match" id="countdownMatch">Loading fixtures…</span>
         </div>
-        <div class="hero__stats">
-          <div class="stat">
-            <span class="stat__num">50+</span>
-            <span class="stat__label">Orders Shipped</span>
-          </div>
-          <div class="stat">
-            <span class="stat__num">5.0★</span>
-            <span class="stat__label">Avg Rating</span>
-          </div>
-          <div class="stat">
-            <span class="stat__num">5d</span>
-            <span class="stat__label">Avg Turnaround</span>
-          </div>
+        <div class="countdown__digits">
+          <div class="countdown__cell"><span class="countdown__num" id="cdDays">--</span><span class="countdown__unit">Days</span></div>
+          <div class="countdown__sep">:</div>
+          <div class="countdown__cell"><span class="countdown__num" id="cdHours">--</span><span class="countdown__unit">Hrs</span></div>
+          <div class="countdown__sep">:</div>
+          <div class="countdown__cell"><span class="countdown__num" id="cdMins">--</span><span class="countdown__unit">Min</span></div>
+          <div class="countdown__sep">:</div>
+          <div class="countdown__cell"><span class="countdown__num" id="cdSecs">--</span><span class="countdown__unit">Sec</span></div>
         </div>
       </div>
 
-      <div class="hero__visual">
-        <div class="hero__product-card">
-          <div class="hero__product-img">
-            <!-- REPLACE: hero product photo -->
-            <img src="assets/hero-product.jpg" alt="Featured 3D printed product" loading="eager" />
-          </div>
-          <div class="hero__product-meta">
-            <span class="tag">FEATURED</span>
-            <span class="hero__product-price">$29.99</span>
-          </div>
-        </div>
-        <div class="hero__decor" aria-hidden="true">
-          <span class="hero__decor-line"></span>
-          <span class="hero__decor-dot"></span>
-        </div>
+      <div class="hero__cta">
+        <a href="#shop" class="btn btn--gold" data-track="hero_cta_shop">⚡ See What's Available</a>
+        <a href="https://pixlforgeshop.etsy.com" target="_blank" rel="noopener" class="btn btn--ghost" data-track="hero_cta_online" data-platform="etsy">Shop Online →</a>
       </div>
     </div>
   </section>
 
-  <!-- ============================================ -->
-  <!-- FEATURED PRODUCT                             -->
-  <!-- ============================================ -->
-  <section class="featured" id="featured">
-    <div class="section__header">
-      <span class="eyebrow">★ This week's drop</span>
-      <h2 class="section__title">World Cup 2026 Trophy Replica</h2>
-    </div>
-    <div class="featured__grid">
-      <div class="featured__image">
-        <!-- REPLACE: featured product main image -->
-        <img src="assets/featured-main.jpg" alt="World Cup 2026 Trophy Replica" loading="lazy" />
-      </div>
-      <div class="featured__details">
-        <p class="featured__desc">Celebrate the biggest tournament on earth with your own World Cup 2026 Trophy Replica. Hand-finished in gold with green base accent — available in two sizes. Perfect for desks, shelves, and die-hard soccer fans.</p>
-        <ul class="featured__specs">
-          <li><span>Material</span><strong>PLA+ Filament</strong></li>
-          <li><span>Size</span><strong>{{FEATURED_SIZE}}</strong></li>
-          <li><span>Finish</span><strong>Gold painted, hand sanded</strong></li>
-          <li><span>Ships in</span><strong>5 days</strong></li>
-        </ul>
-        <div class="featured__price-row">
-          <span class="featured__price">$29.99</span>
-          <a href="{{FEATURED_PRODUCT_URL}}"
-             class="btn btn--primary btn--lg"
-             target="_blank"
-             rel="noopener"
-             data-track="featured_buy"
-             data-platform="featured">
-            Buy Now →
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================ -->
-  <!-- SHOP / PLATFORMS                             -->
-  <!-- ============================================ -->
   <section class="shop" id="shop">
     <div class="section__header">
-      <span class="eyebrow">Where to buy</span>
-      <h2 class="section__title">Pick your <em>platform</em>.</h2>
-      <p class="section__lead">Different platforms, different perks. Pick the one that fits.</p>
+      <span class="eyebrow">⚽ The Drop</span>
+      <h2 class="section__title">In-Person <em>Collectibles</em>.</h2>
+      <p class="section__lead">
+        Pickup in LA. Each piece printed, sanded, and finished by hand. Tap any item to claim it.
+      </p>
     </div>
 
-    <div class="shop__grid">
-      <!-- ETSY -->
-      <a href="https://pixlforgeshop.etsy.com?utm_source=landing&utm_medium=hub&utm_campaign=etsy"
-         class="platform-card platform-card--etsy"
-         target="_blank"
-         rel="noopener"
-         data-track="platform_click"
+    <div class="product-grid">
+      <article class="product-card product-card--featured">
+        <div class="product-card__media">
+          <div class="product-card__placeholder">⚽<span>Golden Boot</span></div>
+          <span class="product-card__badge product-card__badge--gold">⭐ Top Pick</span>
+        </div>
+        <div class="product-card__body">
+          <h3 class="product-card__title">Golden Boot Replica</h3>
+          <p class="product-card__desc">Top scorer trophy, gold finished. ~7" tall, weighted base, hand-painted gold.</p>
+          <div class="product-card__meta">
+            <span class="tag tag--inperson">Available In-Person</span>
+            <span class="tag tag--online">Also Online</span>
+          </div>
+          <button class="btn btn--claim" data-track="claim_click" data-product="golden_boot">Claim This Item →</button>
+        </div>
+      </article>
+
+      <article class="product-card">
+        <div class="product-card__media">
+          <div class="product-card__placeholder">🧘<span>Golden Glove</span></div>
+        </div>
+        <div class="product-card__body">
+          <h3 class="product-card__title">Golden Glove Replica</h3>
+          <p class="product-card__desc">Best goalkeeper award. Detailed sculpt, gold finish, plinth base.</p>
+          <div class="product-card__meta">
+            <span class="tag tag--inperson">Available In-Person</span>
+            <span class="tag tag--online">Also Online</span>
+          </div>
+          <button class="btn btn--claim" data-track="claim_click" data-product="golden_glove">Claim This Item →</button>
+        </div>
+      </article>
+
+      <article class="product-card product-card--featured">
+        <div class="product-card__media">
+          <div class="product-card__placeholder">🏆<span>WC Trophy</span></div>
+          <span class="product-card__badge product-card__badge--gold">🔥 Bestseller</span>
+        </div>
+        <div class="product-card__body">
+          <h3 class="product-card__title">World Cup 2026 Trophy</h3>
+          <p class="product-card__desc">Two sizes — desk (8") or display (12"). Gold painted, hand sanded, green base accent.</p>
+          <div class="product-card__meta">
+            <span class="tag tag--inperson">Available In-Person</span>
+            <span class="tag tag--online">Also Online</span>
+          </div>
+          <button class="btn btn--claim" data-track="claim_click" data-product="wc_trophy">Claim This Item →</button>
+        </div>
+      </article>
+
+      <article class="product-card">
+        <div class="product-card__media">
+          <div class="product-card__placeholder">🔑<span>Team Keychains</span></div>
+        </div>
+        <div class="product-card__body">
+          <h3 class="product-card__title">Team Crest Keychains</h3>
+          <p class="product-card__desc">All 48 World Cup 2026 nations. Pick your team — Mexico, USA, Brazil, Argentina, more.</p>
+          <div class="product-card__meta">
+            <span class="tag tag--inperson">Available In-Person</span>
+            <span class="tag tag--online">Also Online</span>
+          </div>
+          <button class="btn btn--claim" data-track="claim_click" data-product="keychains">Claim This Item →</button>
+        </div>
+      </article>
+
+      <article class="product-card">
+        <div class="product-card__media">
+          <div class="product-card__placeholder">👕<span>Jersey Print</span></div>
+        </div>
+        <div class="product-card__body">
+          <h3 class="product-card__title">Jersey Wall Prints</h3>
+          <p class="product-card__desc">Iconic kits in 3D relief. Mexico, USA, Canada host kits + classic faves. Pre-order custom team.</p>
+          <div class="product-card__meta">
+            <span class="tag tag--inperson">Available In-Person</span>
+          </div>
+          <button class="btn btn--claim" data-track="claim_click" data-product="jersey_print">Claim This Item →</button>
+        </div>
+      </article>
+
+      <article class="product-card">
+        <div class="product-card__media">
+          <div class="product-card__placeholder">🏟️<span>Mini Stadium</span></div>
+        </div>
+        <div class="product-card__body">
+          <h3 class="product-card__title">Mini Stadium Diorama</h3>
+          <p class="product-card__desc">Estadio Azteca, MetLife, BMO Field — pick a host venue, get a hand-finished mini.</p>
+          <div class="product-card__meta">
+            <span class="tag tag--inperson">Available In-Person</span>
+            <span class="tag tag--online">Also Online</span>
+          </div>
+          <button class="btn btn--claim" data-track="claim_click" data-product="mini_stadium">Claim This Item →</button>
+        </div>
+      </article>
+
+      <article class="product-card">
+        <div class="product-card__media">
+          <div class="product-card__placeholder">⚽<span>Player Figurine</span></div>
+        </div>
+        <div class="product-card__body">
+          <h3 class="product-card__title">Player Figurines</h3>
+          <p class="product-card__desc">Custom action poses, team kits, 4-6" scale. DM with player + team for a quote.</p>
+          <div class="product-card__meta">
+            <span class="tag tag--inperson">Available In-Person</span>
+          </div>
+          <button class="btn btn--claim" data-track="claim_click" data-product="figurine">Claim This Item →</button>
+        </div>
+      </article>
+
+      <article class="product-card">
+        <div class="product-card__media">
+          <div class="product-card__placeholder">⚽<span>Match Ball</span></div>
+        </div>
+        <div class="product-card__body">
+          <h3 class="product-card__title">Match Ball Display</h3>
+          <p class="product-card__desc">Trionda-inspired ball with stand. Decorative — perfect for a desk or shelf.</p>
+          <div class="product-card__meta">
+            <span class="tag tag--inperson">Available In-Person</span>
+            <span class="tag tag--online">Also Online</span>
+          </div>
+          <button class="btn btn--claim" data-track="claim_click" data-product="match_ball">Claim This Item →</button>
+        </div>
+      </article>
+    </div>
+
+    <details class="other-items">
+      <summary>
+        <span class="other-items__title">Non-soccer items</span>
+        <span class="other-items__hint">Tap to expand →</span>
+      </summary>
+      <div class="other-items__grid">
+        <div class="other-card">
+          <span class="other-card__icon">🎁</span>
+          <strong>Custom gifts</strong>
+          <span>Birthday, wedding, gamer pieces.</span>
+        </div>
+        <div class="other-card">
+          <span class="other-card__icon">🖼️</span>
+          <strong>Wall decor</strong>
+          <span>Mandalas, geometric, signage.</span>
+        </div>
+        <div class="other-card">
+          <span class="other-card__icon">🛠️</span>
+          <strong>Office accessories</strong>
+          <span>Desk organizers, cable holders, more.</span>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <section class="online-callout" id="online">
+    <div class="online-callout__inner">
+      <span class="eyebrow">Beyond the bench</span>
+      <h2>More items, worldwide shipping.</h2>
+      <p>The full Pixl Forge catalog — including non-soccer designs, custom orders, and exclusive drops — lives on Etsy. Secure checkout, customer reviews, and global delivery.</p>
+      <a href="https://pixlforgeshop.etsy.com?utm_source=landing&utm_medium=hub&utm_campaign=worldcup_callout"
+         target="_blank" rel="noopener"
+         class="btn btn--gold btn--lg"
+         data-track="online_callout"
          data-platform="etsy">
-        <div class="platform-card__top">
-          <span class="platform-card__icon">🛒</span>
-          <span class="platform-card__badge">Most popular</span>
-        </div>
-        <h3 class="platform-card__title">Browse the Full Collection on Etsy</h3>
-        <p class="platform-card__desc">
-          Every design, secure checkout, customer reviews, and worldwide shipping.
-          Best for first-time buyers.
-        </p>
-        <span class="platform-card__cta">Shop Etsy <span class="arrow">→</span></span>
-      </a>
-
-      <!-- SHOPIFY -->
-      <a href="{{SHOPIFY_SHOP_URL}}?utm_source=landing&utm_medium=hub&utm_campaign=shopify"
-         class="platform-card platform-card--shopify"
-         target="_blank"
-         rel="noopener"
-         data-track="platform_click"
-         data-platform="shopify">
-        <div class="platform-card__top">
-          <span class="platform-card__icon">🎨</span>
-          <span class="platform-card__badge">Custom orders</span>
-        </div>
-        <h3 class="platform-card__title">Custom Orders & Bundles</h3>
-        <p class="platform-card__desc">
-          Personalized requests, bundle discounts, and exclusive drops you won't
-          find anywhere else.
-        </p>
-        <span class="platform-card__cta">Shop Direct <span class="arrow">→</span></span>
-      </a>
-
-      <!-- FACEBOOK MARKETPLACE -->
-      <a href="{{FACEBOOK_MARKETPLACE_URL}}?utm_source=landing&utm_medium=hub&utm_campaign=fbmarket"
-         class="platform-card platform-card--facebook"
-         target="_blank"
-         rel="noopener"
-         data-track="platform_click"
-         data-platform="facebook">
-        <div class="platform-card__top">
-          <span class="platform-card__icon">📦</span>
-          <span class="platform-card__badge">Local pickup</span>
-        </div>
-        <h3 class="platform-card__title">Local Deals on Facebook</h3>
-        <p class="platform-card__desc">
-          No shipping fees, fast pickup, and local-only specials. Perfect if you're
-          in LA.
-        </p>
-        <span class="platform-card__cta">View on FB <span class="arrow">→</span></span>
-      </a>
-
-      <!-- OFFERUP -->
-      <a href="{{OFFERUP_URL}}?utm_source=landing&utm_medium=hub&utm_campaign=offerup"
-         class="platform-card platform-card--offerup"
-         target="_blank"
-         rel="noopener"
-         data-track="platform_click"
-         data-platform="offerup">
-        <div class="platform-card__top">
-          <span class="platform-card__icon">🏷️</span>
-          <span class="platform-card__badge">Discounts</span>
-        </div>
-        <h3 class="platform-card__title">Open-Box & Discounted Items</h3>
-        <p class="platform-card__desc">
-          Prototypes, second prints, and clearance pieces at a discount. Updated
-          weekly.
-        </p>
-        <span class="platform-card__cta">Browse OfferUp <span class="arrow">→</span></span>
+        Browse Full Shop on Etsy →
       </a>
     </div>
   </section>
 
-  <!-- ============================================ -->
-  <!-- GALLERY                                      -->
-  <!-- ============================================ -->
-  <section class="gallery" id="gallery">
+  <section class="hub" id="hub">
     <div class="section__header">
-      <span class="eyebrow">Recent prints</span>
-      <h2 class="section__title">From the bench.</h2>
+      <span class="eyebrow">📡 Match center</span>
+      <h2 class="section__title">World Cup 2026 <em>Hub</em>.</h2>
+      <p class="section__lead">Schedule, live scores, and results — all in one place.</p>
     </div>
 
-    <div class="gallery__grid">
-      <article class="product">
-        <div class="product__img"><img src="assets/product-1.jpg" alt="{{PRODUCT_1_NAME}}" loading="lazy" /></div>
-        <div class="product__info">
-          <h3>{{PRODUCT_1_NAME}}</h3>
-          <span class="product__price">${{PRODUCT_1_PRICE}}</span>
-        </div>
-        <a href="{{PRODUCT_1_URL}}" target="_blank" rel="noopener" class="product__link"
-           data-track="product_click" data-product="product_1" aria-label="Shop {{PRODUCT_1_NAME}}"></a>
-      </article>
-
-      <article class="product">
-        <div class="product__img"><img src="assets/product-2.jpg" alt="{{PRODUCT_2_NAME}}" loading="lazy" /></div>
-        <div class="product__info">
-          <h3>{{PRODUCT_2_NAME}}</h3>
-          <span class="product__price">${{PRODUCT_2_PRICE}}</span>
-        </div>
-        <a href="{{PRODUCT_2_URL}}" target="_blank" rel="noopener" class="product__link"
-           data-track="product_click" data-product="product_2" aria-label="Shop {{PRODUCT_2_NAME}}"></a>
-      </article>
-
-      <article class="product">
-        <div class="product__img"><img src="assets/product-3.jpg" alt="{{PRODUCT_3_NAME}}" loading="lazy" /></div>
-        <div class="product__info">
-          <h3>{{PRODUCT_3_NAME}}</h3>
-          <span class="product__price">${{PRODUCT_3_PRICE}}</span>
-        </div>
-        <a href="{{PRODUCT_3_URL}}" target="_blank" rel="noopener" class="product__link"
-           data-track="product_click" data-product="product_3" aria-label="Shop {{PRODUCT_3_NAME}}"></a>
-      </article>
-
-      <article class="product">
-        <div class="product__img"><img src="assets/product-4.jpg" alt="{{PRODUCT_4_NAME}}" loading="lazy" /></div>
-        <div class="product__info">
-          <h3>{{PRODUCT_4_NAME}}</h3>
-          <span class="product__price">${{PRODUCT_4_PRICE}}</span>
-        </div>
-        <a href="{{PRODUCT_4_URL}}" target="_blank" rel="noopener" class="product__link"
-           data-track="product_click" data-product="product_4" aria-label="Shop {{PRODUCT_4_NAME}}"></a>
-      </article>
-
-      <article class="product">
-        <div class="product__img"><img src="assets/product-5.jpg" alt="{{PRODUCT_5_NAME}}" loading="lazy" /></div>
-        <div class="product__info">
-          <h3>{{PRODUCT_5_NAME}}</h3>
-          <span class="product__price">${{PRODUCT_5_PRICE}}</span>
-        </div>
-        <a href="{{PRODUCT_5_URL}}" target="_blank" rel="noopener" class="product__link"
-           data-track="product_click" data-product="product_5" aria-label="Shop {{PRODUCT_5_NAME}}"></a>
-      </article>
-
-      <article class="product">
-        <div class="product__img"><img src="assets/product-6.jpg" alt="{{PRODUCT_6_NAME}}" loading="lazy" /></div>
-        <div class="product__info">
-          <h3>{{PRODUCT_6_NAME}}</h3>
-          <span class="product__price">${{PRODUCT_6_PRICE}}</span>
-        </div>
-        <a href="{{PRODUCT_6_URL}}" target="_blank" rel="noopener" class="product__link"
-           data-track="product_click" data-product="product_6" aria-label="Shop {{PRODUCT_6_NAME}}"></a>
-      </article>
+    <div class="hub__tabs" role="tablist">
+      <button class="hub__tab is-active" data-tab="upcoming" role="tab" aria-selected="true">
+        <span class="hub__tab-dot"></span>Upcoming
+      </button>
+      <button class="hub__tab" data-tab="live" role="tab" aria-selected="false">
+        <span class="hub__tab-dot hub__tab-dot--live"></span>Live Now
+      </button>
+      <button class="hub__tab" data-tab="past" role="tab" aria-selected="false">
+        <span class="hub__tab-dot"></span>Past Results
+      </button>
     </div>
+
+    <div class="hub__panels">
+      <div class="hub__panel is-active" data-panel="upcoming" id="panelUpcoming">
+        <div class="hub__loading">Loading fixtures…</div>
+      </div>
+      <div class="hub__panel" data-panel="live" id="panelLive">
+        <div class="hub__loading">Checking for live matches…</div>
+      </div>
+      <div class="hub__panel" data-panel="past" id="panelPast">
+        <div class="hub__loading">Loading results…</div>
+      </div>
+    </div>
+
+    <p class="hub__note">
+      <strong>Live scores</strong> powered by <a href="https://www.football-data.org/" target="_blank" rel="noopener">football-data.org</a>.
+      Hardcoded fixture fallback ensures the schedule always renders.
+    </p>
   </section>
 
-  <!-- ============================================ -->
-  <!-- SOCIAL PROOF                                 -->
-  <!-- ============================================ -->
-  <section class="proof">
-    <div class="proof__grid">
-      <blockquote class="quote">
-        <p>"{{REVIEW_1_QUOTE}}"</p>
-        <cite>— {{REVIEW_1_NAME}}, {{REVIEW_1_PLATFORM}}</cite>
-      </blockquote>
-      <blockquote class="quote">
-        <p>"{{REVIEW_2_QUOTE}}"</p>
-        <cite>— {{REVIEW_2_NAME}}, {{REVIEW_2_PLATFORM}}</cite>
-      </blockquote>
-      <blockquote class="quote">
-        <p>"{{REVIEW_3_QUOTE}}"</p>
-        <cite>— {{REVIEW_3_NAME}}, {{REVIEW_3_PLATFORM}}</cite>
-      </blockquote>
-    </div>
-  </section>
-
-  <!-- ============================================ -->
-  <!-- FOOTER / CONTACT                             -->
-  <!-- ============================================ -->
   <footer class="footer" id="contact">
     <div class="footer__main">
       <div class="footer__brand">
-        <span class="nav__brand-mark">◣</span>
+        <span class="nav__brand-mark" aria-hidden="true">⚽</span>
         <h3>Pixl Forge</h3>
-        <p>Premium 3D printed collectibles and custom gifts</p>
+        <p>3D printed soccer collectibles. Hand finished in LA.</p>
       </div>
 
       <div class="footer__col">
         <h4>Follow</h4>
-        <ul class="footer__social">
+        <ul>
           <li><a href="https://www.instagram.com/pixel3dla/" target="_blank" rel="noopener" data-track="social_click" data-platform="instagram">Instagram</a></li>
           <li><a href="{{TIKTOK_URL}}" target="_blank" rel="noopener" data-track="social_click" data-platform="tiktok">TikTok</a></li>
           <li><a href="{{YOUTUBE_URL}}" target="_blank" rel="noopener" data-track="social_click" data-platform="youtube">YouTube</a></li>
@@ -407,28 +348,43 @@
 
       <div class="footer__col">
         <h4>Shop</h4>
-        <ul class="footer__social">
-          <li><a href="https://pixlforgeshop.etsy.com" target="_blank" rel="noopener" data-track="footer_click" data-platform="etsy">Etsy</a></li>
-          <li><a href="{{SHOPIFY_SHOP_URL}}" target="_blank" rel="noopener" data-track="footer_click" data-platform="shopify">Shopify</a></li>
-          <li><a href="{{FACEBOOK_MARKETPLACE_URL}}" target="_blank" rel="noopener" data-track="footer_click" data-platform="facebook">Facebook</a></li>
+        <ul>
+          <li><a href="https://pixlforgeshop.etsy.com" target="_blank" rel="noopener" data-track="footer_click" data-platform="etsy">Etsy (Worldwide)</a></li>
+          <li><a href="#shop" data-track="footer_click" data-platform="inperson">In-Person (LA)</a></li>
+          <li><a href="#hub" data-track="footer_click" data-platform="hub">Match Schedule</a></li>
         </ul>
       </div>
 
       <div class="footer__col">
         <h4>Contact</h4>
-        <ul class="footer__social">
+        <ul>
           <li><a href="mailto:{{CONTACT_EMAIL}}" data-track="email_click">{{CONTACT_EMAIL}}</a></li>
-          <li><span>Custom orders welcome</span></li>
+          <li><span>DM on Instagram for fastest reply</span></li>
         </ul>
       </div>
     </div>
 
     <div class="footer__bottom">
       <span>© <span id="year"></span> Pixl Forge. All designs original or fan-inspired.</span>
-      <span class="footer__mono">v1.0 · Built with care</span>
+      <span class="footer__mono">v2.0 · World Cup 2026 edition</span>
     </div>
   </footer>
 
+  <div class="modal" id="claimModal" role="dialog" aria-modal="true" aria-labelledby="claimTitle" hidden>
+    <div class="modal__overlay" data-modal-close></div>
+    <div class="modal__card">
+      <button class="modal__close" data-modal-close aria-label="Close">×</button>
+      <h3 id="claimTitle">Claim <span id="claimItem">this item</span></h3>
+      <p>Send us a quick message — we'll confirm pickup in LA or arrange shipping.</p>
+      <div class="modal__actions">
+        <a href="https://www.instagram.com/pixel3dla/" target="_blank" rel="noopener" class="btn btn--gold" data-track="claim_method" data-method="instagram">DM on Instagram</a>
+        <a href="mailto:{{CONTACT_EMAIL}}?subject=Claim%20Item" class="btn btn--ghost" data-track="claim_method" data-method="email">Email Us</a>
+      </div>
+      <small class="modal__hint">Replies usually within a few hours. Custom orders welcome.</small>
+    </div>
+  </div>
+
+  <script src="js/matches.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
