@@ -1,5 +1,22 @@
-# Default ignored files
-/shelf/
-/workspace.xml
+# OS
 .DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
 .idea/
+*.swp
+*.swo
+
+# Node (if you ever add tooling)
+node_modules/
+npm-debug.log*
+
+# Local dev
+.env
+.env.local
+*.log
+
+# Build artifacts (none yet, here for future-proofing)
+dist/
+build/
