@@ -123,12 +123,25 @@
     </div>
   </section>
 
+  <section class="video-feature" id="preview">
+    <div class="video-feature__inner">
+      <span class="eyebrow">🏆 Watch the Build</span>
+      <h2 class="video-feature__title">Hand-Finished. <em>For Real.</em></h2>
+      <div class="video-feature__player">
+        <video controls playsinline preload="metadata">
+          <source src="assets/wc-trophy-video.mov" type="video/mp4">
+          <source src="assets/wc-trophy-video.mov" type="video/quicktime">
+        </video>
+      </div>
+    </div>
+  </section>
+
   <section class="shop" id="shop">
     <div class="section__header">
       <span class="eyebrow">⚽ The Drop</span>
       <h2 class="section__title">In-Person <em>Collectibles</em>.</h2>
       <p class="section__lead">
-        Pickup in LA. Each piece printed, sanded, and finished by hand. Tap any item to claim it.
+        Pickup in LA. Each piece printed, sanded, and finished by hand.
       </p>
     </div>
 
@@ -145,7 +158,10 @@
             <span class="tag tag--inperson">Available In-Person</span>
             <span class="tag tag--online">Also Online</span>
           </div>
-          <button class="btn btn--claim" data-track="claim_click" data-product="golden_boot">Claim This Item →</button>
+          <div class="card-actions">
+            <button class="btn btn--claim" data-track="claim_click" data-product="golden_boot">Claim In-Person →</button>
+            <a href="https://pixlforgeshop.etsy.com" target="_blank" rel="noopener" class="btn btn--buy" data-track="buy_online" data-product="golden_boot" data-platform="etsy">Buy Online →</a>
+          </div>
         </div>
       </article>
 
@@ -160,23 +176,56 @@
             <span class="tag tag--inperson">Available In-Person</span>
             <span class="tag tag--online">Also Online</span>
           </div>
-          <button class="btn btn--claim" data-track="claim_click" data-product="golden_glove">Claim This Item →</button>
+          <div class="card-actions">
+            <button class="btn btn--claim" data-track="claim_click" data-product="golden_glove">Claim In-Person →</button>
+            <a href="https://pixlforgeshop.etsy.com" target="_blank" rel="noopener" class="btn btn--buy" data-track="buy_online" data-product="golden_glove" data-platform="etsy">Buy Online →</a>
+          </div>
         </div>
       </article>
 
-      <article class="product-card product-card--featured">
+      <article class="product-card product-card--featured" id="trophy-card">
         <div class="product-card__media">
-          <div class="product-card__placeholder">🏆<span>WC Trophy</span></div>
+          <div class="card-gallery" data-gallery="wc-trophy">
+            <div class="card-gallery__track">
+              <img class="card-gallery__img" src="assets/wc-trophy-all.jpg" alt="World Cup Trophy replica — all three sizes" loading="lazy">
+              <img class="card-gallery__img" src="assets/wc-trophy-medium.jpg" alt="Medium trophy 10 inches" loading="lazy">
+              <img class="card-gallery__img" src="assets/wc-trophy-small.jpg" alt="Small trophy 6.5 inches" loading="lazy">
+              <img class="card-gallery__img" src="assets/wc-trophy-large.jpg" alt="Large trophy 14.5 inches" loading="lazy">
+            </div>
+            <button class="card-gallery__btn card-gallery__btn--prev" aria-label="Previous">&#8249;</button>
+            <button class="card-gallery__btn card-gallery__btn--next" aria-label="Next">&#8250;</button>
+            <div class="card-gallery__dots" aria-hidden="true"></div>
+          </div>
           <span class="product-card__badge product-card__badge--gold">🔥 Bestseller</span>
         </div>
         <div class="product-card__body">
           <h3 class="product-card__title">World Cup 2026 Trophy</h3>
-          <p class="product-card__desc">Two sizes — desk (8") or display (12"). Gold painted, hand sanded, green base accent.</p>
+          <p class="product-card__desc">Hand-finished gold replica. Gold-painted, hand-sanded, green base accent.</p>
+          <div class="trophy-sizes">
+            <div class="trophy-size">
+              <span class="trophy-size__name">Small</span>
+              <span class="trophy-size__dim">6.5"</span>
+              <span class="trophy-size__price">$24.99</span>
+            </div>
+            <div class="trophy-size">
+              <span class="trophy-size__name">Medium</span>
+              <span class="trophy-size__dim">10"</span>
+              <span class="trophy-size__price">$35.99</span>
+            </div>
+            <div class="trophy-size">
+              <span class="trophy-size__name">Large</span>
+              <span class="trophy-size__dim">14.5"</span>
+              <span class="trophy-size__price">$45.99</span>
+            </div>
+          </div>
           <div class="product-card__meta">
             <span class="tag tag--inperson">Available In-Person</span>
             <span class="tag tag--online">Also Online</span>
           </div>
-          <button class="btn btn--claim" data-track="claim_click" data-product="wc_trophy">Claim This Item →</button>
+          <div class="card-actions">
+            <button class="btn btn--claim" data-track="claim_click" data-product="wc_trophy">Claim In-Person →</button>
+            <a href="https://www.etsy.com/listing/4502333191/world-cup-2026-trophy-replica-gold" target="_blank" rel="noopener" class="btn btn--buy" data-track="buy_online" data-product="wc_trophy" data-platform="etsy">Buy Online →</a>
+          </div>
         </div>
       </article>
 
@@ -191,7 +240,10 @@
             <span class="tag tag--inperson">Available In-Person</span>
             <span class="tag tag--online">Also Online</span>
           </div>
-          <button class="btn btn--claim" data-track="claim_click" data-product="keychains">Claim This Item →</button>
+          <div class="card-actions">
+            <button class="btn btn--claim" data-track="claim_click" data-product="keychains">Claim In-Person →</button>
+            <a href="https://pixlforgeshop.etsy.com" target="_blank" rel="noopener" class="btn btn--buy" data-track="buy_online" data-product="keychains" data-platform="etsy">Buy Online →</a>
+          </div>
         </div>
       </article>
 
@@ -205,7 +257,10 @@
           <div class="product-card__meta">
             <span class="tag tag--inperson">Available In-Person</span>
           </div>
-          <button class="btn btn--claim" data-track="claim_click" data-product="jersey_print">Claim This Item →</button>
+          <div class="card-actions">
+            <button class="btn btn--claim" data-track="claim_click" data-product="jersey_print">Claim In-Person →</button>
+            <a href="https://pixlforgeshop.etsy.com" target="_blank" rel="noopener" class="btn btn--buy" data-track="buy_online" data-product="jersey_print" data-platform="etsy">Buy Online →</a>
+          </div>
         </div>
       </article>
 
@@ -220,7 +275,10 @@
             <span class="tag tag--inperson">Available In-Person</span>
             <span class="tag tag--online">Also Online</span>
           </div>
-          <button class="btn btn--claim" data-track="claim_click" data-product="mini_stadium">Claim This Item →</button>
+          <div class="card-actions">
+            <button class="btn btn--claim" data-track="claim_click" data-product="mini_stadium">Claim In-Person →</button>
+            <a href="https://pixlforgeshop.etsy.com" target="_blank" rel="noopener" class="btn btn--buy" data-track="buy_online" data-product="mini_stadium" data-platform="etsy">Buy Online →</a>
+          </div>
         </div>
       </article>
 
@@ -234,7 +292,10 @@
           <div class="product-card__meta">
             <span class="tag tag--inperson">Available In-Person</span>
           </div>
-          <button class="btn btn--claim" data-track="claim_click" data-product="figurine">Claim This Item →</button>
+          <div class="card-actions">
+            <button class="btn btn--claim" data-track="claim_click" data-product="figurine">Claim In-Person →</button>
+            <a href="https://pixlforgeshop.etsy.com" target="_blank" rel="noopener" class="btn btn--buy" data-track="buy_online" data-product="figurine" data-platform="etsy">Buy Online →</a>
+          </div>
         </div>
       </article>
 
@@ -249,7 +310,10 @@
             <span class="tag tag--inperson">Available In-Person</span>
             <span class="tag tag--online">Also Online</span>
           </div>
-          <button class="btn btn--claim" data-track="claim_click" data-product="match_ball">Claim This Item →</button>
+          <div class="card-actions">
+            <button class="btn btn--claim" data-track="claim_click" data-product="match_ball">Claim In-Person →</button>
+            <a href="https://pixlforgeshop.etsy.com" target="_blank" rel="noopener" class="btn btn--buy" data-track="buy_online" data-product="match_ball" data-platform="etsy">Buy Online →</a>
+          </div>
         </div>
       </article>
     </div>

@@ -140,13 +140,28 @@ h1,h2,h3,h4 { margin: 0; font-weight: 700; line-height: 1.05; letter-spacing: -.
   background: var(--ink);
   color: var(--chalk);
   border-color: rgba(255,255,255,.14);
-  width: 100%;
-  margin-top: 1rem;
+  flex: 1;
+  margin-top: 0;
 }
 .btn--claim:hover {
-  background: var(--gold-bright);
+  background: rgba(255,255,255,.08);
+  border-color: rgba(255,255,255,.3);
+}
+.btn--buy {
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold));
   color: var(--ink);
-  border-color: var(--gold-bright);
+  box-shadow: 0 4px 14px rgba(212,175,55,.35);
+  flex: 1;
+}
+.btn--buy:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(212,175,55,.45);
+  color: var(--ink);
+}
+.card-actions {
+  display: flex;
+  gap: .6rem;
+  margin-top: 1rem;
 }
 
 /* -----------  TAGS  ----------- */
@@ -484,6 +499,86 @@ h1,h2,h3,h4 { margin: 0; font-weight: 700; line-height: 1.05; letter-spacing: -.
   flex: 1;
 }
 .product-card__meta { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: .25rem; }
+
+/* ── Product photo gallery ───────────────────────── */
+#trophy-card .product-card__media { aspect-ratio: 1 / 1; }
+.card-gallery { position: relative; width: 100%; height: 100%; overflow: hidden; }
+.card-gallery__track {
+  display: flex;
+  width: 100%; height: 100%;
+  transition: transform .4s cubic-bezier(.4,0,.2,1);
+}
+.card-gallery__img { flex-shrink: 0; width: 100%; height: 100%; object-fit: cover; }
+.card-gallery__btn {
+  position: absolute;
+  top: 50%; transform: translateY(-50%);
+  background: rgba(0,0,0,.6);
+  border: none; color: var(--chalk);
+  font-size: 1.8rem; line-height: 1;
+  padding: .2rem .55rem;
+  cursor: pointer; border-radius: 4px;
+  opacity: 0; transition: opacity .2s;
+  z-index: 2;
+}
+.card-gallery:hover .card-gallery__btn,
+.card-gallery:focus-within .card-gallery__btn { opacity: 1; }
+.card-gallery__btn--prev { left: .5rem; }
+.card-gallery__btn--next { right: .5rem; }
+.card-gallery__dots {
+  position: absolute; bottom: .65rem; left: 50%; transform: translateX(-50%);
+  display: flex; gap: .45rem; z-index: 2;
+}
+.card-gallery__dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: rgba(255,255,255,.4);
+  cursor: pointer;
+  transition: background .25s, transform .25s;
+}
+.card-gallery__dot.is-active { background: var(--gold-bright); transform: scale(1.35); }
+
+/* ── Trophy size grid ────────────────────────────── */
+.trophy-sizes { display: flex; gap: .5rem; margin-bottom: .9rem; }
+.trophy-size {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center; gap: .15rem;
+  padding: .55rem .25rem;
+  border-radius: 6px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.08);
+}
+.trophy-size__name {
+  font-family: var(--font-mono); font-size: .62rem;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--paper-mute);
+}
+.trophy-size__dim {
+  font-family: var(--font-mono); font-size: .78rem; color: var(--chalk);
+}
+.trophy-size__price {
+  font-family: var(--font-mono); font-size: .92rem;
+  font-weight: 700; color: var(--gold-bright);
+}
+
+/* ── Video feature section ───────────────────────── */
+.video-feature {
+  padding: 4rem 1.5rem;
+  background: var(--ink);
+  text-align: center;
+}
+.video-feature__inner { max-width: 720px; margin: 0 auto; }
+.video-feature__title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 3.2rem);
+  letter-spacing: .04em;
+  color: var(--chalk);
+  margin: .5rem 0 1.75rem;
+}
+.video-feature__title em { font-style: italic; color: var(--gold-bright); }
+.video-feature__player {
+  border-radius: var(--radius); overflow: hidden;
+  background: #000;
+  box-shadow: 0 20px 60px rgba(0,0,0,.55), 0 0 0 1px rgba(245,204,74,.15);
+}
+.video-feature__player video { width: 100%; display: block; max-height: 75vh; }
 
 /* OTHER ITEMS */
 .other-items {
@@ -852,6 +947,7 @@ h1,h2,h3,h4 { margin: 0; font-weight: 700; line-height: 1.05; letter-spacing: -.
   .match__center { order: -1; }
   .footer__main { grid-template-columns: 1fr; }
   .footer__bottom { flex-direction: column; text-align: center; }
+  .card-actions { flex-direction: column; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

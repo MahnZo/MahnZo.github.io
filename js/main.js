@@ -382,4 +382,51 @@
 
   renderUpcoming();
   renderPast();
+
+  // Product photo galleries
+  document.querySelectorAll('[data-gallery]').forEach(function (gallery) {
+    var slider   = gallery.querySelector('.card-gallery__track');
+    var imgs     = gallery.querySelectorAll('.card-gallery__img');
+    var dotsWrap = gallery.querySelector('.card-gallery__dots');
+    var prevBtn  = gallery.querySelector('.card-gallery__btn--prev');
+    var nextBtn  = gallery.querySelector('.card-gallery__btn--next');
+    if (!slider || imgs.length < 2) return;
+
+    var current   = 0;
+    var total     = imgs.length;
+    var autoTimer = null;
+    var dots      = [];
+
+    imgs.forEach(function (_, i) {
+      var d = document.createElement('span');
+      d.className = 'card-gallery__dot' + (i === 0 ? ' is-active' : '');
+      d.addEventListener('click', function () { go(i); resetAuto(); });
+      dotsWrap.appendChild(d);
+      dots.push(d);
+    });
+
+    function go(idx) {
+      current = ((idx % total) + total) % total;
+      slider.style.transform = 'translateX(-' + (current * 100) + '%)';
+      dots.forEach(function (d, i) { d.classList.toggle('is-active', i === current); });
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', function () { go(current - 1); resetAuto(); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { go(current + 1); resetAuto(); });
+
+    var touchStartX = 0;
+    gallery.addEventListener('touchstart', function (e) {
+      touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    gallery.addEventListener('touchend', function (e) {
+      var delta = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(delta) > 40) { go(current + (delta > 0 ? 1 : -1)); resetAuto(); }
+    }, { passive: true });
+
+    function startAuto() { autoTimer = setInterval(function () { go(current + 1); }, 3500); }
+    function resetAuto() { clearInterval(autoTimer); startAuto(); }
+    gallery.addEventListener('mouseenter', function () { clearInterval(autoTimer); });
+    gallery.addEventListener('mouseleave', startAuto);
+    startAuto();
+  });
 })();
