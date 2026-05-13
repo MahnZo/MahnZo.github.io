@@ -429,4 +429,10 @@
     gallery.addEventListener('mouseleave', startAuto);
     startAuto();
   });
+
+  // When video 1 ends, auto-play video 2
+  const vidEls = document.querySelectorAll('.video-feature__player video');
+  if (vidEls.length >= 2) {
+    vidEls[0].addEventListener('ended', () => vidEls[1].play());
+  }
 })();
