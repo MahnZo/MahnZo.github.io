@@ -500,7 +500,7 @@ h1,h2,h3,h4 { margin: 0; font-weight: 700; line-height: 1.05; letter-spacing: -.
 }
 .product-card__meta { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: .25rem; }
 
-/* ── Product photo gallery ───────────────────────── */
+/* ── Product photo gallery ──────────────────────────────────── */
 #trophy-card .product-card__media { aspect-ratio: 1 / 1; }
 .card-gallery { position: relative; width: 100%; height: 100%; overflow: hidden; }
 .card-gallery__track {
@@ -536,7 +536,7 @@ h1,h2,h3,h4 { margin: 0; font-weight: 700; line-height: 1.05; letter-spacing: -.
 }
 .card-gallery__dot.is-active { background: var(--gold-bright); transform: scale(1.35); }
 
-/* ── Trophy size grid ────────────────────────────── */
+/* ── Trophy size grid ──────────────────────────────────────────── */
 .trophy-sizes { display: flex; gap: .5rem; margin-bottom: .9rem; }
 .trophy-size {
   flex: 1;
@@ -558,7 +558,7 @@ h1,h2,h3,h4 { margin: 0; font-weight: 700; line-height: 1.05; letter-spacing: -.
   font-weight: 700; color: var(--gold-bright);
 }
 
-/* ── Video feature section ───────────────────────── */
+/* ── Video feature section ────────────────────────────────────────── */
 .video-feature {
   padding: 4rem 1.5rem;
   background: var(--ink);
