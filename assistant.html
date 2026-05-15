@@ -367,14 +367,14 @@ textarea::placeholder { color: var(--muted); }
     <a id="emailLink" href="#" class="copy-btn secondary">✉️ Open in email</a>
     <br><br>
     <div style="font-size:13px; color: var(--muted);">
-      Send this to <strong>your@email.com</strong> or paste it into a DM on Instagram / Etsy.
+      Send this to <strong>pixlforgeprints@gmail.com</strong> or paste it into a DM on Instagram / Etsy.
     </div>
   </div>
 
 </div>
 
 <script>
-// ─── State ──────────────────────────────────────────────────────
+// ─── State ──────────────────────────────────────────────
 const history = [];
 let currentMode = 'order';
 let lastOrderText = '';
@@ -416,7 +416,7 @@ When you have enough info, say "Perfect, here's a gift order request:" and outpu
 Keep responses warm, brief, and gift-focused.`
 };
 
-// ─── Mode toggle ─────────────────────────────────────────────────
+// ─── Mode toggle ───────────────────────────────────────
 function setMode(mode) {
   currentMode = mode;
   document.querySelectorAll('.mode-tab').forEach((t, i) => {
@@ -439,7 +439,7 @@ function setMode(mode) {
   ).join('');
 }
 
-// ─── Chat logic ───────────────────────────────────────────────────
+// ─── Chat logic ───────────────────────────────────────────
 function useQuick(btn) {
   document.getElementById('userInput').value = btn.textContent;
   sendMessage();
@@ -515,7 +515,7 @@ async function sendMessage() {
       // Show result card
       lastOrderText = orderPart;
       document.getElementById('orderText').textContent = orderPart;
-      document.getElementById('emailLink').href = `mailto:your@email.com?subject=Custom Order Request&body=${encodeURIComponent(orderPart)}`;
+      document.getElementById('emailLink').href = `mailto:pixlforgeprints@gmail.com?subject=Custom Order Request&body=${encodeURIComponent(orderPart)}`;
       document.getElementById('resultCard').classList.add('visible');
       document.getElementById('resultCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else {
