@@ -1,4 +1,4 @@
-# {{BRAND_NAME}} — Landing Hub
+# Pixl Forge — Landing Hub
 
 A static landing page that funnels visitors to your shops on Etsy, Shopify,
 Facebook Marketplace, and OfferUp. Hosted free on GitHub Pages.
@@ -27,37 +27,39 @@ assets/             ← Product photos, favicon, OG image
 Search the codebase for `{{...}}` to find every placeholder. Quick checklist:
 
 ### Brand
-- `{{BRAND_NAME}}` — Your shop name
-- `{{BRAND_TAGLINE}}` — One-line description
-- `{{SITE_URL}}` — e.g. https://yourname.github.io
-- `{{CUSTOM_DOMAIN}}` — only if using a custom domain
-- `{{LOCAL_AREA}}` — e.g. "Los Angeles" for the Facebook Marketplace card
-- `{{CONTACT_EMAIL}}` — Email for inquiries
+- [x] `{{BRAND_NAME}}` — Your shop name → **Pixl Forge**
+- [x] `{{BRAND_TAGLINE}}` — One-line description → not used in current design
+- [ ] `{{SITE_URL}}` — e.g. https://yourname.github.io ← still needed
+- [x] `{{CUSTOM_DOMAIN}}` — only if using a custom domain → N/A
+- [x] `{{LOCAL_AREA}}` — e.g. "Los Angeles" for the Facebook Marketplace card → not used in current design
+- [x] `{{CONTACT_EMAIL}}` — Email for inquiries → **pixlforgeprints@gmail.com**
 
 ### Analytics IDs
-- `{{GA_MEASUREMENT_ID}}` — Google Analytics 4 ID (looks like G-XXXXXXXXXX)
-- `{{CLARITY_ID}}` — Microsoft Clarity project ID (free heatmaps)
+- [x] `{{GA_MEASUREMENT_ID}}` — Google Analytics 4 ID (looks like G-XXXXXXXXXX) → **G-64SCNVMZ07**
+- [x] `{{CLARITY_ID}}` — Microsoft Clarity project ID (free heatmaps) → **wo6pchoxq4**
 
 ### Platform URLs
-- `{{ETSY_SHOP_URL}}`
-- `{{SHOPIFY_SHOP_URL}}`
-- `{{FACEBOOK_MARKETPLACE_URL}}`
-- `{{OFFERUP_URL}}`
-- `{{INSTAGRAM_URL}}`, `{{TIKTOK_URL}}`, `{{YOUTUBE_URL}}`
+- [x] `{{ETSY_SHOP_URL}}` → **https://pixlforgeshop.etsy.com**
+- [x] `{{SHOPIFY_SHOP_URL}}` → N/A — not used in current design
+- [x] `{{FACEBOOK_MARKETPLACE_URL}}` → N/A — not used in current design
+- [x] `{{OFFERUP_URL}}` → N/A — not used in current design
+- [x] `{{INSTAGRAM_URL}}` → **https://www.instagram.com/pixel3dla/**
+- [ ] `{{TIKTOK_URL}}` ← still needed
+- [ ] `{{YOUTUBE_URL}}` ← still needed
 
 ### Featured product
-- `{{FEATURED_PRODUCT_NAME}}`, `{{FEATURED_PRODUCT_DESCRIPTION}}`
-- `{{FEATURED_PRODUCT_URL}}` — direct buy link (Etsy or Shopify)
-- `{{FEATURED_PRICE}}`, `{{FEATURED_MATERIAL}}`, `{{FEATURED_SIZE}}`,
-  `{{FEATURED_FINISH}}`, `{{FEATURED_SHIP_DAYS}}`
+- [x] `{{FEATURED_PRODUCT_NAME}}`, `{{FEATURED_PRODUCT_DESCRIPTION}}` → N/A — section redesigned into product grid
+- [x] `{{FEATURED_PRODUCT_URL}}` → N/A — section redesigned
+- [x] `{{FEATURED_PRICE}}`, `{{FEATURED_MATERIAL}}`, `{{FEATURED_SIZE}}`,
+  `{{FEATURED_FINISH}}`, `{{FEATURED_SHIP_DAYS}}` → N/A — section redesigned
 
 ### Stats / proof
-- `{{ORDERS_COUNT}}`, `{{RATING}}`, `{{TURNAROUND_DAYS}}`
-- `{{REVIEW_1_QUOTE}}`, `{{REVIEW_1_NAME}}`, `{{REVIEW_1_PLATFORM}}` (×3)
+- [x] `{{ORDERS_COUNT}}`, `{{RATING}}`, `{{TURNAROUND_DAYS}}` → N/A — not in current design
+- [ ] `{{REVIEW_1_QUOTE}}`, `{{REVIEW_1_NAME}}`, `{{REVIEW_1_PLATFORM}}` (×3) — replace with real reviews when available
 
 ### Gallery products (×6)
-- `{{PRODUCT_N_NAME}}`, `{{PRODUCT_N_PRICE}}`, `{{PRODUCT_N_URL}}`
-- Replace `assets/product-N.jpg` with real images
+- [x] `{{PRODUCT_N_NAME}}`, `{{PRODUCT_N_PRICE}}`, `{{PRODUCT_N_URL}}` → N/A — product grid redesigned
+- [ ] Replace `assets/product-N.jpg` with real images (trophy photos uploaded; others pending)
 
 ## Deploy to GitHub Pages
 
