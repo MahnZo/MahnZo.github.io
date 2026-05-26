@@ -56,13 +56,14 @@
       totalInvested: "", startingBudget: "", overheadCost: "",
       filamentInventory: "", toolsEquipment: "", packagingSupplies: "", totalRevenue: "",
     };
-    const DEFAULT_FILAMENT = { rollCost: "20", rollGrams: "1000", printGrams: "279" };
+    const DEFAULT_FILAMENT = { rollCost: "20", rollGrams: "1000", printGrams: "279", unitsPerPlate: "1" };
     const DEFAULT_PRICING = {
       rollCost: "20", rollGrams: "1000", printGrams: "279",
       printHours: "3", laborHours: "0.5", laborRate: "18",
       electricityCost: "0.50", packagingCost: "1.50", shippingCost: "5.00",
       platformFee: "6.5", transactionFee: "3", failurePercent: "10",
       overheadPercent: "15", profitMargin: "30", premiumMargin: "60",
+      unitsPerPlate: "1",
     };
 
     // ─── Sub-components ─────────────────────────────────────────────
@@ -175,8 +176,8 @@
           if (raw) {
             const d = JSON.parse(raw);
             if (d.dashboard) setDashboard(d.dashboard);
-            if (d.filament) setFilament(d.filament);
-            if (d.pricing) setPricing(d.pricing);
+            if (d.filament) setFilament({ ...DEFAULT_FILAMENT, ...d.filament });
+            if (d.pricing) setPricing({ ...DEFAULT_PRICING, ...d.pricing });
           }
         } catch (_) {}
       }, []);
@@ -207,18 +208,21 @@
 
       // Filament math
       const fRC = num(filament.rollCost), fRG = num(filament.rollGrams), fPG = num(filament.printGrams);
+      const fUnits = Math.max(1, Math.round(num(filament.unitsPerPlate, 1)));
       const fErr = {};
       if (fRG <= 0) fErr.rollGrams = "Roll weight must be > 0";
       if (fPG > fRG) fErr.printGrams = "Print weight exceeds roll weight";
       const fCPG = fRG > 0 ? fRC / fRG : 0;
       const fMat = fRG > 0 ? (fPG / fRG) * fRC : 0;
       const fRem = fRG - fPG, fRemCost = fCPG * fRem;
+      const fMatPerUnit = fMat / fUnits;
 
       // Pricing math
       const p = Object.fromEntries(Object.entries(pricing).map(([k, v]) => [k, num(v)]));
       const pErr = {};
       if (p.rollGrams <= 0) pErr.rollGrams = "Roll weight must be > 0";
 
+      const pUnits = Math.max(1, Math.round(num(pricing.unitsPerPlate, 1)));
       const matCost = p.rollGrams > 0 ? (p.printGrams / p.rollGrams) * p.rollCost : 0;
       const cpg = p.rollGrams > 0 ? p.rollCost / p.rollGrams : 0;
       const wasteCost = matCost * (p.failurePercent / 100);
@@ -232,6 +236,12 @@
       const opt5 = opt3 * (1 + p.premiumMargin / 100);
       const profitOpt4 = opt4 - fullBase;
       const profitOpt5 = opt5 - fullBase;
+      // Per-unit (plate costs ÷ units)
+      const opt3pu = opt3 / pUnits;
+      const opt4pu = opt4 / pUnits;
+      const opt5pu = opt5 / pUnits;
+      const fullBasePU = fullBase / pUnits;
+      const matCostPU = matCost / pUnits;
 
       // Styles
       const root = { fontFamily: "'DM Mono', 'Courier New', monospace", background: "#0A0E14", color: "#C9D1D9", minHeight: "100vh", display: "flex", flexDirection: "column" };
@@ -322,15 +332,17 @@
                     <Field label="Roll Cost" value={filament.rollCost} onChange={setF("rollCost")} prefix="$" note="How much you paid for the roll" />
                     <Field label="Roll Weight" value={filament.rollGrams} onChange={setF("rollGrams")} suffix="g" note="Total grams on the roll (e.g. 1000)" error={fErr.rollGrams} />
                     <Field label="Print Weight" value={filament.printGrams} onChange={setF("printGrams")} suffix="g" note="Grams the slicer says this print uses" error={fErr.printGrams} />
+                    <Field label="Units per Plate" value={filament.unitsPerPlate} onChange={setF("unitsPerPlate")} suffix="units" note="How many units fit on one plate" />
                   </div>
                 </InputBlock>
 
                 {!fErr.rollGrams && (
                   <>
                     <div style={cardGrid}>
-                      <DashCard label="Material Cost" value={fmt(fMat)} sub={`${fmtG(fPG)} used from roll`} color="#4DF0C0" />
+                      <DashCard label="Material Cost" value={fmt(fMat)} sub={`${fmtG(fPG)} used · whole plate`} color="#4DF0C0" />
                       <DashCard label="Cost Per Gram" value={"$" + fCPG.toFixed(4) + "/g"} sub="Roll cost ÷ roll weight" color="#60A5FA" />
                       <DashCard label="Filament Remaining" value={fmtG(fRem)} sub={`Worth ${fmt(fRemCost)} still on spool`} color="#FBBF24" />
+                      <DashCard label="Cost Per Unit" value={fmt(fMatPerUnit)} sub={fUnits > 1 ? `Plate cost ÷ ${fUnits} units` : "Set units > 1 to split"} color={fUnits > 1 ? "#F97316" : "#8B949E"} />
                     </div>
 
                     <div style={brkCard}>
@@ -338,9 +350,11 @@
                       <Row label="Roll cost" value={fmt(fRC)} />
                       <Row label="Roll weight" value={fmtG(fRG)} />
                       <Row label="Cost per gram" value={"$" + fCPG.toFixed(4) + "/g"} />
-                      <Row label="Print weight" value={fmtG(fPG)} />
+                      <Row label="Print weight (whole plate)" value={fmtG(fPG)} />
                       <Row label="Formula" value={`(${fPG}g ÷ ${fRG}g) × $${fRC}`} />
-                      <Row label="Filament cost" value={fmt(fMat)} accent bold />
+                      <Row label="Filament cost (whole plate)" value={fmt(fMat)} accent bold />
+                      <Row label="Units per plate" value={fUnits} />
+                      <Row label="Filament cost per unit" value={fmt(fMatPerUnit)} accent bold />
                       <Row label="Remaining filament" value={fmtG(fRem)} />
                       <Row label="Remaining filament value" value={fmt(fRemCost)} />
                     </div>
@@ -360,6 +374,7 @@
                     <Field label="Roll Cost" value={pricing.rollCost} onChange={setP("rollCost")} prefix="$" />
                     <Field label="Roll Weight" value={pricing.rollGrams} onChange={setP("rollGrams")} suffix="g" error={pErr.rollGrams} />
                     <Field label="Print Weight" value={pricing.printGrams} onChange={setP("printGrams")} suffix="g" />
+                    <Field label="Units per Plate" value={pricing.unitsPerPlate} onChange={setP("unitsPerPlate")} suffix="units" note="How many units fit on one plate" />
                   </div>
                 </InputBlock>
 
@@ -396,38 +411,43 @@
                   <>
                     <SecTitle>Pricing Options</SecTitle>
                     <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 28 }}>
-                      <PriceCard option="Option 1 — Material Only" price={fmt(matCost)} sub="Filament cost only — use as absolute minimum" color="#60A5FA"
-                        breakdown={[{ label: "Print weight", value: fmtG(p.printGrams) }, { label: "Cost per gram", value: "$" + cpg.toFixed(4) + "/g" }, { label: "Material cost", value: fmt(matCost) }]} />
-                      <PriceCard option="Option 2 — Cost of Goods" price={fmt(cogBase)} sub="Material + waste + electricity + packaging + shipping" color="#A78BFA"
-                        breakdown={[{ label: "Material cost", value: fmt(matCost) }, { label: `Waste (${p.failurePercent}%)`, value: fmt(wasteCost) }, { label: "Electricity", value: fmt(p.electricityCost) }, { label: "Packaging", value: fmt(p.packagingCost) }, { label: "Shipping", value: fmt(p.shippingCost) }]} />
-                      <PriceCard option="Option 3 — Full Business Cost (Break-even)" price={fmt(opt3)} sub={`COG + labor + overhead + fees — minimum to break even`} color="#F97316"
-                        breakdown={[{ label: "Cost of goods", value: fmt(cogBase) }, { label: `Labor (${p.laborHours}h × $${p.laborRate})`, value: fmt(laborCost) }, { label: `Overhead (${p.overheadPercent}%)`, value: fmt(ohAmt) }, { label: `Total fees (${p.platformFee + p.transactionFee}%)`, value: "grossed up in price" }, { label: "Break-even price", value: fmt(opt3) }]} />
-                      <PriceCard option="Option 4 — Suggested Selling Price ✦" price={fmt(opt4)} sub={`${p.profitMargin}% profit margin · Estimated profit: ${fmt(profitOpt4)}`} color="#4DF0C0"
-                        breakdown={[{ label: "Break-even (opt 3)", value: fmt(opt3) }, { label: `Profit margin (${p.profitMargin}%)`, value: fmt(profitOpt4) }, { label: "Suggested price", value: fmt(opt4) }]} />
-                      <PriceCard option="Option 5 — Premium Price" price={fmt(opt5)} sub={`${p.premiumMargin}% margin · Best for custom/detailed prints · Est. profit: ${fmt(profitOpt5)}`} color="#FBBF24"
-                        breakdown={[{ label: "Material cost", value: fmt(matCost) }, { label: `Waste (${p.failurePercent}%)`, value: fmt(wasteCost) }, { label: "Electricity", value: fmt(p.electricityCost) }, { label: "Packaging", value: fmt(p.packagingCost) }, { label: "Shipping", value: fmt(p.shippingCost) }, { label: `Labor (${p.laborHours}h × $${p.laborRate})`, value: fmt(laborCost) }, { label: `Overhead (${p.overheadPercent}%)`, value: fmt(ohAmt) }, { label: `Premium margin (${p.premiumMargin}%)`, value: fmt(profitOpt5) }]} />
+                      <PriceCard option="Option 1 — Material Only" price={fmt(matCost)} sub={`Whole plate · ${pUnits > 1 ? `Per unit: ${fmt(matCostPU)}` : "filament cost only"}`} color="#60A5FA"
+                        breakdown={[{ label: "Print weight", value: fmtG(p.printGrams) }, { label: "Cost per gram", value: "$" + cpg.toFixed(4) + "/g" }, { label: "Material cost (plate)", value: fmt(matCost) }, ...(pUnits > 1 ? [{ label: `Units per plate`, value: pUnits }, { label: "Material cost per unit", value: fmt(matCostPU) }] : [])]} />
+                      <PriceCard option="Option 2 — Cost of Goods" price={fmt(cogBase)} sub={`Whole plate · ${pUnits > 1 ? `Per unit: ${fmt(cogBase / pUnits)}` : "material + waste + electricity + packaging + shipping"}`} color="#A78BFA"
+                        breakdown={[{ label: "Material cost", value: fmt(matCost) }, { label: `Waste (${p.failurePercent}%)`, value: fmt(wasteCost) }, { label: "Electricity", value: fmt(p.electricityCost) }, { label: "Packaging", value: fmt(p.packagingCost) }, { label: "Shipping", value: fmt(p.shippingCost) }, ...(pUnits > 1 ? [{ label: `Units per plate`, value: pUnits }, { label: "COG per unit", value: fmt(cogBase / pUnits) }] : [])]} />
+                      <PriceCard option="Option 3 — Full Business Cost (Break-even)" price={fmt(opt3)} sub={`Whole plate · ${pUnits > 1 ? `Per unit: ${fmt(opt3pu)}` : "COG + labor + overhead + fees"}`} color="#F97316"
+                        breakdown={[{ label: "Cost of goods", value: fmt(cogBase) }, { label: `Labor (${p.laborHours}h × $${p.laborRate})`, value: fmt(laborCost) }, { label: `Overhead (${p.overheadPercent}%)`, value: fmt(ohAmt) }, { label: `Total fees (${p.platformFee + p.transactionFee}%)`, value: "grossed up in price" }, { label: "Break-even (plate)", value: fmt(opt3) }, ...(pUnits > 1 ? [{ label: `Units per plate`, value: pUnits }, { label: "Break-even per unit", value: fmt(opt3pu) }] : [])]} />
+                      <PriceCard option="Option 4 — Suggested Selling Price ✦" price={fmt(opt4)} sub={`Whole plate · ${p.profitMargin}% margin${pUnits > 1 ? ` · Per unit: ${fmt(opt4pu)}` : ""} · Est. profit: ${fmt(profitOpt4)}`} color="#4DF0C0"
+                        breakdown={[{ label: "Break-even (opt 3)", value: fmt(opt3) }, { label: `Profit margin (${p.profitMargin}%)`, value: fmt(profitOpt4) }, { label: "Suggested price (plate)", value: fmt(opt4) }, ...(pUnits > 1 ? [{ label: `Units per plate`, value: pUnits }, { label: "Suggested price per unit", value: fmt(opt4pu) }] : [])]} />
+                      <PriceCard option="Option 5 — Premium Price" price={fmt(opt5)} sub={`Whole plate · ${p.premiumMargin}% margin${pUnits > 1 ? ` · Per unit: ${fmt(opt5pu)}` : ""} · Est. profit: ${fmt(profitOpt5)}`} color="#FBBF24"
+                        breakdown={[{ label: "Material cost", value: fmt(matCost) }, { label: `Waste (${p.failurePercent}%)`, value: fmt(wasteCost) }, { label: "Electricity", value: fmt(p.electricityCost) }, { label: "Packaging", value: fmt(p.packagingCost) }, { label: "Shipping", value: fmt(p.shippingCost) }, { label: `Labor (${p.laborHours}h × $${p.laborRate})`, value: fmt(laborCost) }, { label: `Overhead (${p.overheadPercent}%)`, value: fmt(ohAmt) }, { label: `Premium margin (${p.premiumMargin}%)`, value: fmt(profitOpt5) }, ...(pUnits > 1 ? [{ label: `Units per plate`, value: pUnits }, { label: "Premium price per unit", value: fmt(opt5pu) }] : [])]} />
                     </div>
 
                     <SecTitle>Full Cost Breakdown</SecTitle>
                     <div style={brkCard}>
                       <Row label="Filament roll cost" value={fmt(p.rollCost)} />
                       <Row label="Roll weight" value={fmtG(p.rollGrams)} />
-                      <Row label="Print weight" value={fmtG(p.printGrams)} />
+                      <Row label="Print weight (whole plate)" value={fmtG(p.printGrams)} />
                       <Row label="Cost per gram" value={"$" + cpg.toFixed(4) + "/g"} />
-                      <Row label="Material cost" value={fmt(matCost)} />
+                      <Row label="Material cost (plate)" value={fmt(matCost)} />
                       <Row label={`Waste / failure cost (${p.failurePercent}%)`} value={fmt(wasteCost)} />
                       <Row label="Electricity cost" value={fmt(p.electricityCost)} />
                       <Row label="Packaging" value={fmt(p.packagingCost)} />
                       <Row label="Shipping" value={fmt(p.shippingCost)} />
                       <Row label={`Labor (${p.laborHours}h × $${p.laborRate}/h)`} value={fmt(laborCost)} />
                       <Row label={`Overhead (${p.overheadPercent}% of COG)`} value={fmt(ohAmt)} />
-                      <Row label="Total cost (before fees)" value={fmt(fullBase)} bold />
+                      <Row label="Total cost — whole plate (before fees)" value={fmt(fullBase)} bold />
+                      <Row label="Units per plate" value={pUnits} />
+                      <Row label="Total cost per unit (before fees)" value={fmt(fullBasePU)} bold />
                       <Row label={`Platform fee (${p.platformFee}%) + Transaction (${p.transactionFee}%)`} value="grossed into price" />
-                      <Row label="Option 3 — Break-even price" value={fmt(opt3)} />
-                      <Row label="Option 4 — Suggested selling price" value={fmt(opt4)} accent bold />
-                      <Row label={`Estimated profit at option 4`} value={fmt(profitOpt4)} />
-                      <Row label="Option 5 — Premium price" value={fmt(opt5)} accent bold />
-                      <Row label={`Estimated profit at option 5`} value={fmt(profitOpt5)} />
+                      <Row label="Option 3 — Break-even (plate)" value={fmt(opt3)} />
+                      {pUnits > 1 && <Row label="Option 3 — Break-even per unit" value={fmt(opt3pu)} />}
+                      <Row label="Option 4 — Suggested price (plate)" value={fmt(opt4)} accent bold />
+                      {pUnits > 1 && <Row label="Option 4 — Suggested price per unit" value={fmt(opt4pu)} accent bold />}
+                      <Row label={`Estimated profit at option 4 (plate)`} value={fmt(profitOpt4)} />
+                      <Row label="Option 5 — Premium price (plate)" value={fmt(opt5)} accent bold />
+                      {pUnits > 1 && <Row label="Option 5 — Premium price per unit" value={fmt(opt5pu)} accent bold />}
+                      <Row label={`Estimated profit at option 5 (plate)`} value={fmt(profitOpt5)} />
                     </div>
                   </>
                 )}
