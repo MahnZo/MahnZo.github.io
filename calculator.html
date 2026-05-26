@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D Print Calculator — Pixl Forge</title>
+  <meta name="description" content="Calculate filament costs, product pricing, and business profitability for your 3D printing operation." />
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-64SCNVMZ07"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-64SCNVMZ07', { send_page_view: true, anonymize_ip: true });
+  </script>
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wo6pchoxq4");
+  </script>
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0A0E14; }
+  </style>
+</head>
+<body>
+
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    const { useState, useEffect, useCallback } = React;
+
+    // ─── Utility helpers ──────────────────────────────────────────────
+    const fmt = (n) =>
+      isNaN(n) || !isFinite(n)
+        ? "—"
+        : "$" + Number(n).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+    const fmtG = (n) => (isNaN(n) || !isFinite(n) ? "—" : Number(n).toFixed(2) + "g");
+
+    const num = (v, fallback = 0) => {
+      const n = parseFloat(v);
+      return isNaN(n) ? fallback : n;
+    };
+
+    const STORAGE_KEY = "printcalc_v2";
+
+    const DEFAULT_DASHBOARD = {
+      totalInvested: "", startingBudget: "", overheadCost: "",
+      filamentInventory: "", toolsEquipment: "", packagingSupplies: "", totalRevenue: "",
+    };
+    const DEFAULT_FILAMENT = { rollCost: "20", rollGrams: "1000", printGrams: "279" };
+    const DEFAULT_PRICING = {
+      rollCost: "20", rollGrams: "1000", printGrams: "279",
+      printHours: "3", laborHours: "0.5", laborRate: "18",
+      electricityCost: "0.50", packagingCost: "1.50", shippingCost: "5.00",
+      platformFee: "6.5", transactionFee: "3", failurePercent: "10",
+      overheadPercent: "15", profitMargin: "30", premiumMargin: "60",
+    };
+
+    // ─── Sub-components ─────────────────────────────────────────────
+    function Field({ label, value, onChange, prefix, suffix, note, error }) {
+      const baseInput = {
+        flex: 1, background: "#0D1117",
+        border: `1px solid ${error ? "#F87171" : "#1C2A3A"}`,
+        borderRadius: 6, color: "#E6EDF3", fontFamily: "inherit",
+        fontSize: 15, fontWeight: 500, padding: "9px 12px",
+        outline: "none", width: "100%", boxSizing: "border-box",
+        ...(prefix ? { borderRadius: "0 6px 6px 0" } : {}),
+        ...(suffix ? { borderRadius: "6px 0 0 6px" } : {}),
+      };
+      const affix = {
+        background: "#161B22", border: "1px solid #1C2A3A",
+        color: "#8B949E", fontSize: 13, padding: "9px 10px",
+        lineHeight: 1, whiteSpace: "nowrap",
+      };
+      return (
+        <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+          <label style={{ color: "#8B949E", fontSize: 11, fontWeight: 600, letterSpacing: "0.05em", textTransform: "uppercase" }}>{label}</label>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            {prefix && <span style={{ ...affix, borderRight: "none", borderRadius: "6px 0 0 6px" }}>{prefix}</span>}
+            <input type="number" min="0" value={value} onChange={(e) => onChange(e.target.value)} style={baseInput} placeholder="0" />
+            {suffix && <span style={{ ...affix, borderLeft: "none", borderRadius: "0 6px 6px 0" }}>{suffix}</span>}
+          </div>
+          {note && <span style={{ color: "#6E7681", fontSize: 11 }}>{note}</span>}
+          {error && <span style={{ color: "#F87171", fontSize: 11 }}>{error}</span>}
+        </div>
+      );
+    }
+
+    function DashCard({ label, value, sub, color = "#4DF0C0" }) {
+      return (
+        <div style={{ background: "#0D1117", border: "1px solid #1C2A3A", borderTop: `3px solid ${color}`, borderRadius: 8, padding: "14px 16px" }}>
+          <div style={{ color: "#8B949E", fontSize: 10, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 5 }}>{label}</div>
+          <div style={{ fontSize: 20, fontWeight: 700, color, letterSpacing: "-0.5px", wordBreak: "break-all" }}>{value}</div>
+          {sub && <div style={{ color: "#6E7681", fontSize: 10, marginTop: 4, lineHeight: 1.4 }}>{sub}</div>}
+        </div>
+      );
+    }
+
+    function Row({ label, value, accent, bold }) {
+      return (
+        <div style={{
+          display: "flex", justifyContent: "space-between", alignItems: "center",
+          padding: accent ? "8px 6px" : "7px 0", borderBottom: "1px solid #161B22",
+          fontSize: 13, background: accent ? "rgba(77,240,192,0.04)" : "transparent",
+          borderRadius: accent ? 4 : 0, marginLeft: accent ? -6 : 0, marginRight: accent ? -6 : 0,
+          fontWeight: bold ? 700 : 400,
+        }}>
+          <span style={{ color: "#8B949E" }}>{label}</span>
+          <span style={{ color: accent ? "#4DF0C0" : "#E6EDF3", fontWeight: bold ? 700 : 600, letterSpacing: "0.02em" }}>{value}</span>
+        </div>
+      );
+    }
+
+    function PriceCard({ option, price, sub, breakdown, color }) {
+      const [open, setOpen] = useState(false);
+      return (
+        <div style={{ background: "#0D1117", border: "1px solid #1C2A3A", borderLeft: `4px solid ${color}`, borderRadius: 8, padding: "14px 18px" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
+            <div>
+              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.05em", textTransform: "uppercase", color, marginBottom: 4 }}>{option}</div>
+              <div style={{ fontSize: 26, fontWeight: 700, color: "#E6EDF3", letterSpacing: "-1px", lineHeight: 1 }}>{price}</div>
+              {sub && <div style={{ color: "#8B949E", fontSize: 11, marginTop: 4 }}>{sub}</div>}
+            </div>
+            <button onClick={() => setOpen(!open)} style={{ background: "transparent", border: `1px solid ${color}`, borderRadius: 6, cursor: "pointer", fontFamily: "inherit", fontSize: 11, fontWeight: 700, letterSpacing: "0.04em", padding: "6px 14px", textTransform: "uppercase", color, whiteSpace: "nowrap" }}>
+              {open ? "Hide" : "Details"}
+            </button>
+          </div>
+          {open && (
+            <div style={{ marginTop: 14, paddingTop: 14, borderTop: "1px solid #1C2A3A" }}>
+              {breakdown.map((b, i) => (
+                <div key={i} style={{ display: "flex", justifyContent: "space-between", padding: "5px 0", fontSize: 12, borderBottom: "1px solid #161B22" }}>
+                  <span style={{ color: "#8B949E" }}>{b.label}</span>
+                  <span style={{ color: "#E6EDF3", fontWeight: 600 }}>{b.value}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    function SecTitle({ children }) {
+      return <h2 style={{ color: "#E6EDF3", fontSize: 14, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", margin: "32px 0 16px", paddingBottom: 8, borderBottom: "1px solid #1C2A3A" }}>{children}</h2>;
+    }
+
+    function InputBlock({ icon, title, children }) {
+      return (
+        <div style={{ background: "#0D1117", border: "1px solid #1C2A3A", borderRadius: 10, padding: "18px", marginBottom: 14 }}>
+          <div style={{ color: "#E6EDF3", fontSize: 13, fontWeight: 600, letterSpacing: "0.03em", marginBottom: 16 }}>{icon} {title}</div>
+          {children}
+        </div>
+      );
+    }
+
+    // ─── Main Component ─────────────────────────────────────────────
+    function PrintCalc() {
+      const [tab, setTab] = useState("dashboard");
+      const [dashboard, setDashboard] = useState(DEFAULT_DASHBOARD);
+      const [filament, setFilament] = useState(DEFAULT_FILAMENT);
+      const [pricing, setPricing] = useState(DEFAULT_PRICING);
+      const [saved, setSaved] = useState(false);
+
+      useEffect(() => {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (raw) {
+            const d = JSON.parse(raw);
+            if (d.dashboard) setDashboard(d.dashboard);
+            if (d.filament) setFilament(d.filament);
+            if (d.pricing) setPricing(d.pricing);
+          }
+        } catch (_) {}
+      }, []);
+
+      const saveAll = useCallback(() => {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ dashboard, filament, pricing }));
+        setSaved(true); setTimeout(() => setSaved(false), 2000);
+      }, [dashboard, filament, pricing]);
+
+      const resetAll = () => {
+        setDashboard(DEFAULT_DASHBOARD);
+        setFilament(DEFAULT_FILAMENT);
+        setPricing(DEFAULT_PRICING);
+        localStorage.removeItem(STORAGE_KEY);
+      };
+
+      const setD = (k) => (v) => setDashboard(p => ({ ...p, [k]: v }));
+      const setF = (k) => (v) => setFilament(p => ({ ...p, [k]: v }));
+      const setP = (k) => (v) => setPricing(p => ({ ...p, [k]: v }));
+
+      // Dashboard math
+      const dInv = num(dashboard.totalInvested), dBudget = num(dashboard.startingBudget),
+        dOH = num(dashboard.overheadCost), dFil = num(dashboard.filamentInventory),
+        dTools = num(dashboard.toolsEquipment), dPkg = num(dashboard.packagingSupplies),
+        dRev = num(dashboard.totalRevenue);
+      const dTotalCosts = dOH + dFil + dTools + dPkg;
+      const dProfit = dRev - dTotalCosts;
+
+      // Filament math
+      const fRC = num(filament.rollCost), fRG = num(filament.rollGrams), fPG = num(filament.printGrams);
+      const fErr = {};
+      if (fRG <= 0) fErr.rollGrams = "Roll weight must be > 0";
+      if (fPG > fRG) fErr.printGrams = "Print weight exceeds roll weight";
+      const fCPG = fRG > 0 ? fRC / fRG : 0;
+      const fMat = fRG > 0 ? (fPG / fRG) * fRC : 0;
+      const fRem = fRG - fPG, fRemCost = fCPG * fRem;
+
+      // Pricing math
+      const p = Object.fromEntries(Object.entries(pricing).map(([k, v]) => [k, num(v)]));
+      const pErr = {};
+      if (p.rollGrams <= 0) pErr.rollGrams = "Roll weight must be > 0";
+
+      const matCost = p.rollGrams > 0 ? (p.printGrams / p.rollGrams) * p.rollCost : 0;
+      const cpg = p.rollGrams > 0 ? p.rollCost / p.rollGrams : 0;
+      const wasteCost = matCost * (p.failurePercent / 100);
+      const laborCost = p.laborHours * p.laborRate;
+      const cogBase = matCost + wasteCost + p.electricityCost + p.packagingCost + p.shippingCost;
+      const ohAmt = cogBase * (p.overheadPercent / 100);
+      const fullBase = cogBase + laborCost + ohAmt;
+      const feesMult = p.platformFee + p.transactionFee > 0 ? 1 / (1 - (p.platformFee + p.transactionFee) / 100) : 1;
+      const opt3 = fullBase * feesMult;
+      const opt4 = opt3 * (1 + p.profitMargin / 100);
+      const opt5 = opt3 * (1 + p.premiumMargin / 100);
+      const profitOpt4 = opt4 - fullBase;
+      const profitOpt5 = opt5 - fullBase;
+
+      // Styles
+      const root = { fontFamily: "'DM Mono', 'Courier New', monospace", background: "#0A0E14", color: "#C9D1D9", minHeight: "100vh", display: "flex", flexDirection: "column" };
+      const hdr = { background: "#0D1117", borderBottom: "1px solid #1C2A3A", padding: "0 20px" };
+      const hdrI = { maxWidth: 1060, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", height: 56 };
+      const tabBar = { background: "#0D1117", borderBottom: "1px solid #1C2A3A", display: "flex", paddingLeft: 20, overflowX: "auto" };
+      const tabS = (active) => ({ background: "transparent", border: "none", borderBottom: active ? "2px solid #4DF0C0" : "2px solid transparent", color: active ? "#4DF0C0" : "#8B949E", cursor: "pointer", fontFamily: "inherit", fontSize: 13, fontWeight: 600, padding: "13px 18px", whiteSpace: "nowrap" });
+      const content = { flex: 1, maxWidth: 1060, margin: "0 auto", padding: "28px 20px", width: "100%", boxSizing: "border-box" };
+      const grid2 = { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 14 };
+      const grid3 = { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(185px, 1fr))", gap: 14 };
+      const cardGrid = { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))", gap: 12, margin: "16px 0 28px" };
+      const btnSave = { background: "#4DF0C0", border: "none", borderRadius: 6, color: "#0A0E14", cursor: "pointer", fontFamily: "inherit", fontSize: 11, fontWeight: 800, letterSpacing: "0.04em", padding: "7px 14px", textTransform: "uppercase" };
+      const btnReset = { background: "transparent", border: "1px solid #1C2A3A", borderRadius: 6, color: "#8B949E", cursor: "pointer", fontFamily: "inherit", fontSize: 11, fontWeight: 600, padding: "7px 14px", textTransform: "uppercase" };
+      const brkCard = { background: "#0D1117", border: "1px solid #1C2A3A", borderRadius: 10, padding: "16px 18px", marginTop: 14 };
+
+      return (
+        <div style={root}>
+          <div style={hdr}>
+            <div style={hdrI}>
+              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                <a href="index.html" style={{ color: "#8B949E", fontSize: 12, textDecoration: "none", marginRight: 6, letterSpacing: "0.03em" }}>← Pixl Forge</a>
+                <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+                  <rect x="1.5" y="1.5" width="23" height="23" rx="4" stroke="#4DF0C0" strokeWidth="1.5" />
+                  <path d="M7 13h12M13 7v12" stroke="#4DF0C0" strokeWidth="2" strokeLinecap="round" />
+                  <circle cx="13" cy="13" r="3" fill="#4DF0C0" opacity="0.25" />
+                </svg>
+                <span style={{ fontSize: 20, color: "#E6EDF3", fontWeight: 300, letterSpacing: "-0.3px" }}>
+                  3D Print<span style={{ color: "#4DF0C0", fontWeight: 700 }}>Calc</span>
+                </span>
+              </div>
+              <div style={{ display: "flex", gap: 8 }}>
+                <button onClick={saveAll} style={btnSave}>{saved ? "✓ Saved!" : "💾 Save"}</button>
+                <button onClick={resetAll} style={btnReset}>↺ Reset</button>
+              </div>
+            </div>
+          </div>
+
+          <div style={tabBar}>
+            {[["dashboard", "📊 Dashboard"], ["filament", "🧵 Filament"], ["pricing", "💰 Full Pricing"]].map(([id, label]) => (
+              <button key={id} onClick={() => setTab(id)} style={tabS(tab === id)}>{label}</button>
+            ))}
+          </div>
+
+          <div style={content}>
+            {tab === "dashboard" && (
+              <>
+                <SecTitle>Business Overview</SecTitle>
+                <p style={{ color: "#8B949E", fontSize: 13, marginTop: -8, marginBottom: 22, lineHeight: 1.6 }}>Enter your overall business numbers. Cards below update live.</p>
+                <div style={grid2}>
+                  <Field label="Total Money Invested" value={dashboard.totalInvested} onChange={setD("totalInvested")} prefix="$" note="Everything spent on the business so far" />
+                  <Field label="Starting Budget" value={dashboard.startingBudget} onChange={setD("startingBudget")} prefix="$" note="Initial capital you started with" />
+                  <Field label="Total Overhead Cost" value={dashboard.overheadCost} onChange={setD("overheadCost")} prefix="$" note="Rent, subscriptions, utilities, etc." />
+                  <Field label="Filament Inventory Cost" value={dashboard.filamentInventory} onChange={setD("filamentInventory")} prefix="$" note="What you've spent on filament stock" />
+                  <Field label="Tools & Equipment Cost" value={dashboard.toolsEquipment} onChange={setD("toolsEquipment")} prefix="$" note="Printers, tools, upgrades" />
+                  <Field label="Packaging & Shipping Supplies" value={dashboard.packagingSupplies} onChange={setD("packagingSupplies")} prefix="$" />
+                  <Field label="Total Revenue Entered" value={dashboard.totalRevenue} onChange={setD("totalRevenue")} prefix="$" note="All sales revenue so far" />
+                </div>
+
+                <SecTitle>Summary Cards</SecTitle>
+                <div style={cardGrid}>
+                  <DashCard label="Total Invested" value={dInv > 0 ? fmt(dInv) : "—"} sub="All money put in" color="#4DF0C0" />
+                  <DashCard label="Starting Budget" value={dBudget > 0 ? fmt(dBudget) : "—"} sub="Initial capital" color="#60A5FA" />
+                  <DashCard label="Total Costs" value={fmt(dTotalCosts)} sub="OH + filament + tools + packaging" color="#F97316" />
+                  <DashCard label="Total Revenue" value={dRev > 0 ? fmt(dRev) : "—"} sub="All revenue entered" color="#A78BFA" />
+                  <DashCard label="Estimated Profit" value={dRev > 0 || dTotalCosts > 0 ? fmt(dProfit) : "—"} sub="Revenue minus all costs" color={dProfit >= 0 ? "#4DF0C0" : "#F87171"} />
+                  <DashCard label="Budget Remaining" value={dBudget > 0 ? fmt(dBudget - dInv) : "—"} sub="Starting budget minus invested" color="#FBBF24" />
+                </div>
+
+                <div style={{ ...brkCard, marginTop: 0 }}>
+                  <div style={{ color: "#E6EDF3", fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 12, paddingBottom: 8, borderBottom: "1px solid #1C2A3A" }}>Cost Breakdown</div>
+                  <Row label="Overhead" value={fmt(dOH)} />
+                  <Row label="Filament inventory" value={fmt(dFil)} />
+                  <Row label="Tools & equipment" value={fmt(dTools)} />
+                  <Row label="Packaging & supplies" value={fmt(dPkg)} />
+                  <Row label="Total costs" value={fmt(dTotalCosts)} bold />
+                  <Row label="Total revenue" value={fmt(dRev)} />
+                  <Row label="Estimated profit / loss" value={fmt(dProfit)} accent bold />
+                </div>
+              </>
+            )}
+
+            {tab === "filament" && (
+              <>
+                <SecTitle>Filament Cost Calculator</SecTitle>
+                <p style={{ color: "#8B949E", fontSize: 13, marginTop: -8, marginBottom: 22, lineHeight: 1.6 }}>Enter your roll details and print weight. Results update instantly.</p>
+                <InputBlock icon="🧵" title="Filament Details">
+                  <div style={grid3}>
+                    <Field label="Roll Cost" value={filament.rollCost} onChange={setF("rollCost")} prefix="$" note="How much you paid for the roll" />
+                    <Field label="Roll Weight" value={filament.rollGrams} onChange={setF("rollGrams")} suffix="g" note="Total grams on the roll (e.g. 1000)" error={fErr.rollGrams} />
+                    <Field label="Print Weight" value={filament.printGrams} onChange={setF("printGrams")} suffix="g" note="Grams the slicer says this print uses" error={fErr.printGrams} />
+                  </div>
+                </InputBlock>
+
+                {!fErr.rollGrams && (
+                  <>
+                    <div style={cardGrid}>
+                      <DashCard label="Material Cost" value={fmt(fMat)} sub={`${fmtG(fPG)} used from roll`} color="#4DF0C0" />
+                      <DashCard label="Cost Per Gram" value={"$" + fCPG.toFixed(4) + "/g"} sub="Roll cost ÷ roll weight" color="#60A5FA" />
+                      <DashCard label="Filament Remaining" value={fmtG(fRem)} sub={`Worth ${fmt(fRemCost)} still on spool`} color="#FBBF24" />
+                    </div>
+
+                    <div style={brkCard}>
+                      <div style={{ color: "#E6EDF3", fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 12, paddingBottom: 8, borderBottom: "1px solid #1C2A3A" }}>Calculation Breakdown</div>
+                      <Row label="Roll cost" value={fmt(fRC)} />
+                      <Row label="Roll weight" value={fmtG(fRG)} />
+                      <Row label="Cost per gram" value={"$" + fCPG.toFixed(4) + "/g"} />
+                      <Row label="Print weight" value={fmtG(fPG)} />
+                      <Row label="Formula" value={`(${fPG}g ÷ ${fRG}g) × $${fRC}`} />
+                      <Row label="Filament cost" value={fmt(fMat)} accent bold />
+                      <Row label="Remaining filament" value={fmtG(fRem)} />
+                      <Row label="Remaining filament value" value={fmt(fRemCost)} />
+                    </div>
+                  </>
+                )}
+                {fErr.rollGrams && <div style={{ background: "#1A0E0E", border: "1px solid #F87171", borderRadius: 8, color: "#F87171", fontSize: 13, padding: "14px 18px", marginTop: 20 }}>⚠ {fErr.rollGrams}</div>}
+              </>
+            )}
+
+            {tab === "pricing" && (
+              <>
+                <SecTitle>Full Product Pricing Calculator</SecTitle>
+                <p style={{ color: "#8B949E", fontSize: 13, marginTop: -8, marginBottom: 22, lineHeight: 1.6 }}>Fill in all your costs to see five pricing options with detailed breakdowns. Defaults are loaded — adjust to match your real numbers.</p>
+
+                <InputBlock icon="🧵" title="Filament">
+                  <div style={grid3}>
+                    <Field label="Roll Cost" value={pricing.rollCost} onChange={setP("rollCost")} prefix="$" />
+                    <Field label="Roll Weight" value={pricing.rollGrams} onChange={setP("rollGrams")} suffix="g" error={pErr.rollGrams} />
+                    <Field label="Print Weight" value={pricing.printGrams} onChange={setP("printGrams")} suffix="g" />
+                  </div>
+                </InputBlock>
+
+                <InputBlock icon="🕐" title="Time & Labor">
+                  <div style={grid3}>
+                    <Field label="Print Time" value={pricing.printHours} onChange={setP("printHours")} suffix="hrs" note="How long the printer runs" />
+                    <Field label="Your Labor Time" value={pricing.laborHours} onChange={setP("laborHours")} suffix="hrs" note="Setup, finishing, packing" />
+                    <Field label="Hourly Rate" value={pricing.laborRate} onChange={setP("laborRate")} prefix="$" suffix="/hr" />
+                  </div>
+                </InputBlock>
+
+                <InputBlock icon="💡" title="Expenses Per Print">
+                  <div style={grid3}>
+                    <Field label="Electricity" value={pricing.electricityCost} onChange={setP("electricityCost")} prefix="$" note="Estimated electricity per print" />
+                    <Field label="Packaging" value={pricing.packagingCost} onChange={setP("packagingCost")} prefix="$" />
+                    <Field label="Shipping" value={pricing.shippingCost} onChange={setP("shippingCost")} prefix="$" />
+                  </div>
+                </InputBlock>
+
+                <InputBlock icon="📈" title="Fees & Profit Margins">
+                  <div style={grid3}>
+                    <Field label="Platform Fee" value={pricing.platformFee} onChange={setP("platformFee")} suffix="%" note="Etsy, eBay, Amazon, etc." />
+                    <Field label="Transaction Fee" value={pricing.transactionFee} onChange={setP("transactionFee")} suffix="%" note="PayPal, Stripe, etc." />
+                    <Field label="Failure / Waste" value={pricing.failurePercent} onChange={setP("failurePercent")} suffix="%" note="Buffer for failed prints" />
+                    <Field label="Overhead %" value={pricing.overheadPercent} onChange={setP("overheadPercent")} suffix="%" note="% of COG to cover overhead" />
+                    <Field label="Profit Margin" value={pricing.profitMargin} onChange={setP("profitMargin")} suffix="%" />
+                    <Field label="Premium Margin" value={pricing.premiumMargin} onChange={setP("premiumMargin")} suffix="%" note="Custom / detailed prints" />
+                  </div>
+                </InputBlock>
+
+                {pErr.rollGrams && <div style={{ background: "#1A0E0E", border: "1px solid #F87171", borderRadius: 8, color: "#F87171", fontSize: 13, padding: "14px 18px", marginBottom: 20 }}>⚠ {pErr.rollGrams}</div>}
+
+                {!pErr.rollGrams && (
+                  <>
+                    <SecTitle>Pricing Options</SecTitle>
+                    <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 28 }}>
+                      <PriceCard option="Option 1 — Material Only" price={fmt(matCost)} sub="Filament cost only — use as absolute minimum" color="#60A5FA"
+                        breakdown={[{ label: "Print weight", value: fmtG(p.printGrams) }, { label: "Cost per gram", value: "$" + cpg.toFixed(4) + "/g" }, { label: "Material cost", value: fmt(matCost) }]} />
+                      <PriceCard option="Option 2 — Cost of Goods" price={fmt(cogBase)} sub="Material + waste + electricity + packaging + shipping" color="#A78BFA"
+                        breakdown={[{ label: "Material cost", value: fmt(matCost) }, { label: `Waste (${p.failurePercent}%)`, value: fmt(wasteCost) }, { label: "Electricity", value: fmt(p.electricityCost) }, { label: "Packaging", value: fmt(p.packagingCost) }, { label: "Shipping", value: fmt(p.shippingCost) }]} />
+                      <PriceCard option="Option 3 — Full Business Cost (Break-even)" price={fmt(opt3)} sub={`COG + labor + overhead + fees — minimum to break even`} color="#F97316"
+                        breakdown={[{ label: "Cost of goods", value: fmt(cogBase) }, { label: `Labor (${p.laborHours}h × $${p.laborRate})`, value: fmt(laborCost) }, { label: `Overhead (${p.overheadPercent}%)`, value: fmt(ohAmt) }, { label: `Total fees (${p.platformFee + p.transactionFee}%)`, value: "grossed up in price" }, { label: "Break-even price", value: fmt(opt3) }]} />
+                      <PriceCard option="Option 4 — Suggested Selling Price ✦" price={fmt(opt4)} sub={`${p.profitMargin}% profit margin · Estimated profit: ${fmt(profitOpt4)}`} color="#4DF0C0"
+                        breakdown={[{ label: "Break-even (opt 3)", value: fmt(opt3) }, { label: `Profit margin (${p.profitMargin}%)`, value: fmt(profitOpt4) }, { label: "Suggested price", value: fmt(opt4) }]} />
+                      <PriceCard option="Option 5 — Premium Price" price={fmt(opt5)} sub={`${p.premiumMargin}% margin · Best for custom/detailed prints · Est. profit: ${fmt(profitOpt5)}`} color="#FBBF24"
+                        breakdown={[{ label: "Material cost", value: fmt(matCost) }, { label: `Waste (${p.failurePercent}%)`, value: fmt(wasteCost) }, { label: "Electricity", value: fmt(p.electricityCost) }, { label: "Packaging", value: fmt(p.packagingCost) }, { label: "Shipping", value: fmt(p.shippingCost) }, { label: `Labor (${p.laborHours}h × $${p.laborRate})`, value: fmt(laborCost) }, { label: `Overhead (${p.overheadPercent}%)`, value: fmt(ohAmt) }, { label: `Premium margin (${p.premiumMargin}%)`, value: fmt(profitOpt5) }]} />
+                    </div>
+
+                    <SecTitle>Full Cost Breakdown</SecTitle>
+                    <div style={brkCard}>
+                      <Row label="Filament roll cost" value={fmt(p.rollCost)} />
+                      <Row label="Roll weight" value={fmtG(p.rollGrams)} />
+                      <Row label="Print weight" value={fmtG(p.printGrams)} />
+                      <Row label="Cost per gram" value={"$" + cpg.toFixed(4) + "/g"} />
+                      <Row label="Material cost" value={fmt(matCost)} />
+                      <Row label={`Waste / failure cost (${p.failurePercent}%)`} value={fmt(wasteCost)} />
+                      <Row label="Electricity cost" value={fmt(p.electricityCost)} />
+                      <Row label="Packaging" value={fmt(p.packagingCost)} />
+                      <Row label="Shipping" value={fmt(p.shippingCost)} />
+                      <Row label={`Labor (${p.laborHours}h × $${p.laborRate}/h)`} value={fmt(laborCost)} />
+                      <Row label={`Overhead (${p.overheadPercent}% of COG)`} value={fmt(ohAmt)} />
+                      <Row label="Total cost (before fees)" value={fmt(fullBase)} bold />
+                      <Row label={`Platform fee (${p.platformFee}%) + Transaction (${p.transactionFee}%)`} value="grossed into price" />
+                      <Row label="Option 3 — Break-even price" value={fmt(opt3)} />
+                      <Row label="Option 4 — Suggested selling price" value={fmt(opt4)} accent bold />
+                      <Row label={`Estimated profit at option 4`} value={fmt(profitOpt4)} />
+                      <Row label="Option 5 — Premium price" value={fmt(opt5)} accent bold />
+                      <Row label={`Estimated profit at option 5`} value={fmt(profitOpt5)} />
+                    </div>
+                  </>
+                )}
+              </>
+            )}
+          </div>
+
+          <div style={{ background: "#0D1117", borderTop: "1px solid #1C2A3A", color: "#6E7681", display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 11, padding: "12px 20px", flexWrap: "wrap", gap: 8 }}>
+            <span>3D PrintCalc · All calculations are estimates</span>
+            <div style={{ display: "flex", gap: 8 }}>
+              <button onClick={saveAll} style={btnSave}>{saved ? "✓ Saved!" : "💾 Save"}</button>
+              <button onClick={resetAll} style={btnReset}>↺ Reset All</button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    const domRoot = ReactDOM.createRoot(document.getElementById("root"));
+    domRoot.render(<PrintCalc />);
+  </script>
+
+</body>
+</html>
